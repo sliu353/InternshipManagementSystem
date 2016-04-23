@@ -21,7 +21,7 @@ namespace InternshipManagementSystem.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("azure", throwIfV1Schema: false)
         {
         }
 
