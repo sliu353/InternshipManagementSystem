@@ -9,9 +9,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using InternshipManagementSystem.Models;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 
 namespace InternshipManagementSystem.Controllers
-{
+{ 
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -142,13 +145,17 @@ namespace InternshipManagementSystem.Controllers
             return View();
         }
 
+
+
         //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> RegisterTeacher(RegisterViewModel model)
         {
+            var db = new Internship_Management_SystemEntities();
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
@@ -161,17 +168,61 @@ namespace InternshipManagementSystem.Controllers
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    // await UshnerManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                
+                    Teacher newTeacher = new Teacher();
+                    newTeacher.TeacherName = model.Name;
+                    newTeacher.TeacherEmail = model.Email;
+                    newTeacher.PassWord = "secrete";
+                    newTeacher.TeacherContactNumber = model.ContactNumber;
+                    db.Teachers.Add(newTeacher);
 
+                    await db.SaveChangesAsync();
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View("Register", model);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterCompany(RegisterCompanyViewModel model)
+        {
+            var db = new Internship_Management_SystemEntities();
+
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UshnerManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    RegisterCompanyViewModel newRegisteredCompany = (RegisterCompanyViewModel)model;
+                    Company newCompany = new Company();
+                    newCompany.CompanyName = newRegisteredCompany.Name;
+                    newCompany.PassWord = "secrete";
+                    newCompany.PersonInCharge = newRegisteredCompany.PersonInCharge;
+                    newCompany.ContactNumber = newRegisteredCompany.ContactNumber;
+                    newCompany.CompanyLocation = newRegisteredCompany.CompanyLocation;
+                    db.Companies.Add(newCompany);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+            return View("Register" ,model);
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

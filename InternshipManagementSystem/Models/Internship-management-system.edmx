@@ -1,0 +1,627 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Internship_Management_SystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Class_">
+          <Key>
+            <PropertyRef Name="ClassName" />
+          </Key>
+          <Property Name="ClassName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="255" />
+          <Property Name="TeacherEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumberOfStudents" Type="int" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyName" />
+          </Key>
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CompanyOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="PersonInCharge" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PassWord" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CompanyLocation" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="InternIntroduction" Type="nvarchar" MaxLength="4000" />
+          <Property Name="CompanyIntroduction" Type="nvarchar" MaxLength="4000" />
+        </EntityType>
+        <EntityType Name="Contract_">
+          <Key>
+            <PropertyRef Name="TeacherEmail" />
+            <PropertyRef Name="CompanyName" />
+          </Key>
+          <Property Name="TeacherEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ContractContent" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="StartTime" Type="date" Nullable="false" />
+          <Property Name="EndTime" Type="date" Nullable="false" />
+          <Property Name="InternLocation" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HomePageContent">
+          <Key>
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="4000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InternType">
+          <Key>
+            <PropertyRef Name="InternTypeId" />
+          </Key>
+          <Property Name="InternTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InternType" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InternType_Company">
+          <Key>
+            <PropertyRef Name="InternTypeId" />
+            <PropertyRef Name="CompanyName" />
+          </Key>
+          <Property Name="InternTypeId" Type="int" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="PhoneNumber" />
+          </Key>
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="StudentName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="255" />
+          <Property Name="TeacherEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyMark" Type="int" />
+          <Property Name="TeacherMark" Type="int" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="TeacherEmail" />
+          </Key>
+          <Property Name="TeacherEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TeacherContactNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="TeacherName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PassWord" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Internship_Management_System.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="modify_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Class___CompanyN__00200768">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Class_" Type="Self.Class_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyName" />
+            </Principal>
+            <Dependent Role="Class_">
+              <PropertyRef Name="CompanyName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Class___TeacherE__7F2BE32F">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Class_" Type="Self.Class_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherEmail" />
+            </Principal>
+            <Dependent Role="Class_">
+              <PropertyRef Name="TeacherEmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contract___Compa__08B54D69">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Contract_" Type="Self.Contract_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyName" />
+            </Principal>
+            <Dependent Role="Contract_">
+              <PropertyRef Name="CompanyName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contract___Teach__07C12930">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Contract_" Type="Self.Contract_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherEmail" />
+            </Principal>
+            <Dependent Role="Contract_">
+              <PropertyRef Name="TeacherEmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__InternTyp__Compa__76969D2E">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="InternType_Company" Type="Self.InternType_Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyName" />
+            </Principal>
+            <Dependent Role="InternType_Company">
+              <PropertyRef Name="CompanyName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__InternTyp__Inter__75A278F5">
+          <End Role="InternType" Type="Self.InternType" Multiplicity="1" />
+          <End Role="InternType_Company" Type="Self.InternType_Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InternType">
+              <PropertyRef Name="InternTypeId" />
+            </Principal>
+            <Dependent Role="InternType_Company">
+              <PropertyRef Name="InternTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__ClassNa__02FC7413">
+          <End Role="Class_" Type="Self.Class_" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class_">
+              <PropertyRef Name="ClassName" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="ClassName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__Company__03F0984C">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyName" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="CompanyName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__Teacher__04E4BC85">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherEmail" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="TeacherEmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Internship_Management_SystemModelStoreContainer">
+          <EntitySet Name="Class_" EntityType="Self.Class_" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contract_" EntityType="Self.Contract_" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomePageContent" EntityType="Self.HomePageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InternType" EntityType="Self.InternType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InternType_Company" EntityType="Self.InternType_Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+            <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Class___CompanyN__00200768" Association="Self.FK__Class___CompanyN__00200768">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Class_" EntitySet="Class_" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Class___TeacherE__7F2BE32F" Association="Self.FK__Class___TeacherE__7F2BE32F">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Class_" EntitySet="Class_" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contract___Compa__08B54D69" Association="Self.FK__Contract___Compa__08B54D69">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Contract_" EntitySet="Contract_" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contract___Teach__07C12930" Association="Self.FK__Contract___Teach__07C12930">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Contract_" EntitySet="Contract_" />
+          </AssociationSet>
+          <AssociationSet Name="FK__InternTyp__Compa__76969D2E" Association="Self.FK__InternTyp__Compa__76969D2E">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="InternType_Company" EntitySet="InternType_Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK__InternTyp__Inter__75A278F5" Association="Self.FK__InternTyp__Inter__75A278F5">
+            <End Role="InternType" EntitySet="InternType" />
+            <End Role="InternType_Company" EntitySet="InternType_Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__ClassNa__02FC7413" Association="Self.FK__Student__ClassNa__02FC7413">
+            <End Role="Class_" EntitySet="Class_" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__Company__03F0984C" Association="Self.FK__Student__Company__03F0984C">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__Teacher__04E4BC85" Association="Self.FK__Student__Teacher__04E4BC85">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Internship_Management_SystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Class_">
+          <Key>
+            <PropertyRef Name="ClassName" />
+          </Key>
+          <Property Name="ClassName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TeacherEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumberOfStudents" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__Class___CompanyN__00200768" FromRole="Class_" ToRole="Company" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK__Class___TeacherE__7F2BE32F" FromRole="Class_" ToRole="Teacher" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Student__ClassNa__02FC7413" FromRole="Class_" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyName" />
+          </Key>
+          <Property Name="CompanyName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonInCharge" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PassWord" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="InternIntroduction" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyIntroduction" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Class_" Relationship="Self.FK__Class___CompanyN__00200768" FromRole="Company" ToRole="Class_" />
+          <NavigationProperty Name="Contract_" Relationship="Self.FK__Contract___Compa__08B54D69" FromRole="Company" ToRole="Contract_" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Student__Company__03F0984C" FromRole="Company" ToRole="Student" />
+          <NavigationProperty Name="InternTypes" Relationship="Self.InternType_Company" FromRole="Company" ToRole="InternType" />
+        </EntityType>
+        <EntityType Name="Contract_">
+          <Key>
+            <PropertyRef Name="TeacherEmail" />
+            <PropertyRef Name="CompanyName" />
+          </Key>
+          <Property Name="TeacherEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContractContent" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="InternLocation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__Contract___Compa__08B54D69" FromRole="Contract_" ToRole="Company" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK__Contract___Teach__07C12930" FromRole="Contract_" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="HomePageContent">
+          <Key>
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InternType">
+          <Key>
+            <PropertyRef Name="InternTypeId" />
+          </Key>
+          <Property Name="InternTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InternType1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Companies" Relationship="Self.InternType_Company" FromRole="InternType" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="PhoneNumber" />
+          </Key>
+          <Property Name="PhoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StudentName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClassName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TeacherEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyMark" Type="Int32" />
+          <Property Name="TeacherMark" Type="Int32" />
+          <NavigationProperty Name="Class_" Relationship="Self.FK__Student__ClassNa__02FC7413" FromRole="Student" ToRole="Class_" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__Student__Company__03F0984C" FromRole="Student" ToRole="Company" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK__Student__Teacher__04E4BC85" FromRole="Student" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="TeacherEmail" />
+          </Key>
+          <Property Name="TeacherEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TeacherContactNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TeacherName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PassWord" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Class_" Relationship="Self.FK__Class___TeacherE__7F2BE32F" FromRole="Teacher" ToRole="Class_" />
+          <NavigationProperty Name="Contract_" Relationship="Self.FK__Contract___Teach__07C12930" FromRole="Teacher" ToRole="Contract_" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Student__Teacher__04E4BC85" FromRole="Teacher" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK__Class___CompanyN__00200768">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Class_" Type="Self.Class_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyName" />
+            </Principal>
+            <Dependent Role="Class_">
+              <PropertyRef Name="CompanyName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Class___TeacherE__7F2BE32F">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Class_" Type="Self.Class_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherEmail" />
+            </Principal>
+            <Dependent Role="Class_">
+              <PropertyRef Name="TeacherEmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__ClassNa__02FC7413">
+          <End Role="Class_" Type="Self.Class_" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class_">
+              <PropertyRef Name="ClassName" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="ClassName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contract___Compa__08B54D69">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Contract_" Type="Self.Contract_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyName" />
+            </Principal>
+            <Dependent Role="Contract_">
+              <PropertyRef Name="CompanyName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__Company__03F0984C">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyName" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="CompanyName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contract___Teach__07C12930">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Contract_" Type="Self.Contract_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherEmail" />
+            </Principal>
+            <Dependent Role="Contract_">
+              <PropertyRef Name="TeacherEmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__Teacher__04E4BC85">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherEmail" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="TeacherEmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InternType_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="*" />
+          <End Role="InternType" Type="Self.InternType" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Internship_Management_SystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Class_" EntityType="Self.Class_" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="Contract_" EntityType="Self.Contract_" />
+          <EntitySet Name="HomePageContents" EntityType="Self.HomePageContent" />
+          <EntitySet Name="InternTypes" EntityType="Self.InternType" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
+          <AssociationSet Name="FK__Class___CompanyN__00200768" Association="Self.FK__Class___CompanyN__00200768">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Class_" EntitySet="Class_" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Class___TeacherE__7F2BE32F" Association="Self.FK__Class___TeacherE__7F2BE32F">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="Class_" EntitySet="Class_" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__ClassNa__02FC7413" Association="Self.FK__Student__ClassNa__02FC7413">
+            <End Role="Class_" EntitySet="Class_" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contract___Compa__08B54D69" Association="Self.FK__Contract___Compa__08B54D69">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Contract_" EntitySet="Contract_" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__Company__03F0984C" Association="Self.FK__Student__Company__03F0984C">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contract___Teach__07C12930" Association="Self.FK__Contract___Teach__07C12930">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="Contract_" EntitySet="Contract_" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__Teacher__04E4BC85" Association="Self.FK__Student__Teacher__04E4BC85">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="InternType_Company" Association="Self.InternType_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="InternType" EntitySet="InternTypes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Internship_Management_SystemModelStoreContainer" CdmEntityContainer="Internship_Management_SystemEntities">
+          <EntitySetMapping Name="Class_">
+            <EntityTypeMapping TypeName="Internship_Management_SystemModel.Class_">
+              <MappingFragment StoreEntitySet="Class_">
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="TeacherEmail" ColumnName="TeacherEmail" />
+                <ScalarProperty Name="NumberOfStudents" ColumnName="NumberOfStudents" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="Internship_Management_SystemModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyOrder" ColumnName="CompanyOrder" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="PersonInCharge" ColumnName="PersonInCharge" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="CompanyLocation" ColumnName="CompanyLocation" />
+                <ScalarProperty Name="InternIntroduction" ColumnName="InternIntroduction" />
+                <ScalarProperty Name="CompanyIntroduction" ColumnName="CompanyIntroduction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contract_">
+            <EntityTypeMapping TypeName="Internship_Management_SystemModel.Contract_">
+              <MappingFragment StoreEntitySet="Contract_">
+                <ScalarProperty Name="TeacherEmail" ColumnName="TeacherEmail" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="ContractContent" ColumnName="ContractContent" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="InternLocation" ColumnName="InternLocation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomePageContents">
+            <EntityTypeMapping TypeName="Internship_Management_SystemModel.HomePageContent">
+              <MappingFragment StoreEntitySet="HomePageContent">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InternTypes">
+            <EntityTypeMapping TypeName="Internship_Management_SystemModel.InternType">
+              <MappingFragment StoreEntitySet="InternType">
+                <ScalarProperty Name="InternTypeId" ColumnName="InternTypeId" />
+                <ScalarProperty Name="InternType1" ColumnName="InternType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="Internship_Management_SystemModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="TeacherEmail" ColumnName="TeacherEmail" />
+                <ScalarProperty Name="CompanyMark" ColumnName="CompanyMark" />
+                <ScalarProperty Name="TeacherMark" ColumnName="TeacherMark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="Internship_Management_SystemModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="TeacherEmail" ColumnName="TeacherEmail" />
+                <ScalarProperty Name="TeacherContactNumber" ColumnName="TeacherContactNumber" />
+                <ScalarProperty Name="TeacherName" ColumnName="TeacherName" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="Internship_Management_SystemModel.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="InternType_Company" TypeName="Internship_Management_SystemModel.InternType_Company" StoreEntitySet="InternType_Company">
+            <EndProperty Name="Company">
+              <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+            </EndProperty>
+            <EndProperty Name="InternType">
+              <ScalarProperty Name="InternTypeId" ColumnName="InternTypeId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

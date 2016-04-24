@@ -1,40 +1,32 @@
-﻿@model InternshipManagementSystem.Models.RegisterViewModel
+﻿
 @{
     ViewBag.Title = "Register";
 }
 
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#registerCompany">Register a company account</a></li>
+        <li><a data-toggle="tab" href="#registerTeacher">Register a teacher account</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="registerCompany" class="tab-pane fade in active">
+            @using (Html.BeginForm("RegisterCompany", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Partial("_CompanyRegister", new InternshipManagementSystem.Models.RegisterCompanyViewModel())
+            }
+        </div>
+        <div id="registerTeacher" class="tab-pane fade">
+            @using (Html.BeginForm("RegisterTeacher", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Partial("_TeacherRegister", new InternshipManagementSystem.Models.RegisterViewModel())
+            }
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
