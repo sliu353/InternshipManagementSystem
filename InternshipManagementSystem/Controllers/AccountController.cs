@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using InternshipManagementSystem.Models;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using BotDetect.Web.Mvc;
 
 namespace InternshipManagementSystem.Controllers
 { 
@@ -152,6 +153,7 @@ namespace InternshipManagementSystem.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [CaptchaValidation("TeacherCaptchaCode", "TeacherCaptcha", "Incorrect teacher CAPTCHA code!")]
         public async Task<ActionResult> RegisterTeacher(RegisterViewModel model)
         {
             var db = new Internship_Management_SystemEntities();
@@ -190,6 +192,7 @@ namespace InternshipManagementSystem.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [CaptchaValidation("CompanyCaptchaCode", "CompanyCaptcha", "Incorrect teacher CAPTCHA code!")]
         public async Task<ActionResult> RegisterCompany(RegisterCompanyViewModel model)
         {
             var db = new Internship_Management_SystemEntities();

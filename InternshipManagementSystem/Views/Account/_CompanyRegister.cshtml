@@ -1,4 +1,5 @@
 ﻿@model InternshipManagementSystem.Models.RegisterCompanyViewModel
+@using BotDetect.Web.Mvc;
 
 @Html.ValidationSummary("", new { @class = "text-danger" })
 <div class="form-group">
@@ -43,6 +44,20 @@
         @Html.TextBoxFor(m => m.CompanyLocation, new { @class = "form-control" })
     </div>
 </div>
+<div class="form-group">
+    @{ MvcCaptcha companyCaptcha = new MvcCaptcha("CompanyCaptcha"); }
+    @Html.Label("captchar", new { @class = "col-md-2 control-label"})
+    <div class="col-md-10">
+        @Html.TextBox("CompanyCaptchaCode", null, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-2"></div>
+    <div class="col-md-10">
+        @Html.Captcha(companyCaptcha)
+    </div>
+</div>
+
 <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
         <input type="submit" class="btn btn-default" value="Register" />
