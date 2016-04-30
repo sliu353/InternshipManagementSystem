@@ -7,19 +7,19 @@
 
 <div class="container">
     <ul class="nav nav-tabs col-lg-8 col-md-10">
-        <li class="active"><a data-toggle="tab" href="#registerCompany">Register a company account</a></li>
-        <li><a data-toggle="tab" href="#registerTeacher">Register a teacher account</a></li>
+        <li class="active"><a data-toggle="tab" href="#registerCompany" class="registerTab">Register a company account</a></li>
+        <li><a data-toggle="tab" href="#registerTeacher" class="registerTab">Register a teacher account</a></li>
     </ul>
     <div class="tab-content  col-lg-8 col-md-10">
         <div class="tab-pane fade in active" id="registerCompany">
-            @using (Ajax.BeginForm("RegisterCompany", "Account", null, new AjaxOptions { UpdateTargetId = "registerCompanyPage", HttpMethod = "POST", OnSuccess = "directToHomePage"}, new { @class = "form-horizontal ", role = "form" }))
+            @using (Ajax.BeginForm("RegisterCompany", "Account", null, new AjaxOptions { UpdateTargetId = "registerCompanyPage", HttpMethod = "POST", OnSuccess = "directToHomePage", OnBegin = "startLoading"}, new { @class = "form-horizontal ", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 Html.RenderPartial("_CompanyRegister", new InternshipManagementSystem.Models.RegisterCompanyViewModel());
             }
         </div>
         <div class="tab-pane fade " id="registerTeacher">
-            @using (Ajax.BeginForm("RegisterTeacher", "Account", null, new AjaxOptions { UpdateTargetId = "registerTeacherPage", HttpMethod = "POST", OnSuccess = "directToHomePage"}, new { @class = "form-horizontal", role = "form" }))
+            @using (Ajax.BeginForm("RegisterTeacher", "Account", null, new AjaxOptions { UpdateTargetId = "registerTeacherPage", HttpMethod = "POST", OnSuccess = "directToHomePage", OnBegin = "startLoading"}, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 Html.RenderPartial("_TeacherRegister", new InternshipManagementSystem.Models.RegisterViewModel());
@@ -28,6 +28,18 @@
     </div>
 </div>
 <script>
+    var startLoading = function () {
+        $(".fakeLoader").show();
+        $(".registerTab").bind('click', false)
+        $(".submitButton").attr("disabled", true);
+    }
+
+    var endLoading = function () {
+        $(".fakeLoader").hide();
+        $(".registerTab").unbind('click', false)
+        $(".submitButton").attr("disabled", false);
+    }
+
     var directToHomePage = function (result) {
         if (result.isRedirect) {
             window.location.href = result.redirectUrl;
