@@ -164,6 +164,8 @@ namespace InternshipManagementSystem.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await UserManager.AddToRoleAsync(user.Id, "teacher");
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -180,13 +182,17 @@ namespace InternshipManagementSystem.Controllers
                     db.Teachers.Add(newTeacher);
 
                     await db.SaveChangesAsync();
-                    return RedirectToAction("Index", "Home");
+                    return Json(new
+                    {
+                        redirectUrl = Url.Action("Index", "Home"),
+                        isRedirect = true
+                    });
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
-            return View("Register", model);
+            return PartialView("_TeacherRegister", model);
         }
 
         [HttpPost]
@@ -203,6 +209,8 @@ namespace InternshipManagementSystem.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await UserManager.AddToRoleAsync(user.Id, "company");
+
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -220,11 +228,14 @@ namespace InternshipManagementSystem.Controllers
                     newCompany.CompanyLocation = newRegisteredCompany.CompanyLocation;
                     db.Companies.Add(newCompany);
                     await db.SaveChangesAsync();
-                    return RedirectToAction("Index", "Home");
+                    return Json(new {
+                        redirectUrl = Url.Action("Index", "Home"),
+                        isRedirect = true
+                    });
                 }
                 AddErrors(result);
             }
-            return View("Register" ,model);
+            return PartialView("_CompanyRegister" ,model);
         }
         //
         // GET: /Account/ConfirmEmail

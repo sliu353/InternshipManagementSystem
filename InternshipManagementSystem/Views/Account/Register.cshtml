@@ -5,28 +5,35 @@
 
 <h2>@ViewBag.Title.</h2>
 
-
-    <ul class="nav nav-tabs">
+<div class="container">
+    <ul class="nav nav-tabs col-lg-8 col-md-10">
         <li class="active"><a data-toggle="tab" href="#registerCompany">Register a company account</a></li>
         <li><a data-toggle="tab" href="#registerTeacher">Register a teacher account</a></li>
     </ul>
-    <div class="tab-content">
-        <div id="registerCompany" class="tab-pane fade in active">
-            @using (Html.BeginForm("RegisterCompany", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    <div class="tab-content  col-lg-8 col-md-10">
+        <div class="tab-pane fade in active" id="registerCompany">
+            @using (Ajax.BeginForm("RegisterCompany", "Account", null, new AjaxOptions { UpdateTargetId = "registerCompanyPage", HttpMethod = "POST", OnSuccess = "directToHomePage"}, new { @class = "form-horizontal ", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.Partial("_CompanyRegister", new InternshipManagementSystem.Models.RegisterCompanyViewModel())
+                Html.RenderPartial("_CompanyRegister", new InternshipManagementSystem.Models.RegisterCompanyViewModel());
             }
         </div>
-        <div id="registerTeacher" class="tab-pane fade">
-            @using (Html.BeginForm("RegisterTeacher", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        <div class="tab-pane fade " id="registerTeacher">
+            @using (Ajax.BeginForm("RegisterTeacher", "Account", null, new AjaxOptions { UpdateTargetId = "registerTeacherPage", HttpMethod = "POST", OnSuccess = "directToHomePage"}, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.Partial("_TeacherRegister", new InternshipManagementSystem.Models.RegisterViewModel())
+                Html.RenderPartial("_TeacherRegister", new InternshipManagementSystem.Models.RegisterViewModel());
             }
         </div>
     </div>
-
+</div>
+<script>
+    var directToHomePage = function (result) {
+        if (result.isRedirect) {
+            window.location.href = result.redirectUrl;
+        }
+    }
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
