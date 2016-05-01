@@ -1,4 +1,6 @@
 ﻿using InternshipManagementSystem.CustomerFilter;
+using InternshipManagementSystem.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,8 @@ namespace InternshipManagementSystem.Controllers
 {
     public class HomeController : Controller
     {
+        Internship_Management_SystemEntities db = new Internship_Management_SystemEntities();
+
         public ActionResult Index()
         {
             return View();
@@ -45,6 +49,7 @@ namespace InternshipManagementSystem.Controllers
         public ActionResult ForCompany()
         {
             ViewBag.Message = "This page is for company";
+            db.Companies.Where(c => c.CompanyEmail == User.Identity.Name);
             return View();
         }
     }

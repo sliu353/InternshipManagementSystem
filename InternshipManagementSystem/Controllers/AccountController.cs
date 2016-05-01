@@ -177,7 +177,6 @@ namespace InternshipManagementSystem.Controllers
                     Teacher newTeacher = new Teacher();
                     newTeacher.TeacherName = model.Name;
                     newTeacher.TeacherEmail = model.Email;
-                    newTeacher.PassWord = "secrete";
                     newTeacher.TeacherContactNumber = model.ContactNumber;
                     db.Teachers.Add(newTeacher);
 
@@ -210,7 +209,6 @@ namespace InternshipManagementSystem.Controllers
                 if (result.Succeeded)
                 {
                     await UserManager.AddToRoleAsync(user.Id, "company");
-
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -221,8 +219,8 @@ namespace InternshipManagementSystem.Controllers
 
                     RegisterCompanyViewModel newRegisteredCompany = (RegisterCompanyViewModel)model;
                     Company newCompany = new Company();
+                    newCompany.CompanyEmail = newRegisteredCompany.Email;
                     newCompany.CompanyName = newRegisteredCompany.Name;
-                    newCompany.PassWord = "secrete";
                     newCompany.PersonInCharge = newRegisteredCompany.PersonInCharge;
                     newCompany.ContactNumber = newRegisteredCompany.ContactNumber;
                     newCompany.CompanyLocation = newRegisteredCompany.CompanyLocation;

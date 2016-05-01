@@ -25,7 +25,6 @@ namespace InternshipManagementSystem.Models
         public string TeacherEmail { get; set; }
         public string TeacherContactNumber { get; set; }
         public string TeacherName { get; set; }
-        public string PassWord { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Class_> Class_ { get; set; }
