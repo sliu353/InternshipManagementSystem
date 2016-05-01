@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InternshipManagementSystem.CustomerFilter;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,6 +25,26 @@ namespace InternshipManagementSystem.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult Grade()
+        {
+            ViewBag.Message = "Your Grade";
+            return View();
+        }
+
+        [AuthLog(Roles = "teacher")]
+        public ActionResult ForTeacher()
+        {
+            ViewBag.Message = "This page is for teacher";
+            return View();
+        }
+
+        [AuthLog(Roles = "company")]
+        public ActionResult ForCompany()
+        {
+            ViewBag.Message = "This page is for company";
             return View();
         }
     }
