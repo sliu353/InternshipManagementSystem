@@ -1,14 +1,19 @@
 ﻿body {
 }
 
-.fakeLoader{
+.fakeLoader {
     width: 65px;
     height: 65px;
-    display: none;       
+    display: none;
 }
 
-.fakeLoader{
+.fakeLoader {
     margin: -29px 0 -32px 0;
 }
 
-
+textarea {
+    max-width: 100%;
+    margin: 0px;
+    height: 408px;
+    max-height: 408px;
+}

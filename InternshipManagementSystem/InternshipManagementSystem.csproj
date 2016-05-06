@@ -197,6 +197,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="CustomerFilter\AuthLogAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -214,6 +215,7 @@
     <Compile Include="Models\database_firewall_rules.cs">
       <DependentUpon>Internship-management-system.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ForCompanyViewModel.cs" />
     <Compile Include="Models\HomePageContent.cs">
       <DependentUpon>Internship-management-system.tt</DependentUpon>
     </Compile>
@@ -284,6 +286,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Loading.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -329,11 +332,13 @@
     <Content Include="Views\Account\_CompanyRegister.cshtml" />
     <Content Include="Views\Home\Grade.cshtml" />
     <Content Include="Views\Home\ForTeacher.cshtml" />
-    <Content Include="Views\Home\ForCompany.cshtml" />
     <Content Include="Views\Shared\AuthorizeFailed.cshtml" />
+    <Content Include="Views\Company\ForCompany.cshtml" />
+    <Content Include="Views\Company\_CompanyIntro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Teacher\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

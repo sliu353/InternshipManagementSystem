@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -42,14 +43,6 @@ namespace InternshipManagementSystem.Controllers
         public ActionResult ForTeacher()
         {
             ViewBag.Message = "This page is for teacher";
-            return View();
-        }
-
-        [AuthLog(Roles = "company")]
-        public ActionResult ForCompany()
-        {
-            ViewBag.Message = "This page is for company";
-            db.Companies.Where(c => c.CompanyEmail == User.Identity.Name);
             return View();
         }
     }

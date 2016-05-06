@@ -31,12 +31,12 @@
                     @{
                         if (User.IsInRole("teacher"))
                         {
-                            <li>@Html.ActionLink("Teacher", "ForTeacher", "Home")</li>
+                            <li>@Html.ActionLink("Teacher", "ForTeacher", "Teacher")</li>
                         }
                         if (User.IsInRole("company"))
                         {
 
-                            <li>@Html.ActionLink("Company", "ForCompany", "Home")</li>
+                            <li>@Html.ActionLink("Company", "ForCompany", "Company")</li>
                         }
                     }
                 </ul>
@@ -55,5 +55,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>

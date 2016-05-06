@@ -21,6 +21,7 @@ namespace InternshipManagementSystem.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        Internship_Management_SystemEntities db = new Internship_Management_SystemEntities();
 
         public AccountController()
         {
@@ -156,8 +157,6 @@ namespace InternshipManagementSystem.Controllers
         [CaptchaValidation("TeacherCaptchaCode", "TeacherCaptcha", "Incorrect teacher CAPTCHA code!")]
         public async Task<ActionResult> RegisterTeacher(RegisterViewModel model)
         {
-            var db = new Internship_Management_SystemEntities();
-
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
@@ -200,8 +199,6 @@ namespace InternshipManagementSystem.Controllers
         [CaptchaValidation("CompanyCaptchaCode", "CompanyCaptcha", "Incorrect teacher CAPTCHA code!")]
         public async Task<ActionResult> RegisterCompany(RegisterCompanyViewModel model)
         {
-            var db = new Internship_Management_SystemEntities();
-
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
