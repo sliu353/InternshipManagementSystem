@@ -198,6 +198,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="CustomerFilter\AuthLogAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -335,10 +336,11 @@
     <Content Include="Views\Shared\AuthorizeFailed.cshtml" />
     <Content Include="Views\Company\ForCompany.cshtml" />
     <Content Include="Views\Company\_CompanyIntro.cshtml" />
+    <Content Include="Views\Company\_InternIntro.cshtml" />
+    <Content Include="Views\Teacher\ForTeacher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Teacher\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

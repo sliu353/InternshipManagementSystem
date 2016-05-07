@@ -37,5 +37,15 @@ namespace InternshipManagementSystem.Controllers
             await db.SaveChangesAsync();
             return PartialView("_CompanyIntro", model);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditInternIntro(ForCompanyViewModel model)
+        {
+            var company = db.Companies.Where(c => c.CompanyEmail == User.Identity.Name).FirstOrDefault();
+            company.InternIntroduction = model.InternIntroduction;
+            await db.SaveChangesAsync();
+            return PartialView("_InternIntro", model);
+        }
     }
 }

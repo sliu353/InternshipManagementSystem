@@ -1,0 +1,10 @@
+﻿@model InternshipManagementSystem.Models.ForCompanyViewModel
+
+@{if (Model.InternIntroduction == null)
+    {
+        <div class="well displayDiv"><p>There is no introduction now. Click "Edit internship intro" button to add your company introduction</p></div>
+    }
+    else {
+        <div class="well displayDiv"><p>@Model.InternIntroduction</p></div>
+    }
+}

@@ -1,5 +1,5 @@
 ﻿@model InternshipManagementSystem.Models.ForCompanyViewModel
-
+<script src="~/Scripts/site.js"></script>
 @{
      ViewBag.Title = "Account for" + Model.CompanyName;
 }
@@ -14,29 +14,66 @@
     </div>
     <p>Want to edit your company introduction? Click &nbsp; <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#companyIntroEditor ">Edit company intro</button></p>
     <div class="collapse col-md-12" id="companyIntroEditor">
-        @using (Ajax.BeginForm("EditCompanyIntro", "Company", null, new AjaxOptions { UpdateTargetId = "companyIntro", HttpMethod = "POST", OnSuccess = "endLoading", OnBegin = "startLoading" }, new { @class = "form-horizontal ", role = "form" }))
+        @using (Ajax.BeginForm("EditCompanyIntro", "Company", null, new AjaxOptions { UpdateTargetId = "companyIntro", HttpMethod = "POST", OnSuccess = "companyIntroEndLoading", OnBegin = "companyIntroStartLoading", OnFailure = "companyIntroFailLoading" }, new { @class = "form-horizontal ", role = "form" }))
         {
             @Html.AntiForgeryToken()
-            <div id="companyIntroEditor" class="form-group">
+            <div class="form-group">
                 <label for="editCompanyIntro">Add or change company introduction</label>
                 @Html.TextAreaFor(m => m.CompanyIntroduction, new { @class = "form-control", rows = "10" })
             </div>
             <div class="col-md-offset-2 col-md-10 form-group">
                 <input type="submit" class="btn btn-default submitButton" value="Submit" />&nbsp;
                 <img class="fakeLoader" src="~/Picture/loading.gif" />
+                <span class="alert alert-danger failingAlert">Your submission failed. Please make sure no tags are indluded in your company introduction</span>
+            </div>
+        }
+    </div>
+</div>
+<div class="container">
+    <hr />
+    <h3>Internship Introduction</h3>
+    <div id="internIntro">
+        @Html.Partial("_InternIntro", Model)
+    </div>
+    <p>Want to edit your intrenship introduction? Click &nbsp; <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#internIntroEditor ">Edit internship intro</button></p>
+    <div class="collapse col-md-12" id="internIntroEditor">
+        @using (Ajax.BeginForm("EditInternIntro", "Company", null, new AjaxOptions { UpdateTargetId = "internIntro", HttpMethod = "POST", OnSuccess = "internIntroEndLoading", OnBegin = "internIntroStartLoading", OnFailure = "internIntroFailLoading" }, new { @class = "form-horizontal ", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label for="editInternIntro">Add or change company introduction</label>
+                @Html.TextAreaFor(m => m.InternIntroduction, new { @class = "form-control", rows = "10" })
+            </div>
+            <div class="col-md-offset-2 col-md-10 form-group">
+                <input type="submit" class="btn btn-default submitButton" value="Submit" />&nbsp;
+                <img class="fakeLoader" src="~/Picture/loading.gif" />
+                <span class="alert alert-danger failingAlert">Your submission failed. Please make sure no tags are indluded in your company introduction</span>
             </div>
         }
     </div>
 </div>
 <script>
-    var startLoading = function () {
-        $(".fakeLoader").show();
-        $(".submitButton").attr("disabled", true);
+    var companyIntroEndLoading = function () {
+        endLoading("companyIntroEditor");
     }
 
-    var endLoading = function () {
-        $(".fakeLoader").hide();
-        $(".submitButton").attr("disabled", false);
+    var companyIntroStartLoading = function () {
+        startLoading("companyIntroEditor");
+    }
+    var companyIntroFailLoading = function () {
+        failLoading("companyIntroEditor");
+    }
+
+    var internIntroEndLoading = function () {
+        endLoading("internIntroEditor");
+    }
+
+    var internIntroStartLoading = function () {
+        startLoading("internIntroEditor");
+    }
+
+    var internIntroFailLoading = function () {
+        failLoading("internIntroEditor");
     }
 </script>
 @section Scripts {

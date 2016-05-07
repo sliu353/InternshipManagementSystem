@@ -38,12 +38,5 @@ namespace InternshipManagementSystem.Controllers
             ViewBag.Message = "Your Grade";
             return View();
         }
-
-        [AuthLog(Roles = "teacher")]
-        public ActionResult ForTeacher()
-        {
-            ViewBag.Message = "This page is for teacher";
-            return View();
-        }
     }
 }

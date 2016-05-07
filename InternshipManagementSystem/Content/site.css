@@ -5,9 +5,6 @@
     width: 65px;
     height: 65px;
     display: none;
-}
-
-.fakeLoader {
     margin: -29px 0 -32px 0;
 }
 
@@ -16,4 +13,13 @@ textarea {
     margin: 0px;
     height: 408px;
     max-height: 408px;
+}
+
+.displayDiv > p{
+     white-space: pre-line;
+}
+
+.failingAlert{
+     display: none;
+     height: 33.09px;
 }

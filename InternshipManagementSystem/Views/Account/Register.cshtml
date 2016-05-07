@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Register";
 }
+<script src="~/Scripts/site.js"></script>
 <h2>@ViewBag.Title.</h2>
 
 <div class="container">
@@ -27,18 +28,6 @@
     </div>
 </div>
 <script>
-    var startLoading = function () {
-        $(".fakeLoader").show();
-        $(".registerTab").bind('click', false)
-        $(".submitButton").attr("disabled", true);
-    }
-
-    var endLoading = function () {
-        $(".fakeLoader").hide();
-        $(".registerTab").unbind('click', false)
-        $(".submitButton").attr("disabled", false);
-    }
-
     var directToHomePage = function (result) {
         if (result.isRedirect) {
             window.location.href = result.redirectUrl;
