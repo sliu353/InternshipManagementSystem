@@ -18,14 +18,14 @@ namespace InternshipManagementSystem.Controllers
         {
             var company = db.Companies.Where(c => c.CompanyEmail == User.Identity.Name).FirstOrDefault();
             ViewBag.Message = "This page is for company";
-            var students = (from theStudent in db.Students where theStudent.Company.CompanyName == company.CompanyName select theStudent).ToList();
+
             var companyIntroduction = company.CompanyIntroduction;
             var internIntroduction = company.InternIntroduction;
             string companyName = company.CompanyName;
 
             // Create our view model.
-            ForCompanyViewModel ForCompanyModel = new ForCompanyViewModel(companyName, internIntroduction, companyIntroduction, students);
-            return View(ForCompanyModel);
+            ForCompanyViewModel forCompanyModel = new ForCompanyViewModel(companyName, internIntroduction, companyIntroduction, company.Students.ToList());
+            return View(forCompanyModel);
         }
 
         [HttpPost]

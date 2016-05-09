@@ -1,33 +1,33 @@
 ﻿var startLoading = function (id) {
-    if (id == null) {
+    try{
         $(".fakeLoader").show();
         $(".submitButton").attr("disabled", true);
         $(".failingAlert").hide();
     }
-    else {
+    catch(er) {
         $("#" + id + " .fakeLoader").show();
-        $("#" + id + " .submitButton").attr("disabled", true);
+        $("#" + id + " input").attr("disabled", true);
         $("#" + id + " .failingAlert").hide();
     }
 }
 
 var endLoading = function (id) {
-    if (id == null) {
+    try{
         $(".fakeLoader").hide();
         $(".submitButton").attr("disabled", false);
     }
-    else {
+    catch(er) {
         $("#" + id + " .fakeLoader").hide();
-        $("#" + id + " .submitButton").attr("disabled", false);
+        $("#" + id + " input").attr("disabled", false);
     }
 }
 
 var failLoading = function (id) {
     endLoading(id);
-    if (id == null) {
+    try {
         $(".fallingAlert").show();
     }
-    else {
+    catch(er) {
         $("#" + id + " .failingAlert").show();
     }
 }

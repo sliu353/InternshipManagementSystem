@@ -1,0 +1,33 @@
+﻿@using (Html.BeginForm("UploadStudentInfo", "Teacher", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal ", role = "form"}))
+{
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Select the Excel File</label>
+        <div class="col-sm-6">
+            <input onclick="OnUploadStudentInfo" class="form-control" type="file" name="UploadedFile">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6">
+            <input class="form-control" type="submit" name="Submit" value="Submit">
+            <img class="fakeLoader" src="~/Picture/loading.gif" />
+        </div>
+    </div>
+    <span class="alert alert-danger failingAlert">Your submission failed. Please check your excel format again</span>
+    if (ViewData["isSuccessful"] != null)
+    {
+        if ((bool)ViewData["isSuccessful"] == true)
+        {
+            <span class="alert alert-success successAlert">Your submission was successful.</span>
+        }
+        else
+        {
+            <span class="alert alert-danger failingAlert">Your submission failed. Please check your excel format again</span>
+        }
+    }
+}
+<script>
+    var OnUploadStudentInfo = function () {
+        startLoading("uploadStudentInfo")
+    }
+</script>

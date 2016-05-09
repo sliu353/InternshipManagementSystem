@@ -19,7 +19,8 @@ textarea {
      white-space: pre-line;
 }
 
-.failingAlert{
+.failingAlert, .successAlert{
      display: none;
      height: 33.09px;
 }
+

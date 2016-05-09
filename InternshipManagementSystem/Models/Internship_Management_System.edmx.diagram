@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="707779e6e3a74a659ef56a8a092be35e" Name="Diagram1">
+      <Diagram DiagramId="a7941bf2755e4bf3968c2e0423b57d44" Name="Diagram1">
         <EntityTypeShape EntityType="Internship_Management_SystemModel.Class_" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Internship_Management_SystemModel.Company" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Internship_Management_SystemModel.Contract_" Width="1.5" PointX="6" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Internship_Management_SystemModel.HomePageContent" Width="1.5" PointX="2.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Internship_Management_SystemModel.InternType" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Internship_Management_SystemModel.InternType" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Internship_Management_SystemModel.Student" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Internship_Management_SystemModel.Teacher" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Internship_Management_SystemModel.database_firewall_rules" Width="1.5" PointX="4.75" PointY="1.125" IsExpanded="true" />
-        <AssociationConnector Association="Internship_Management_SystemModel.FK__Class___CompanyN__44CA3770" ManuallyRouted="false" />
-        <AssociationConnector Association="Internship_Management_SystemModel.FK__Class___TeacherE__43D61337" ManuallyRouted="false" />
-        <AssociationConnector Association="Internship_Management_SystemModel.FK__Student__ClassNa__47A6A41B" ManuallyRouted="false" />
-        <AssociationConnector Association="Internship_Management_SystemModel.FK__Contract___Compa__4D5F7D71" ManuallyRouted="false" />
-        <AssociationConnector Association="Internship_Management_SystemModel.FK__Student__Company__489AC854" ManuallyRouted="false" />
-        <AssociationConnector Association="Internship_Management_SystemModel.FK__Contract___Teach__4C6B5938" ManuallyRouted="false" />
-        <AssociationConnector Association="Internship_Management_SystemModel.FK__Student__Teacher__498EEC8D" ManuallyRouted="false" />
+        <AssociationConnector Association="Internship_Management_SystemModel.FK__Class___CompanyN__0697FACD" ManuallyRouted="false" />
+        <AssociationConnector Association="Internship_Management_SystemModel.FK__Class___TeacherE__05A3D694" ManuallyRouted="false" />
+        <AssociationConnector Association="Internship_Management_SystemModel.FK__Student__ClassNa__09746778" ManuallyRouted="false" />
+        <AssociationConnector Association="Internship_Management_SystemModel.FK__Contract___Compa__01D345B0" ManuallyRouted="false" />
+        <AssociationConnector Association="Internship_Management_SystemModel.FK__Student__Company__0A688BB1" ManuallyRouted="false" />
+        <AssociationConnector Association="Internship_Management_SystemModel.FK__Contract___Teach__00DF2177" ManuallyRouted="false" />
+        <AssociationConnector Association="Internship_Management_SystemModel.FK__Student__Teacher__0B5CAFEA" ManuallyRouted="false" />
         <AssociationConnector Association="Internship_Management_SystemModel.InternType_Company" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
