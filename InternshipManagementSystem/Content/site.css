@@ -24,3 +24,6 @@ textarea {
      height: 33.09px;
 }
 
+.hiddenButton{
+    display: none;
+}

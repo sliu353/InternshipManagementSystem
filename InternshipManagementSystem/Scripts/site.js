@@ -1,10 +1,11 @@
 ﻿var startLoading = function (id) {
-    try{
+    if (typeof id != "string"){
         $(".fakeLoader").show();
         $(".submitButton").attr("disabled", true);
         $(".failingAlert").hide();
     }
-    catch(er) {
+    else
+    {
         $("#" + id + " .fakeLoader").show();
         $("#" + id + " input").attr("disabled", true);
         $("#" + id + " .failingAlert").hide();
@@ -12,11 +13,11 @@
 }
 
 var endLoading = function (id) {
-    try{
+    if (typeof id != "string"){
         $(".fakeLoader").hide();
         $(".submitButton").attr("disabled", false);
     }
-    catch(er) {
+    else{
         $("#" + id + " .fakeLoader").hide();
         $("#" + id + " input").attr("disabled", false);
     }
@@ -24,10 +25,10 @@ var endLoading = function (id) {
 
 var failLoading = function (id) {
     endLoading(id);
-    try {
+    if (typeof id != "string"){
         $(".fallingAlert").show();
     }
-    catch(er) {
+    else {
         $("#" + id + " .failingAlert").show();
     }
 }

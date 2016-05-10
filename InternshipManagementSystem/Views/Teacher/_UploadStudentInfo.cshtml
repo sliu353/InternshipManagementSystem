@@ -13,16 +13,15 @@
             <img class="fakeLoader" src="~/Picture/loading.gif" />
         </div>
     </div>
-    <span class="alert alert-danger failingAlert">Your submission failed. Please check your excel format again</span>
     if (ViewData["isSuccessful"] != null)
     {
         if ((bool)ViewData["isSuccessful"] == true)
         {
-            <span class="alert alert-success successAlert">Your submission was successful.</span>
+            <span class="alert alert-success successAlert" style="display: inline">Your submission was successful.</span>
         }
         else
         {
-            <span class="alert alert-danger failingAlert">Your submission failed. Please check your excel format again</span>
+            <span class="alert alert-danger failingAlert" style="display: inline">Your submission failed. Please check your excel format again</span>
         }
     }
 }
@@ -31,3 +30,5 @@
         startLoading("uploadStudentInfo")
     }
 </script>
+<script src="~/Scripts/site.js"></script>
+<link href="~/Content/site.css" rel="stylesheet" />

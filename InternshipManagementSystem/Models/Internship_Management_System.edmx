@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="ClassName" />
           </Key>
-          <Property Name="ClassName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="255" />
           <Property Name="TeacherEmail" Type="nvarchar" MaxLength="254" Nullable="false" />
           <Property Name="NumberOfStudents" Type="int" />
@@ -23,7 +23,7 @@
           <Property Name="CompanyEmail" Type="nvarchar" MaxLength="254" Nullable="false" />
           <Property Name="CompanyOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ContactNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="PersonInCharge" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PersonInCharge" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="CompanyLocation" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="InternIntroduction" Type="nvarchar" MaxLength="4000" />
           <Property Name="CompanyIntroduction" Type="nvarchar" MaxLength="4000" />
@@ -67,8 +67,8 @@
             <PropertyRef Name="PhoneNumber" />
           </Key>
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="StudentName" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="ClassName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="StudentName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="255" />
           <Property Name="TeacherEmail" Type="nvarchar" MaxLength="254" Nullable="false" />
           <Property Name="CompanyMark" Type="int" />
@@ -80,7 +80,7 @@
           </Key>
           <Property Name="TeacherEmail" Type="nvarchar" MaxLength="254" Nullable="false" />
           <Property Name="TeacherContactNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="TeacherName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TeacherName" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Internship_Management_System.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -100,7 +100,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
           <Property Name="create_date" Type="datetime" Nullable="false" />
           <Property Name="modify_date" Type="datetime" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Class___CompanyN__0697FACD">
+        <Association Name="FK__Class___CompanyN__1B9317B3">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="Class_" Type="Self.Class_" Multiplicity="*" />
           <ReferentialConstraint>
@@ -112,7 +112,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Class___TeacherE__05A3D694">
+        <Association Name="FK__Class___TeacherE__1A9EF37A">
           <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
           <End Role="Class_" Type="Self.Class_" Multiplicity="*" />
           <ReferentialConstraint>
@@ -124,7 +124,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Contract___Compa__01D345B0">
+        <Association Name="FK__Contract___Compa__1F63A897">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="Contract_" Type="Self.Contract_" Multiplicity="*" />
           <ReferentialConstraint>
@@ -136,7 +136,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Contract___Teach__00DF2177">
+        <Association Name="FK__Contract___Teach__1E6F845E">
           <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
           <End Role="Contract_" Type="Self.Contract_" Multiplicity="*" />
           <ReferentialConstraint>
@@ -148,7 +148,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__InternTyp__Compa__7C1A6C5A">
+        <Association Name="FK__InternTyp__Compa__14E61A24">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="InternType_Company" Type="Self.InternType_Company" Multiplicity="*" />
           <ReferentialConstraint>
@@ -160,7 +160,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__InternTyp__Inter__7B264821">
+        <Association Name="FK__InternTyp__Inter__13F1F5EB">
           <End Role="InternType" Type="Self.InternType" Multiplicity="1" />
           <End Role="InternType_Company" Type="Self.InternType_Company" Multiplicity="*" />
           <ReferentialConstraint>
@@ -172,7 +172,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Student__ClassNa__09746778">
+        <Association Name="FK__Student__ClassNa__22401542">
           <End Role="Class_" Type="Self.Class_" Multiplicity="1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
@@ -184,7 +184,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Student__Company__0A688BB1">
+        <Association Name="FK__Student__Company__2334397B">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
@@ -196,7 +196,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Student__Teacher__0B5CAFEA">
+        <Association Name="FK__Student__Teacher__24285DB4">
           <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
@@ -227,39 +227,39 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
     [database_firewall_rules].[modify_date] AS [modify_date]
     FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__Class___CompanyN__0697FACD" Association="Self.FK__Class___CompanyN__0697FACD">
+          <AssociationSet Name="FK__Class___CompanyN__1B9317B3" Association="Self.FK__Class___CompanyN__1B9317B3">
             <End Role="Company" EntitySet="Company" />
             <End Role="Class_" EntitySet="Class_" />
           </AssociationSet>
-          <AssociationSet Name="FK__Class___TeacherE__05A3D694" Association="Self.FK__Class___TeacherE__05A3D694">
+          <AssociationSet Name="FK__Class___TeacherE__1A9EF37A" Association="Self.FK__Class___TeacherE__1A9EF37A">
             <End Role="Teacher" EntitySet="Teacher" />
             <End Role="Class_" EntitySet="Class_" />
           </AssociationSet>
-          <AssociationSet Name="FK__Contract___Compa__01D345B0" Association="Self.FK__Contract___Compa__01D345B0">
+          <AssociationSet Name="FK__Contract___Compa__1F63A897" Association="Self.FK__Contract___Compa__1F63A897">
             <End Role="Company" EntitySet="Company" />
             <End Role="Contract_" EntitySet="Contract_" />
           </AssociationSet>
-          <AssociationSet Name="FK__Contract___Teach__00DF2177" Association="Self.FK__Contract___Teach__00DF2177">
+          <AssociationSet Name="FK__Contract___Teach__1E6F845E" Association="Self.FK__Contract___Teach__1E6F845E">
             <End Role="Teacher" EntitySet="Teacher" />
             <End Role="Contract_" EntitySet="Contract_" />
           </AssociationSet>
-          <AssociationSet Name="FK__InternTyp__Compa__7C1A6C5A" Association="Self.FK__InternTyp__Compa__7C1A6C5A">
+          <AssociationSet Name="FK__InternTyp__Compa__14E61A24" Association="Self.FK__InternTyp__Compa__14E61A24">
             <End Role="Company" EntitySet="Company" />
             <End Role="InternType_Company" EntitySet="InternType_Company" />
           </AssociationSet>
-          <AssociationSet Name="FK__InternTyp__Inter__7B264821" Association="Self.FK__InternTyp__Inter__7B264821">
+          <AssociationSet Name="FK__InternTyp__Inter__13F1F5EB" Association="Self.FK__InternTyp__Inter__13F1F5EB">
             <End Role="InternType" EntitySet="InternType" />
             <End Role="InternType_Company" EntitySet="InternType_Company" />
           </AssociationSet>
-          <AssociationSet Name="FK__Student__ClassNa__09746778" Association="Self.FK__Student__ClassNa__09746778">
+          <AssociationSet Name="FK__Student__ClassNa__22401542" Association="Self.FK__Student__ClassNa__22401542">
             <End Role="Class_" EntitySet="Class_" />
             <End Role="Student" EntitySet="Student" />
           </AssociationSet>
-          <AssociationSet Name="FK__Student__Company__0A688BB1" Association="Self.FK__Student__Company__0A688BB1">
+          <AssociationSet Name="FK__Student__Company__2334397B" Association="Self.FK__Student__Company__2334397B">
             <End Role="Company" EntitySet="Company" />
             <End Role="Student" EntitySet="Student" />
           </AssociationSet>
-          <AssociationSet Name="FK__Student__Teacher__0B5CAFEA" Association="Self.FK__Student__Teacher__0B5CAFEA">
+          <AssociationSet Name="FK__Student__Teacher__24285DB4" Association="Self.FK__Student__Teacher__24285DB4">
             <End Role="Teacher" EntitySet="Teacher" />
             <End Role="Student" EntitySet="Student" />
           </AssociationSet>
@@ -273,14 +273,14 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
           <Key>
             <PropertyRef Name="ClassName" />
           </Key>
-          <Property Name="ClassName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClassName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CompanyName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="TeacherEmail" Type="String" MaxLength="254" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NumberOfStudents" Type="Int32" />
           <Property Name="InternshipTasks" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Company" Relationship="Self.FK__Class___CompanyN__0697FACD" FromRole="Class_" ToRole="Company" />
-          <NavigationProperty Name="Teacher" Relationship="Self.FK__Class___TeacherE__05A3D694" FromRole="Class_" ToRole="Teacher" />
-          <NavigationProperty Name="Students" Relationship="Self.FK__Student__ClassNa__09746778" FromRole="Class_" ToRole="Student" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__Class___CompanyN__1B9317B3" FromRole="Class_" ToRole="Company" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK__Class___TeacherE__1A9EF37A" FromRole="Class_" ToRole="Teacher" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Student__ClassNa__22401542" FromRole="Class_" ToRole="Student" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -290,13 +290,13 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
           <Property Name="CompanyEmail" Type="String" MaxLength="254" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CompanyOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ContactNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PersonInCharge" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonInCharge" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CompanyLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="InternIntroduction" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="CompanyIntroduction" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Class_" Relationship="Self.FK__Class___CompanyN__0697FACD" FromRole="Company" ToRole="Class_" />
-          <NavigationProperty Name="Contract_" Relationship="Self.FK__Contract___Compa__01D345B0" FromRole="Company" ToRole="Contract_" />
-          <NavigationProperty Name="Students" Relationship="Self.FK__Student__Company__0A688BB1" FromRole="Company" ToRole="Student" />
+          <NavigationProperty Name="Class_" Relationship="Self.FK__Class___CompanyN__1B9317B3" FromRole="Company" ToRole="Class_" />
+          <NavigationProperty Name="Contract_" Relationship="Self.FK__Contract___Compa__1F63A897" FromRole="Company" ToRole="Contract_" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Student__Company__2334397B" FromRole="Company" ToRole="Student" />
           <NavigationProperty Name="InternTypes" Relationship="Self.InternType_Company" FromRole="Company" ToRole="InternType" />
         </EntityType>
         <EntityType Name="Contract_">
@@ -310,8 +310,8 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
           <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="InternLocation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Company" Relationship="Self.FK__Contract___Compa__01D345B0" FromRole="Contract_" ToRole="Company" />
-          <NavigationProperty Name="Teacher" Relationship="Self.FK__Contract___Teach__00DF2177" FromRole="Contract_" ToRole="Teacher" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__Contract___Compa__1F63A897" FromRole="Contract_" ToRole="Company" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK__Contract___Teach__1E6F845E" FromRole="Contract_" ToRole="Teacher" />
         </EntityType>
         <EntityType Name="HomePageContent">
           <Key>
@@ -333,15 +333,15 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
             <PropertyRef Name="PhoneNumber" />
           </Key>
           <Property Name="PhoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="StudentName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ClassName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StudentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClassName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CompanyName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="TeacherEmail" Type="String" MaxLength="254" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CompanyMark" Type="Int32" />
           <Property Name="TeacherMark" Type="Int32" />
-          <NavigationProperty Name="Class_" Relationship="Self.FK__Student__ClassNa__09746778" FromRole="Student" ToRole="Class_" />
-          <NavigationProperty Name="Company" Relationship="Self.FK__Student__Company__0A688BB1" FromRole="Student" ToRole="Company" />
-          <NavigationProperty Name="Teacher" Relationship="Self.FK__Student__Teacher__0B5CAFEA" FromRole="Student" ToRole="Teacher" />
+          <NavigationProperty Name="Class_" Relationship="Self.FK__Student__ClassNa__22401542" FromRole="Student" ToRole="Class_" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__Student__Company__2334397B" FromRole="Student" ToRole="Company" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK__Student__Teacher__24285DB4" FromRole="Student" ToRole="Teacher" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -349,10 +349,10 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
           </Key>
           <Property Name="TeacherEmail" Type="String" MaxLength="254" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TeacherContactNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TeacherName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Class_" Relationship="Self.FK__Class___TeacherE__05A3D694" FromRole="Teacher" ToRole="Class_" />
-          <NavigationProperty Name="Contract_" Relationship="Self.FK__Contract___Teach__00DF2177" FromRole="Teacher" ToRole="Contract_" />
-          <NavigationProperty Name="Students" Relationship="Self.FK__Student__Teacher__0B5CAFEA" FromRole="Teacher" ToRole="Student" />
+          <Property Name="TeacherName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Class_" Relationship="Self.FK__Class___TeacherE__1A9EF37A" FromRole="Teacher" ToRole="Class_" />
+          <NavigationProperty Name="Contract_" Relationship="Self.FK__Contract___Teach__1E6F845E" FromRole="Teacher" ToRole="Contract_" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Student__Teacher__24285DB4" FromRole="Teacher" ToRole="Student" />
         </EntityType>
         <EntityType Name="database_firewall_rules">
           <Key>
@@ -370,7 +370,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
           <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <Association Name="FK__Class___CompanyN__0697FACD">
+        <Association Name="FK__Class___CompanyN__1B9317B3">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="Class_" Type="Self.Class_" Multiplicity="*" />
           <ReferentialConstraint>
@@ -382,7 +382,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Class___TeacherE__05A3D694">
+        <Association Name="FK__Class___TeacherE__1A9EF37A">
           <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
           <End Role="Class_" Type="Self.Class_" Multiplicity="*" />
           <ReferentialConstraint>
@@ -394,7 +394,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Student__ClassNa__09746778">
+        <Association Name="FK__Student__ClassNa__22401542">
           <End Role="Class_" Type="Self.Class_" Multiplicity="1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
@@ -406,7 +406,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Contract___Compa__01D345B0">
+        <Association Name="FK__Contract___Compa__1F63A897">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="Contract_" Type="Self.Contract_" Multiplicity="*" />
           <ReferentialConstraint>
@@ -418,7 +418,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Student__Company__0A688BB1">
+        <Association Name="FK__Student__Company__2334397B">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
@@ -430,7 +430,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Contract___Teach__00DF2177">
+        <Association Name="FK__Contract___Teach__1E6F845E">
           <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
           <End Role="Contract_" Type="Self.Contract_" Multiplicity="*" />
           <ReferentialConstraint>
@@ -442,7 +442,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Student__Teacher__0B5CAFEA">
+        <Association Name="FK__Student__Teacher__24285DB4">
           <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
           <ReferentialConstraint>
@@ -467,31 +467,31 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
           <EntitySet Name="Students" EntityType="Self.Student" />
           <EntitySet Name="Teachers" EntityType="Self.Teacher" />
           <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
-          <AssociationSet Name="FK__Class___CompanyN__0697FACD" Association="Self.FK__Class___CompanyN__0697FACD">
+          <AssociationSet Name="FK__Class___CompanyN__1B9317B3" Association="Self.FK__Class___CompanyN__1B9317B3">
             <End Role="Company" EntitySet="Companies" />
             <End Role="Class_" EntitySet="Class_" />
           </AssociationSet>
-          <AssociationSet Name="FK__Class___TeacherE__05A3D694" Association="Self.FK__Class___TeacherE__05A3D694">
+          <AssociationSet Name="FK__Class___TeacherE__1A9EF37A" Association="Self.FK__Class___TeacherE__1A9EF37A">
             <End Role="Teacher" EntitySet="Teachers" />
             <End Role="Class_" EntitySet="Class_" />
           </AssociationSet>
-          <AssociationSet Name="FK__Student__ClassNa__09746778" Association="Self.FK__Student__ClassNa__09746778">
+          <AssociationSet Name="FK__Student__ClassNa__22401542" Association="Self.FK__Student__ClassNa__22401542">
             <End Role="Class_" EntitySet="Class_" />
             <End Role="Student" EntitySet="Students" />
           </AssociationSet>
-          <AssociationSet Name="FK__Contract___Compa__01D345B0" Association="Self.FK__Contract___Compa__01D345B0">
+          <AssociationSet Name="FK__Contract___Compa__1F63A897" Association="Self.FK__Contract___Compa__1F63A897">
             <End Role="Company" EntitySet="Companies" />
             <End Role="Contract_" EntitySet="Contract_" />
           </AssociationSet>
-          <AssociationSet Name="FK__Student__Company__0A688BB1" Association="Self.FK__Student__Company__0A688BB1">
+          <AssociationSet Name="FK__Student__Company__2334397B" Association="Self.FK__Student__Company__2334397B">
             <End Role="Company" EntitySet="Companies" />
             <End Role="Student" EntitySet="Students" />
           </AssociationSet>
-          <AssociationSet Name="FK__Contract___Teach__00DF2177" Association="Self.FK__Contract___Teach__00DF2177">
+          <AssociationSet Name="FK__Contract___Teach__1E6F845E" Association="Self.FK__Contract___Teach__1E6F845E">
             <End Role="Teacher" EntitySet="Teachers" />
             <End Role="Contract_" EntitySet="Contract_" />
           </AssociationSet>
-          <AssociationSet Name="FK__Student__Teacher__0B5CAFEA" Association="Self.FK__Student__Teacher__0B5CAFEA">
+          <AssociationSet Name="FK__Student__Teacher__24285DB4" Association="Self.FK__Student__Teacher__24285DB4">
             <End Role="Teacher" EntitySet="Teachers" />
             <End Role="Student" EntitySet="Students" />
           </AssociationSet>

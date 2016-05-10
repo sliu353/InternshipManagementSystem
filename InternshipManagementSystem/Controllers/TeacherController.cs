@@ -3,6 +3,7 @@ using InternshipManagementSystem.Models;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -13,6 +14,7 @@ namespace InternshipManagementSystem.Controllers
     public class TeacherController : Controller
     {
         Internship_Management_SystemEntities db = new Internship_Management_SystemEntities();
+
 
         //This method helps set up the view model for populating the "ForTeacher" view with needed data.
         private ForTeacherViewModel prepareViewModel()
@@ -45,6 +47,11 @@ namespace InternshipManagementSystem.Controllers
             {
                 try
                 {
+                    //If there are already records of classes and students that are related to this teacher,
+                    //delete them and replace with our new file.
+                    db.Students.RemoveRange(thisTeacher.Students);
+                    db.Class_.RemoveRange(thisTeacher.Class_);
+
                     HttpPostedFileBase file = Request.Files["UploadedFile"];
 
                     if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
@@ -63,7 +70,7 @@ namespace InternshipManagementSystem.Controllers
                         var noOfRow = workSheet.Dimension.End.Row;
 
                         Class_ class_ = new Class_();
-                        for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
+                        for (int rowIterator = 2; ; rowIterator++)
                         {
                             if (workSheet.Cells[rowIterator, 1].Value != null)
                             {
@@ -77,6 +84,7 @@ namespace InternshipManagementSystem.Controllers
                                 class_.Teacher = thisTeacher;
                                 class_.TeacherEmail = thisTeacher.TeacherEmail;
                                 class_.ClassName = workSheet.Cells[rowIterator, 1].Value.ToString();
+
                             }
                             try
                             {
@@ -95,16 +103,37 @@ namespace InternshipManagementSystem.Controllers
                                 break;
                             }
                         }
-                        await db.SaveChangesAsync();
                     }
+                    await db.SaveChangesAsync();
                 }
                 catch (Exception e)
                 {
                     ViewData["isSuccessful"] = false;
+                    return View("ForTeacher", prepareViewModel());
                 }
                 ViewData["isSuccessful"] = true;
             }
             return View("ForTeacher", prepareViewModel());
+        }
+
+        public async Task<ActionResult> MarkStudent(List<string> teacherMark)
+        {
+            var thisTeacher = db.Teachers.Where(t => t.TeacherEmail == User.Identity.Name).FirstOrDefault();
+            var teacherMarkIterator = 0;
+            foreach (var c in thisTeacher.Class_)
+            {
+                    foreach (var s in c.Students)
+                    {
+                        int result;
+                        if (Int32.TryParse(teacherMark[teacherMarkIterator], out result))
+                            s.TeacherMark = result;
+                        else
+                            s.TeacherMark = null;
+                        teacherMarkIterator++;
+                    }
+            }
+            await db.SaveChangesAsync();
+            return PartialView("_MarkedStudentInfo", prepareViewModel());
         }
     }
 }

@@ -1,0 +1,38 @@
+﻿@model InternshipManagementSystem.Models.ForTeacherViewModel
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Class</th>
+            <th>Student Name</th>
+            <th>Phone Number</th>
+            <th>Grade (Given by teacher)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model.Classes)
+        {
+            int rowCounter = 1;
+            foreach (var s in c.Students)
+            {
+                <tr>
+                    @if (rowCounter == 1)
+                    {
+                        <td rowspan="@c.NumberOfStudents">@c.ClassName</td>
+                        rowCounter++;
+                    }
+                    <td>@s.StudentName</td>
+                    <td>@s.PhoneNumber</td>
+                    @if (s.TeacherMark == null)
+                    {
+                        <td>HNMY</td>
+                    }
+                    else
+                    {
+                        <td>@s.TeacherMark</td>
+                    }
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
