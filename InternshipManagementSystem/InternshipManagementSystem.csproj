@@ -220,9 +220,9 @@
     <Compile Include="Models\database_firewall_rules.cs">
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EditOrAddContractViewModel.cs" />
     <Compile Include="Models\ForCompanyViewModel.cs" />
     <Compile Include="Models\ForTeacherViewModel.cs" />
-    <Compile Include="Models\HiddenFormForMarkingStudentsViewModel.cs" />
     <Compile Include="Models\HomePageContent.cs">
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
     </Compile>
@@ -258,7 +258,21 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\site.css" />
+    <Content Include="Content\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -283,11 +297,12 @@
       <DependentUpon>Internship_Management_System.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\HiddenFormForMarkingStudent.js" />
     <Content Include="Scripts\isLoading.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -350,7 +365,9 @@
     <Content Include="Views\Teacher\_UploadStudentInfo.cshtml" />
     <Content Include="Views\Teacher\_TeacherAssessStudents.cshtml" />
     <Content Include="Views\Teacher\_MarkedStudentInfo.cshtml" />
-    <Content Include="Views\Teacher\_HiddenFormForMarkingStudents.cshtml" />
+    <Content Include="Views\Teacher\_DisplayContract.cshtml" />
+    <Content Include="Views\Teacher\_EditOrAddContract.cshtml" />
+    <Content Include="Views\Teacher\_Contracts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

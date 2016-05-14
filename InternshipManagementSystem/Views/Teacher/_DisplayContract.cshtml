@@ -1,0 +1,47 @@
+﻿@model InternshipManagementSystem.Models.EditOrAddContractViewModel
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        与<strong>@Model.contract.CompanyName</strong>的合同 &nbsp;
+        <a href="#@ViewData["contractNo"]" data-toggle="collapse">
+            <span class="glyphicon glyphicon-edit" data-toggle="tooltip" title="编辑合同" data-placement="bottom"></span>
+        </a>
+        &nbsp;
+        
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td class="col-xs-3"><strong>实习单位名称</strong></td>
+                    <td class="col-xs-9">@Model.contract.CompanyName</td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3"><strong>实习地址</strong></td>
+                    <td class="col-xs-9">@Model.contract.InternLocation</td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3"><strong>开始时间</strong></td>
+                    <td class="col-xs-9">@Model.contract.StartTime</td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3"><strong>结束时间</strong></td>
+                    <td class="col-xs-9">@Model.contract.EndTime</td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3"><strong>实习班级</strong></td>
+                    <td class="col-xs-9">
+                        @foreach (var class_ in (from classes in Model.classes.Where(c => c.Company == Model.contract.Company) select classes.ClassName))
+                        {
+                            <span>@class_ &nbsp;</span>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3"><strong>合同内容</strong></td>
+                    <td class="col-xs-9">@Model.contract.ContractContent</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

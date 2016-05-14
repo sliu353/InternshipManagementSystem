@@ -16,10 +16,10 @@ namespace InternshipManagementSystem.Controllers
         Internship_Management_SystemEntities db = new Internship_Management_SystemEntities();
 
 
-        //This method helps set up the view model for populating the "ForTeacher" view with needed data.
+        //This method helps setting up the view model for populating the "ForTeacher" view with needed data.
         private ForTeacherViewModel prepareViewModel()
         {
-            var thisTeacher = db.Teachers.Where(t => t.TeacherEmail == User.Identity.Name).FirstOrDefault();
+            var thisTeacher = getThisTeacher();
             ForTeacherViewModel forTeacherModel = new ForTeacherViewModel(thisTeacher);
             if (thisTeacher.Class_ != null)
             {
@@ -30,6 +30,12 @@ namespace InternshipManagementSystem.Controllers
                     forTeacherModel.Students.AddRange(c.Students.ToList());
                 }
             }
+            if (thisTeacher.Contract_ != null)
+            {
+                forTeacherModel.Contracts = thisTeacher.Contract_.ToList();
+            }
+            forTeacherModel.AllCompanies = db.Companies.ToList();
+
             return forTeacherModel;
         }
 
@@ -40,18 +46,24 @@ namespace InternshipManagementSystem.Controllers
             return View(prepareViewModel());
         }
 
+        private Teacher getThisTeacher()
+        {
+            return db.Teachers.Where(t => t.TeacherEmail == User.Identity.Name).FirstOrDefault();
+        }
+
+        [HttpPost]
         public async Task<ActionResult> UploadStudentInfo(FormCollection formCollection)
         {
-            var thisTeacher = db.Teachers.Where(t => t.TeacherEmail == User.Identity.Name).FirstOrDefault();
+            var thisTeacher = getThisTeacher();
             if (Request != null)
             {
+                //Create a copy of db so if user submit any files with problem that mess up db, it can be reverted back.
+                var aCopyOfDB = new Internship_Management_SystemEntities();
                 try
                 {
-                    //If there are already records of classes and students that are related to this teacher,
-                    //delete them and replace with our new file.
+                    //If there are already records of classes and students that are related to this teacher, delete them and replace with our new file.
                     db.Students.RemoveRange(thisTeacher.Students);
                     db.Class_.RemoveRange(thisTeacher.Class_);
-
                     HttpPostedFileBase file = Request.Files["UploadedFile"];
 
                     if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
@@ -61,7 +73,6 @@ namespace InternshipManagementSystem.Controllers
                         byte[] fileBytes = new byte[file.ContentLength];
                         var data = file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
                     }
-
                     using (var package = new ExcelPackage(file.InputStream))
                     {
                         var currentSheet = package.Workbook.Worksheets;
@@ -108,6 +119,7 @@ namespace InternshipManagementSystem.Controllers
                 }
                 catch (Exception e)
                 {
+                    db = aCopyOfDB;
                     ViewData["isSuccessful"] = false;
                     return View("ForTeacher", prepareViewModel());
                 }
@@ -116,24 +128,58 @@ namespace InternshipManagementSystem.Controllers
             return View("ForTeacher", prepareViewModel());
         }
 
+        [HttpPost]
         public async Task<ActionResult> MarkStudent(List<string> teacherMark)
         {
-            var thisTeacher = db.Teachers.Where(t => t.TeacherEmail == User.Identity.Name).FirstOrDefault();
+            var thisTeacher = getThisTeacher();
             var teacherMarkIterator = 0;
             foreach (var c in thisTeacher.Class_)
             {
-                    foreach (var s in c.Students)
-                    {
-                        int result;
-                        if (Int32.TryParse(teacherMark[teacherMarkIterator], out result))
-                            s.TeacherMark = result;
-                        else
-                            s.TeacherMark = null;
-                        teacherMarkIterator++;
-                    }
+                foreach (var s in c.Students)
+                {
+                    int result;
+                    if (Int32.TryParse(teacherMark[teacherMarkIterator], out result))
+                        s.TeacherMark = result;
+                    else
+                        s.TeacherMark = null;
+                    teacherMarkIterator++;
+                }
             }
             await db.SaveChangesAsync();
             return PartialView("_MarkedStudentInfo", prepareViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult EditOrAddContract(Contract_ contract, List<string> Classes, string company)
+        {
+            var thisTeacher = getThisTeacher();
+            var aCopyOfDatabase = new Internship_Management_SystemEntities();
+
+            try
+            {
+                // If there is already a contract between this teacher and this company, delete it and replace it with our new contract later.
+                db.Contract_.RemoveRange(db.Contract_.Where(c => c.CompanyName == company && c.TeacherEmail == thisTeacher.TeacherEmail));
+                // If there are any contract that related to the classes we get, we also need to delete them.
+                db.Contract_.RemoveRange(db.Contract_.Where(c => (from classes in db.Class_.Where(cl => Classes.Contains(cl.ClassName)) select classes.CompanyName).Contains(c.CompanyName) && c.TeacherEmail == thisTeacher.TeacherEmail));
+                contract.Teacher = thisTeacher;
+                contract.TeacherEmail = thisTeacher.TeacherEmail;
+                contract.Company = db.Companies.Where(c => c.CompanyName == company).FirstOrDefault();
+                contract.Teacher = db.Teachers.Where(t => t.TeacherEmail == contract.TeacherEmail).FirstOrDefault();
+                db.Contract_.Add(contract);
+                db.SaveChanges();
+
+                var contractedCompany = db.Companies.Where(c => c.CompanyName == contract.CompanyName).FirstOrDefault();
+                foreach (string class_ in Classes)
+                {
+                    db.Class_.Where(c => c.ClassName == class_).FirstOrDefault().Company = contract.Company;
+                }
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                db = aCopyOfDatabase;
+            }
+            return PartialView("_Contracts", prepareViewModel());
         }
     }
 }

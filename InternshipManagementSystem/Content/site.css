@@ -27,3 +27,7 @@ textarea {
 .hiddenButton{
     display: none;
 }
+
+.glyphicon-edit{
+    color: white;
+}

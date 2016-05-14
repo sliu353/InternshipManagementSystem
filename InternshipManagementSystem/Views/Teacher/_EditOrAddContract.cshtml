@@ -1,0 +1,89 @@
+﻿@model InternshipManagementSystem.Models.EditOrAddContractViewModel
+
+@{
+    string onSuccess = "ContractSubmitEndLoading(\"" + (ViewData["editContractNo"].ToString() != "createContract" ? ViewData["editContractNo"].ToString() : "addNewContract") + "\")";
+    string onStart = "ContractSubmitStartLoading(\"" + (ViewData["editContractNo"].ToString() != "createContract" ? ViewData["editContractNo"].ToString() : "addNewContract") + "\")";
+    using (Ajax.BeginForm("EditOrAddContract", "Teacher", null, new AjaxOptions { UpdateTargetId = "contract", HttpMethod = "POST", OnSuccess = onSuccess, OnBegin = onStart }, new { @class = "form-horizontal ", role = "form" }))
+    {
+    <div class="form-group">
+        <label class="col-md-2 control-label">实习单位名称</label>
+        <div class="col-md-10">
+            @foreach (var company in Model.allCompanies)
+            {
+                <label class="radio-inline">
+                    @if (company.CompanyName == Model.contract.CompanyName && Model.contract.CompanyName != null)
+            {
+                        <input type="radio" Value="@company.CompanyName" name="company" checked />
+                    }
+                    else
+                    {
+                        <input type="radio" Value="@company.CompanyName" name="company" />
+                    }
+                @company.CompanyName
+            </label>
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">实习地址</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.contract.InternLocation, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">开始日期</label>
+        <div class="col-md-4">
+            @if (!DateTime.Equals(Model.contract.StartTime, new DateTime()))
+            {
+                @Html.TextBoxFor(m => m.contract.StartTime, new { id = ViewData["editContractNo"] + "StartDateInput", @class = "form-control datePicker", Value = Model.contract.StartTime.ToString("yyyy-MM-dd") })
+            }
+            else
+            {
+                @Html.TextBoxFor(m => m.contract.StartTime, new { id = ViewData["editContractNo"] + "StartDateInput", @class = "form-control datePicker", Value = DateTime.Now.ToString("yyyy-MM-dd") })
+            }
+        </div>
+        <label class="col-md-2 control-label">结束日期</label>
+        <div class="col-md-4">
+            @if (!DateTime.Equals(Model.contract.EndTime, new DateTime()))
+            {
+                @Html.TextBoxFor(m => m.contract.EndTime, new { id = ViewData["editContractNo"] + "EndDateInput", @class = "form-control datePicker", Value = Model.contract.EndTime.ToString("yyyy-MM-dd") })
+            }
+            else
+            {
+                @Html.TextBoxFor(m => m.contract.EndTime, new { id = ViewData["editContractNo"] + "EndDateInput", @class = "form-control datePicker", Value = DateTime.Now.ToString("yyyy-MM-dd") })
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">实习班级</label>
+        <div class="col-lg-10">
+            @foreach (var c in Model.classes)
+    {
+        if (c.CompanyName == Model.contract.CompanyName && c.CompanyName != null)
+        {
+                    <label class="checkbox-inline"><input type="checkbox" Value="@c.ClassName" name="Classes" checked>@c.ClassName</label>
+                }
+                else
+                {
+                    <label class="checkbox-inline"><input type="checkbox" Value="@c.ClassName" name="Classes">@c.ClassName</label>
+                }
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">合同内容</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.contract.ContractContent, new { @class = "form-control", rows = "10" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="" type="submit" class="btn btn-default submitButton" value="Submit" />&nbsp;
+            <img class="fakeLoader" src="~/Picture/loading.gif" />
+            <span class="alert alert-danger failingAlert">上传失败，请在检查你的信息是否合适</span>
+        </div>
+    </div>
+        }
+    }
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui-1.11.4.js"></script>

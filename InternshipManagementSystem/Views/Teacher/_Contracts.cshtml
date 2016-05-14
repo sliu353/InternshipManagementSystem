@@ -1,0 +1,25 @@
+﻿@model InternshipManagementSystem.Models.ForTeacherViewModel
+
+@if (Model.Contracts.Count != 0)
+{
+    int contractNo = 0;
+    foreach (var c in Model.Contracts)
+    {
+        contractNo++;
+        string idForDiv = "updateContract" + contractNo;
+        @Html.Partial("_DisplayContract", new InternshipManagementSystem.Models.EditOrAddContractViewModel(c, Model.Classes, null), new ViewDataDictionary { { "contractNo", idForDiv } })
+        <div id="@idForDiv" class="collapse well">
+            @Html.Partial("_EditOrAddContract", new InternshipManagementSystem.Models.EditOrAddContractViewModel(c, Model.Classes, Model.AllCompanies), new ViewDataDictionary { { "editContractNo", idForDiv} })
+        </div>
+    }
+}
+else
+{
+    <div class="alert alert-info">You haven't uploaded any student info yet.</div>
+}
+<div class="row form-group">
+    Add new contracts? click <button id="addNewContractButton" type="button" class="btn btn-primary" data-toggle="collapse" href="#addNewContract"><span class="glyphicon glyphicon-plus"></span></button>
+</div>
+<div id="addNewContract" class="collapse well">
+    @Html.Partial("_EditOrAddContract", new InternshipManagementSystem.Models.EditOrAddContractViewModel(new InternshipManagementSystem.Models.Contract_(), Model.Classes, Model.AllCompanies), new ViewDataDictionary { { "editContractNo", "createContract" } })
+</div>

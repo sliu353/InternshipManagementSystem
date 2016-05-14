@@ -6,17 +6,65 @@
 <br />
 <h2>ForTeacher</h2>
 <div class="container">
-    <h3>Upload students </h3>
+    <h3>Upload students Info</h3>
     <hr />
     <div class="container">
-        <h3>Upload Students information</h3>
         <div id="uploadStudentInfo" class="col-lg-12">
             @Html.Partial("_UploadStudentInfo")
         </div>
     </div>
-   @Html.Partial("_TeacherAssessStudents", Model)
+    @Html.Partial("_TeacherAssessStudents", Model)
+    <h3>Contract Info</h3>
+    <hr />
+    <div class="container" id="contract">
+        @Html.Partial("_Contracts", Model)
+    </div>
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script>
+    function MarkNowHandler() {
+        $("#submitButtonForMarkingStudent").hide();
+        $(".hiddenButton").show();
+    }
+
+    function CancelHandler() {
+        $("#submitButtonForMarkingStudent").show();
+        $(".hiddenButton").hide();
+    }
+
+    var StudentMarkEndLoading = function () {
+        endLoading("markingStudentButtons");
+        $("#cancelButton").click()
+    }
+
+    var StudentMarkStartLoading = function () {
+        startLoading("markingStudentButtons");
+    }
+
+    $(function () {
+        $(".datePicker").each(
+            function () {
+                $("#" + this.id).datepicker({ dateFormat: 'yy-mm-dd' });
+            }
+        )
+    });
+
+    var ContractSubmitEndLoading = function (divId) {
+        endLoading(divId);
+    }
+
+    var ContractSubmitStartLoading = function (divId) {
+        startLoading(divId);
+    }
+    //function MarkNowHandler() {
+    //    $("#submitButtonForMarkingStudent").hide();
+    //    $(".hiddenButton").show();
+    //}
+
+    //function CancelHandler() {
+    //    $("#submitButtonForMarkingStudent").show();
+    //    $(".hiddenButton").hide();
+    //}
+</script>
