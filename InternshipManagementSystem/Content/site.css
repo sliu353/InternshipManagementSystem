@@ -31,3 +31,73 @@ textarea {
 .glyphicon-edit{
     color: white;
 }
+
+ .glyphicon-remove{
+     color: white;
+ }
+
+.cancelLabel{
+    background-color: white; 
+    color:#428bca;
+}
+
+.cancelLabelAnchor:hover{
+    text-decoration: none;
+}
+
+.modal {
+  text-align: center;
+}
+
+@media screen { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.modal-header{
+    background-color: #d9534f;
+}
+
+.modal-title{
+    color: white;
+}
+
+.modal-body{
+    padding-bottom: 20px;
+}
+
+.close{
+    color: white;
+}
+
+.modalOverlay {
+    display: none;
+    background-color: white;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 100;
+    opacity: 0.6;
+    background-image: url('../Picture/loader.gif');
+    background-position: center center
+}
+
+.overlay{
+    opacity: 1;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    left: 0
+}

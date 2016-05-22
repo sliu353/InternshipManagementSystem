@@ -7,10 +7,16 @@
     {
         contractNo++;
         string idForDiv = "updateContract" + contractNo;
-        @Html.Partial("_DisplayContract", new InternshipManagementSystem.Models.EditOrAddContractViewModel(c, Model.Classes, null), new ViewDataDictionary { { "contractNo", idForDiv } })
-        <div id="@idForDiv" class="collapse well">
-            @Html.Partial("_EditOrAddContract", new InternshipManagementSystem.Models.EditOrAddContractViewModel(c, Model.Classes, Model.AllCompanies), new ViewDataDictionary { { "editContractNo", idForDiv} })
-        </div>
+        <div class="tab-content">
+            @Html.Partial("_DisplayContract", new InternshipManagementSystem.Models.EditOrAddContractViewModel(c, Model.Classes, null), new ViewDataDictionary { { "contractNo", idForDiv } })
+
+            @{
+                var tabContantId = idForDiv + "EditTabContent";
+            }
+            <div class="panel panel-primary tab-pane fade" id="@tabContantId">
+                    @Html.Partial("_EditOrAddContract", new InternshipManagementSystem.Models.EditOrAddContractViewModel(c, Model.Classes, Model.AllCompanies), new ViewDataDictionary { { "editContractNo", idForDiv } })
+                </div>
+            </div>
     }
 }
 else
@@ -20,6 +26,6 @@ else
 <div class="row form-group">
     Add new contracts? click <button id="addNewContractButton" type="button" class="btn btn-primary" data-toggle="collapse" href="#addNewContract"><span class="glyphicon glyphicon-plus"></span></button>
 </div>
-<div id="addNewContract" class="collapse well">
+<div id="addNewContract" class="collapse panel panel-primary">
     @Html.Partial("_EditOrAddContract", new InternshipManagementSystem.Models.EditOrAddContractViewModel(new InternshipManagementSystem.Models.Contract_(), Model.Classes, Model.AllCompanies), new ViewDataDictionary { { "editContractNo", "createContract" } })
 </div>

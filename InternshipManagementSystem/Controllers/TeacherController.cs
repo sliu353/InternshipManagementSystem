@@ -64,6 +64,7 @@ namespace InternshipManagementSystem.Controllers
                     //If there are already records of classes and students that are related to this teacher, delete them and replace with our new file.
                     db.Students.RemoveRange(thisTeacher.Students);
                     db.Class_.RemoveRange(thisTeacher.Class_);
+                    db.Contract_.RemoveRange(thisTeacher.Contract_);
                     HttpPostedFileBase file = Request.Files["UploadedFile"];
 
                     if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
@@ -150,7 +151,7 @@ namespace InternshipManagementSystem.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditOrAddContract(Contract_ contract, List<string> Classes, string company)
+        public async Task<ActionResult> EditOrAddContract(Contract_ contract, List<string> Classes, string company)
         {
             var thisTeacher = getThisTeacher();
             var aCopyOfDatabase = new Internship_Management_SystemEntities();
@@ -158,28 +159,56 @@ namespace InternshipManagementSystem.Controllers
             try
             {
                 // If there is already a contract between this teacher and this company, delete it and replace it with our new contract later.
-                db.Contract_.RemoveRange(db.Contract_.Where(c => c.CompanyName == company && c.TeacherEmail == thisTeacher.TeacherEmail));
+                var contractsBetweenThisTeacherAndThisCompany = db.Contract_.Where(c => c.CompanyName == company && c.TeacherEmail == thisTeacher.TeacherEmail);
                 // If there are any contract that related to the classes we get, we also need to delete them.
-                db.Contract_.RemoveRange(db.Contract_.Where(c => (from classes in db.Class_.Where(cl => Classes.Contains(cl.ClassName)) select classes.CompanyName).Contains(c.CompanyName) && c.TeacherEmail == thisTeacher.TeacherEmail));
+                var contractsRelatiedToTheseClasses = db.Contract_.Where(c => (from classes in db.Class_.Where(cl => Classes.Contains(cl.ClassName)) select classes.CompanyName).Contains(c.CompanyName) && c.TeacherEmail == thisTeacher.TeacherEmail);
+                var contractToRemove = contractsRelatiedToTheseClasses.Union(contractsBetweenThisTeacherAndThisCompany);
+                db.Contract_.RemoveRange(contractToRemove);
                 contract.Teacher = thisTeacher;
                 contract.TeacherEmail = thisTeacher.TeacherEmail;
                 contract.Company = db.Companies.Where(c => c.CompanyName == company).FirstOrDefault();
                 contract.Teacher = db.Teachers.Where(t => t.TeacherEmail == contract.TeacherEmail).FirstOrDefault();
                 db.Contract_.Add(contract);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
 
+                //First set all the related classes' company to null
+                db.Class_.Where(c => c.CompanyName == company && c.Teacher.TeacherEmail == thisTeacher.TeacherEmail).ToList().ForEach(c => c.Company = null);
+
+                //Then set the company attribute of the classes that are in Classes
                 var contractedCompany = db.Companies.Where(c => c.CompanyName == contract.CompanyName).FirstOrDefault();
                 foreach (string class_ in Classes)
                 {
-                    db.Class_.Where(c => c.ClassName == class_).FirstOrDefault().Company = contract.Company;
+                    var relatedClass = db.Class_.Where(c => c.ClassName == class_).FirstOrDefault();
+                    relatedClass.Company = contract.Company;
+                    contract.Company.Students.ToList().AddRange(relatedClass.Students);
                 }
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch (Exception e)
             {
                 db = aCopyOfDatabase;
             }
-            return PartialView("_Contracts", prepareViewModel());
+            return View("ForTeacher", prepareViewModel());
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteContract(List<string> Classes, string company)
+        {
+            var thisTeacher = getThisTeacher();
+            var aCopyOfDatabase = new Internship_Management_SystemEntities();
+
+            try
+            {
+                var contractToRemove = db.Contract_.Where(c => c.CompanyName == company && c.TeacherEmail == thisTeacher.TeacherEmail);
+                db.Contract_.RemoveRange(contractToRemove);
+                db.Class_.Where(c => Classes.Contains(c.ClassName)).ToList().ForEach(c => c.CompanyName = null);
+                await db.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                db = aCopyOfDatabase;
+            }
+            return View("ForTeacher", prepareViewModel());
         }
     }
 }

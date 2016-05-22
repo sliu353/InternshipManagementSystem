@@ -43,28 +43,41 @@
         startLoading("markingStudentButtons");
     }
 
-    $(function () {
-        $(".datePicker").each(
-            function () {
-                $("#" + this.id).datepicker({ dateFormat: 'yy-mm-dd' });
-            }
-        )
-    });
-
     var ContractSubmitEndLoading = function (divId) {
         endLoading(divId);
+        SetDataPicker()
     }
 
     var ContractSubmitStartLoading = function (divId) {
-        startLoading(divId);
+        if (divId.substr(15, 5) == "Modal") {
+            $(".overlay").css("position", "fixed");
+            $(".modalOverlay").show();
+        } else {
+            startLoading(divId);
+        }
     }
-    //function MarkNowHandler() {
-    //    $("#submitButtonForMarkingStudent").hide();
-    //    $(".hiddenButton").show();
-    //}
 
-    //function CancelHandler() {
-    //    $("#submitButtonForMarkingStudent").show();
-    //    $(".hiddenButton").hide();
-    //}
+    $(
+        function(){
+            SetDataPicker();
+        }
+    );
+
+    function SetDataPicker() {
+        $(".datePicker").each(
+            function () {
+                $("#" + this.id).datepicker("destroy");
+                $("#" + this.id).datepicker({ dateFormat: 'yy-mm-dd' });
+            }
+        )
+    }
+        //function MarkNowHandler() {
+        //    $("#submitButtonForMarkingStudent").hide();
+        //    $(".hiddenButton").show();
+        //}
+
+        //function CancelHandler() {
+        //    $("#submitButtonForMarkingStudent").show();
+        //    $(".hiddenButton").hide();
+        //}
 </script>

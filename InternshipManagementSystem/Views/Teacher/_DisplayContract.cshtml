@@ -1,15 +1,25 @@
 ﻿@model InternshipManagementSystem.Models.EditOrAddContractViewModel
 
-<div class="panel panel-primary">
+@{
+    var tabContentId = ViewData["contractNo"] + "DisplayTabContent";
+    var anchorId = ViewData["contractNo"] + "EditTabContent";
+    var modalId = ViewData["contractNo"] + "Modal";
+    string onStart = "ContractSubmitStartLoading(\"" + modalId + "\")";
+}
+<div class="panel panel-primary tab-pane fade in active" id="@tabContentId">
     <div class="panel-heading">
         与<strong>@Model.contract.CompanyName</strong>的合同 &nbsp;
-        <a href="#@ViewData["contractNo"]" data-toggle="collapse">
+        <a href="#@anchorId" data-toggle="tab">
             <span class="glyphicon glyphicon-edit" data-toggle="tooltip" title="编辑合同" data-placement="bottom"></span>
         </a>
         &nbsp;
-        
+        <a href="" data-toggle="modal" data-target="#@modalId">
+            <span class="glyphicon glyphicon-remove" data-toggle="tooltip" title="删除合同" data-placement="bottom"></span>
+        </a>
     </div>
     <div class="panel-body">
+@using (Html.BeginForm("DeleteContract", "Teacher", null, FormMethod.Post, new { @class = "form-horizontal ", role = "form", onsubmit = onStart }))
+{
         <table class="table">
             <tbody>
                 <tr>
@@ -39,9 +49,38 @@
                 </tr>
                 <tr>
                     <td class="col-xs-3"><strong>合同内容</strong></td>
-                    <td class="col-xs-9">@Model.contract.ContractContent</td>
+                    <td class="col-xs-9 displayDiv"><p>@Model.contract.ContractContent</p></td>
                 </tr>
             </tbody>
         </table>
+
+        <input type="hidden" Value="@Model.contract.CompanyName" name="company" />
+        foreach (var class_ in (from classes in Model.classes.Where(c => c.Company == Model.contract.Company) select classes.ClassName))
+        {
+            <input type="hidden" Value="@class_" name="Classes" />
+        }
+
+        <div class="modal fade" id="@modalId" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modalOverlay"></div>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">删除与<strong>@Model.contract.CompanyName</strong>的合同</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>确定要删除与<strong>@Model.contract.CompanyName</strong>的合同吗</p>
+                        <div class="row">
+                            <div class="col-sm-offset-8 col-sm-4 text-center">
+                                <input type="submit" class="btn btn-danger" value="确定" />&nbsp;&nbsp;
+                                <butto type="button" class="btn btn-default" data-dismiss="modal">取消</butto>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+}
     </div>
+
 </div>

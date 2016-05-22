@@ -7,7 +7,7 @@
     else
     {
         $("#" + id + " .fakeLoader").show();
-        $("#" + id + " input").attr("disabled", true);
+        $("#" + id + " .submitButton").attr("disabled", true);
         $("#" + id + " .failingAlert").hide();
     }
 }
@@ -19,7 +19,7 @@ var endLoading = function (id) {
     }
     else{
         $("#" + id + " .fakeLoader").hide();
-        $("#" + id + " input").attr("disabled", false);
+        $("#" + id + " .submitButton").attr("disabled", false);
     }
 }
 

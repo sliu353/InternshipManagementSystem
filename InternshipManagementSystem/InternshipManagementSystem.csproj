@@ -286,6 +286,7 @@
       <DependentUpon>Internship_Management_System.edmx</DependentUpon>
       <LastGenOutput>Internship_Management_System.cs</LastGenOutput>
     </Content>
+    <Content Include="Picture\loader.gif" />
     <Content Include="Picture\loading.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
