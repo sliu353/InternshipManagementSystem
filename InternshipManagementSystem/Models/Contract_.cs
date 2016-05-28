@@ -23,19 +23,5 @@ namespace InternshipManagementSystem.Models
     
         public virtual Company Company { get; set; }
         public virtual Teacher Teacher { get; set; }
-
-        public Contract_() { }
-
-        public Contract_(string teacherEmail, string companyName, string contractContent, DateTime startTime, DateTime endTime, string internLocation, Company company, Teacher teacher)
-        {
-            TeacherEmail = teacherEmail;
-            CompanyName = companyName;
-            ContractContent = contractContent;
-            StartTime = startTime;
-            EndTime = endTime;
-            InternLocation = internLocation;
-            Company = company;
-            Teacher = teacher;
-        }
     }
 }

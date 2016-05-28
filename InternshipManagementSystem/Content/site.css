@@ -15,68 +15,68 @@ textarea {
     max-height: 408px;
 }
 
-.displayDiv > p{
-     white-space: pre-line;
+.displayDiv > p {
+    white-space: pre-line;
 }
 
-.failingAlert, .successAlert{
-     display: none;
-     height: 33.09px;
+.failingAlert, .successAlert {
+    display: none;
+    height: 33.09px;
 }
 
-.hiddenButton{
+.hiddenButton {
     display: none;
 }
 
-.glyphicon-edit{
+.glyphicon-edit {
     color: white;
 }
 
- .glyphicon-remove{
-     color: white;
- }
-
-.cancelLabel{
-    background-color: white; 
-    color:#428bca;
+.glyphicon-remove {
+    color: white;
 }
 
-.cancelLabelAnchor:hover{
+.cancelLabel {
+    background-color: white;
+    color: #428bca;
+}
+
+.cancelLabelAnchor:hover {
     text-decoration: none;
 }
 
 .modal {
-  text-align: center;
+    text-align: center;
 }
 
-@media screen { 
-  .modal:before {
-    display: inline-block;
-    vertical-align: middle;
-    content: " ";
-    height: 100%;
-  }
+@media screen {
+    .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+    }
 }
 
 .modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
 }
 
-.modal-header{
+.modal-header {
     background-color: #d9534f;
 }
 
-.modal-title{
+.modal-title {
     color: white;
 }
 
-.modal-body{
+.modal-body {
     padding-bottom: 20px;
 }
 
-.close{
+.close {
     color: white;
 }
 
@@ -90,14 +90,45 @@ textarea {
     top: 0;
     z-index: 100;
     opacity: 0.6;
-    background-image: url('../Picture/loader.gif');
-    background-position: center center
+    background: #ffffff url('../Picture/loader.gif') no-repeat center center;
 }
 
-.overlay{
+.overlay {
     opacity: 1;
     bottom: 0;
     right: 0;
     top: 0;
-    left: 0
+    left: 0;
 }
+
+.list-group {
+    padding-right: 0;
+    margin-bottom: 0;
+}
+
+.CompanyDatail {
+    border: 1px solid #eeeeee;
+}
+
+.list-group-item {
+    font-size: 20px;
+}
+
+    .list-group-item:first-child {
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+    }
+
+.companiesList {
+    padding: 0;
+    top: 134px;
+    position: fixed;
+}
+
+/*position: fixed;
+    top: 134px;*/
+
+#CompanyDetail {
+    border: 1px solid #dddddd;
+}
+

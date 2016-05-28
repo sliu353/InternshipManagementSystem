@@ -17,20 +17,12 @@ namespace InternshipManagementSystem.Controllers
         public ActionResult ForCompany()
         {
             var company = db.Companies.Where(c => c.CompanyEmail == User.Identity.Name).FirstOrDefault();
-            ViewBag.Message = "This page is for company";
-
-            var companyIntroduction = company.CompanyIntroduction;
-            var internIntroduction = company.InternIntroduction;
-            string companyName = company.CompanyName;
-
-            // Create our view model.
-            ForCompanyViewModel forCompanyModel = new ForCompanyViewModel(companyName, internIntroduction, companyIntroduction, company.Students.ToList());
-            return View(forCompanyModel);
+            return View(company);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditCompanyIntro(ForCompanyViewModel model)
+        public async Task<ActionResult> EditCompanyIntro(Company model)
         {
             var company = db.Companies.Where(c => c.CompanyEmail == User.Identity.Name).FirstOrDefault();
             company.CompanyIntroduction = model.CompanyIntroduction;
@@ -40,12 +32,39 @@ namespace InternshipManagementSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditInternIntro(ForCompanyViewModel model)
+        public async Task<ActionResult> EditInternIntro(Company model)
         {
             var company = db.Companies.Where(c => c.CompanyEmail == User.Identity.Name).FirstOrDefault();
             company.InternIntroduction = model.InternIntroduction;
             await db.SaveChangesAsync();
             return PartialView("_InternIntro", model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> MarkStudent(List<string> companyMark)
+        {
+            var aCopyOfDB = new Internship_Management_SystemEntities();
+            var thisCompany = db.Companies.Where(c => c.CompanyEmail == User.Identity.Name).FirstOrDefault();
+            try {
+                var companyMarkIterator = 0;
+                foreach (var c in thisCompany.Class_)
+                {
+                    foreach (var s in c.Students)
+                    {
+                        int result;
+                        if (Int32.TryParse(companyMark[companyMarkIterator], out result))
+                            s.CompanyMark = result;
+                        else
+                            s.CompanyMark = null;
+                        companyMarkIterator++;
+                    }
+                }
+                await db.SaveChangesAsync();
+            }
+            catch(Exception e){
+                thisCompany = aCopyOfDB.Companies.Where(c => c.CompanyEmail == User.Identity.Name).FirstOrDefault();
+            }
+            return PartialView("_CompanyMarkedStudentInfo", thisCompany);
         }
     }
 }

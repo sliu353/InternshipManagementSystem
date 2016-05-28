@@ -21,10 +21,10 @@
 }
 else
 {
-    <div class="alert alert-info">You haven't uploaded any student info yet.</div>
+    <div class="alert alert-info">现在没有您的合同</div>
 }
 <div class="row form-group">
-    Add new contracts? click <button id="addNewContractButton" type="button" class="btn btn-primary" data-toggle="collapse" href="#addNewContract"><span class="glyphicon glyphicon-plus"></span></button>
+    想要上传新合同？ 点 <button id="addNewContractButton" type="button" class="btn btn-primary" data-toggle="collapse" href="#addNewContract"><span class="glyphicon glyphicon-plus"></span></button>
 </div>
 <div id="addNewContract" class="collapse panel panel-primary">
     @Html.Partial("_EditOrAddContract", new InternshipManagementSystem.Models.EditOrAddContractViewModel(new InternshipManagementSystem.Models.Contract_(), Model.Classes, Model.AllCompanies), new ViewDataDictionary { { "editContractNo", "createContract" } })

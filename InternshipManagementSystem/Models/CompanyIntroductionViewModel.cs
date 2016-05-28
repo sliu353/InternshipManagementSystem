@@ -5,8 +5,8 @@ using System.Web;
 
 namespace InternshipManagementSystem.Models
 {
-    public class ForCompanyViewModel
+    public class CompanyIntroductionViewModel
     {
-        public Company company { get; set; }
+        public List<Company> companies { get; set; }
     }
 }

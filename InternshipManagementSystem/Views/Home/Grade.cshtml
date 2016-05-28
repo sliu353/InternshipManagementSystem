@@ -1,8 +1,75 @@
-﻿
+﻿@model InternshipManagementSystem.Models.GradeViewModel
 @{
-    ViewBag.Title = "Grade";
+    ViewBag.Title = "查看成绩";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-
-
+<br />
+<br />
+<h2>查看成绩</h2>
+<hr />
+@if (Model.Classes.FirstOrDefault() != null)
+{
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>班级</th>
+                <th>学生姓名</th>
+                <th>电话号码</th>
+                <th>老师打分</th>
+                <th>单位打分</th>
+                <th>最终实习成绩</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model.Classes)
+            {
+                int rowCounter = 1;
+                foreach (var s in c.Students)
+                {
+                    <tr>
+                        @if (rowCounter == 1)
+                        {
+                            <td rowspan="@c.NumberOfStudents">@c.ClassName</td>
+                            rowCounter++;
+                        }
+                        <td>@s.StudentName</td>
+                        <td>@s.PhoneNumber</td>
+                        @if (s.TeacherMark == null)
+                        {
+                            <td></td>
+                        }
+                        else
+                        {
+                            <td>@s.TeacherMark</td>
+                        }
+                        @if (s.CompanyMark == null)
+                        {
+                            <td></td>
+                        }
+                        else
+                        {
+                            <td>@s.CompanyMark</td>
+                        }
+                        @if (s.CompanyMark != null && s.TeacherMark != null)
+                        {
+                            int finalMark = s.CompanyMark.Value + s.TeacherMark.Value;
+                            <td>@finalMark</td>
+                        }
+                        else
+                        {
+                                    <td></td>
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+}
+else {
+    <div class="container">
+        <div class="alert alert-info">
+            <strong>现在还没有学生成绩被上传。</strong>
+        </div >
+        </div >
+        }

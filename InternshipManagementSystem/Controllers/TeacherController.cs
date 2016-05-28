@@ -171,16 +171,17 @@ namespace InternshipManagementSystem.Controllers
                 db.Contract_.Add(contract);
                 await db.SaveChangesAsync();
 
-                //First set all the related classes' company to null
-                db.Class_.Where(c => c.CompanyName == company && c.Teacher.TeacherEmail == thisTeacher.TeacherEmail).ToList().ForEach(c => c.Company = null);
-
+                //First set all the related classes' company to null      
+                var relatedClasses = db.Class_.Where(c => c.CompanyName == company && c.Teacher.TeacherEmail == thisTeacher.TeacherEmail).ToList();
+                relatedClasses.ForEach(c => c.Company = null);
+                relatedClasses.ForEach(c => c.Students.ToList().ForEach(s => { s.CompanyName = null; s.CompanyMark = null; }));
                 //Then set the company attribute of the classes that are in Classes
                 var contractedCompany = db.Companies.Where(c => c.CompanyName == contract.CompanyName).FirstOrDefault();
                 foreach (string class_ in Classes)
                 {
                     var relatedClass = db.Class_.Where(c => c.ClassName == class_).FirstOrDefault();
                     relatedClass.Company = contract.Company;
-                    contract.Company.Students.ToList().AddRange(relatedClass.Students);
+                    relatedClass.Students.ToList().ForEach(s => s.Company = contract.Company);
                 }
                 await db.SaveChangesAsync();
             }
@@ -201,7 +202,9 @@ namespace InternshipManagementSystem.Controllers
             {
                 var contractToRemove = db.Contract_.Where(c => c.CompanyName == company && c.TeacherEmail == thisTeacher.TeacherEmail);
                 db.Contract_.RemoveRange(contractToRemove);
-                db.Class_.Where(c => Classes.Contains(c.ClassName)).ToList().ForEach(c => c.CompanyName = null);
+                var relatedClasses = db.Class_.Where(c => Classes.Contains(c.ClassName)).ToList();
+                relatedClasses.ForEach(c => c.CompanyName = null);
+                relatedClasses.ForEach(c => c.Students.ToList().ForEach(s => { s.CompanyName = null; s.CompanyMark = null; }));
                 await db.SaveChangesAsync();
             }
             catch (Exception e)

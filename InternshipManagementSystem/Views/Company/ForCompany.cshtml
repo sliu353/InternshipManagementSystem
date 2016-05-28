@@ -1,4 +1,4 @@
-﻿@model InternshipManagementSystem.Models.ForCompanyViewModel
+﻿@model InternshipManagementSystem.Models.Company
 <script src="~/Scripts/site.js"></script>
 @{
      ViewBag.Title = "Account for" + Model.CompanyName;
@@ -9,6 +9,7 @@
 <hr />
 <div class="container">
     <h3>Company Introduction</h3>
+    <hr />
     <div id="companyIntro">
         @Html.Partial("_CompanyIntro", Model)
     </div>
@@ -30,8 +31,8 @@
     </div>
 </div>
 <div class="container">
-    <hr />
     <h3>Internship Introduction</h3>
+    <hr />
     <div id="internIntro">
         @Html.Partial("_InternIntro", Model)
     </div>
@@ -51,6 +52,11 @@
             </div>
         }
     </div>
+</div>
+<div class="container">
+    <h3>实习为学生打分</h3>
+    <hr />
+    @Html.Partial("_CompanyAssessStudents", Model)
 </div>
 <script>
     var companyIntroEndLoading = function () {
@@ -74,6 +80,25 @@
 
     var internIntroFailLoading = function () {
         failLoading("internIntroEditor");
+    }
+
+    var StudentMarkEndLoading = function () {
+        endLoading("markingStudentButtons");
+        $("#cancelButton").click()
+    }
+
+    var StudentMarkStartLoading = function () {
+        startLoading("markingStudentButtons");
+    }
+
+    function MarkNowHandler() {
+        $("#submitButtonForMarkingStudent").hide();
+        $(".hiddenButton").show();
+    }
+
+    function CancelHandler() {
+        $("#submitButtonForMarkingStudent").show();
+        $(".hiddenButton").hide();
     }
 </script>
 @section Scripts {

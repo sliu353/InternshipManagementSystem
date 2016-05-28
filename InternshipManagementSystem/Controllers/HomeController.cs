@@ -19,11 +19,29 @@ namespace InternshipManagementSystem.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult CompanyIntroduction()
         {
-            ViewBag.Message = "Your application description page.";
+            CompanyIntroductionViewModel thisModel = new CompanyIntroductionViewModel();
+            thisModel.companies = db.Companies.ToList();
+            return View(thisModel);
+        }
 
-            return View();
+        private Company prepareUserSelectedCompanyDetail(string company)
+        {
+            Company thisCompany = new Company();
+            company = company.Replace('-', ' ');
+            thisCompany = db.Companies.Where(c => c.CompanyName == company).FirstOrDefault();
+            return thisCompany;
+        }
+
+        public ActionResult DisplayUserSelectedCompanyDetail(string company)
+        {
+            return PartialView("_selectedCompany", prepareUserSelectedCompanyDetail(company));
+        }
+
+        public ActionResult DisplayUserSelectedCompanyDetailForMobile(string company)
+        {
+            return PartialView("_selectedCompanyForMobile", prepareUserSelectedCompanyDetail(company));
         }
 
         public ActionResult Contact()
@@ -35,8 +53,9 @@ namespace InternshipManagementSystem.Controllers
 
         public ActionResult Grade()
         {
-            ViewBag.Message = "Your Grade";
-            return View();
+            GradeViewModel thisModel = new GradeViewModel();
+            thisModel.Classes = db.Class_.ToList();
+            return View(thisModel);
         }
     }
 }

@@ -214,6 +214,7 @@
     <Compile Include="Models\Company.cs">
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CompanyIntroductionViewModel.cs" />
     <Compile Include="Models\Contract_.cs">
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
     </Compile>
@@ -223,6 +224,7 @@
     <Compile Include="Models\EditOrAddContractViewModel.cs" />
     <Compile Include="Models\ForCompanyViewModel.cs" />
     <Compile Include="Models\ForTeacherViewModel.cs" />
+    <Compile Include="Models\GradeViewModel.cs" />
     <Compile Include="Models\HomePageContent.cs">
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
     </Compile>
@@ -331,7 +333,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\CompanyIntroduction.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -357,7 +359,6 @@
     <Content Include="Views\Account\_TeacherRegister.cshtml" />
     <Content Include="Views\Account\_CompanyRegister.cshtml" />
     <Content Include="Views\Home\Grade.cshtml" />
-    <Content Include="Views\Home\ForTeacher.cshtml" />
     <Content Include="Views\Shared\AuthorizeFailed.cshtml" />
     <Content Include="Views\Company\ForCompany.cshtml" />
     <Content Include="Views\Company\_CompanyIntro.cshtml" />
@@ -369,6 +370,10 @@
     <Content Include="Views\Teacher\_DisplayContract.cshtml" />
     <Content Include="Views\Teacher\_EditOrAddContract.cshtml" />
     <Content Include="Views\Teacher\_Contracts.cshtml" />
+    <Content Include="Views\Company\_CompanyAssessStudents.cshtml" />
+    <Content Include="Views\Company\_CompanyMarkedStudentInfo.cshtml" />
+    <Content Include="Views\Home\_selectedCompany.cshtml" />
+    <Content Include="Views\Home\_selectedCompanyForMobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

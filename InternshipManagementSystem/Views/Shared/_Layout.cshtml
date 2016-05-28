@@ -28,8 +28,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("公司一览", "CompanyIntroduction", "Home")</li>
+                    <li>@Html.ActionLink("Ct", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("查看成绩", "Grade", "Home")</li>
                     @{
                         if (User.IsInRole("teacher"))
                         {
