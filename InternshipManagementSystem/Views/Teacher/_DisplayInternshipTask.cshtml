@@ -1,0 +1,118 @@
+﻿@model InternshipManagementSystem.Models.EditOrAddInternshipTaskViewModel
+
+@{
+    var tabContentId = ViewData["internshipTaskNo"] + "DisplayTabContent";
+    var anchorId = ViewData["internshipTaskNo"] + "EditTabContent";
+    var modalId = ViewData["internshipTaskNo"] + "Modal";
+    string onStart = "InternshipTaskSubmitStartLoading(\"" + modalId + "\")";
+}
+<div class="panel panel-primary tab-pane fade in active" id="@tabContentId">
+    <div class="panel-heading">
+        <span>
+            编辑
+            @{
+                var lastClass = Model.internshipTask.Class_.Last();
+                foreach (var c in Model.internshipTask.Class_)
+                {
+                    if (c != lastClass)
+                    {
+                        <strong>@c.ClassName,</strong>
+                }
+                    else
+                    {
+                        <strong>@c.ClassName</strong>
+                    }
+                }
+
+            }的实习任务
+        </span>
+        <a href="#@anchorId" data-toggle="tab">
+            <span class="glyphicon glyphicon-edit" data-toggle="tooltip" title="编辑实习任务" data-placement="bottom"></span>
+        </a>
+        &nbsp;
+        <a href="" data-toggle="modal" data-target="#@modalId">
+            <span class="glyphicon glyphicon-remove" data-toggle="tooltip" title="删除实习任务" data-placement="bottom"></span>
+        </a>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("DeleteInternshipTask", "Teacher", null, FormMethod.Post, new { @class = "form-horizontal ", role = "form", onsubmit = onStart }))
+        {
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td class="col-xs-3">实习班级</td>
+                        <td class="col-xs-9">@{
+                            foreach (var c in Model.internshipTask.Class_)
+                            {
+                                if (c != lastClass)
+                                {
+                                    <strong>@c.ClassName,</strong>
+                                }
+                                else
+                                {
+                                    <strong>@c.ClassName</strong>
+                                }
+                            }
+
+                        }</td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-3"><strong>实习任务</strong></td>
+                        <td class="col-xs-9">@Model.internshipTask.InternshipTask1</td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="hidden" Value="@Model.internshipTask.InternshipTaskId" name="internshipTaskId" />
+
+            <div class="modal fade" id="@modalId" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modalOverlay"></div>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">
+                                删除@{
+                                    foreach (var c in Model.internshipTask.Class_)
+                                    {
+                                        if (c != lastClass)
+                                        {
+                                            <strong>@c.ClassName,</strong>
+                }
+                                        else
+                                        {
+                                            <strong>@c.ClassName</strong>
+                                        }
+                                    }
+                                }
+                                的实习任务？
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                确定要删除@{
+                                    foreach (var c in Model.internshipTask.Class_)
+                                    {
+                                        if (c != lastClass)
+                                        {
+                                            <strong>@c.ClassName,</strong>
+                }
+                                        else
+                                        {
+                                            <strong>@c.ClassName</strong>
+                                        }
+                                    }
+                                }的实习任务吗？
+                            </p>
+                            <div class="row">
+                                <div class="col-sm-offset-8 col-sm-4 text-center">
+                                    <input type="submit" class="btn btn-danger" value="确定" />&nbsp;&nbsp;
+                                    <butto type="button" class="btn btn-default" data-dismiss="modal">取消</butto>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                    }
+    </div>
+</div>

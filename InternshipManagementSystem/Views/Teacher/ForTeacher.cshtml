@@ -57,7 +57,7 @@
     }
 
     var ContractSubmitStartLoading = function (divId) {
-        if (divId.substr(15, 5) == "Modal") {
+        if (divId.substr(divId.length - 5) == "Modal") {
             $(".overlay").css("position", "fixed");
             $(".modalOverlay").show();
         } else {

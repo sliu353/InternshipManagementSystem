@@ -13,6 +13,7 @@ namespace InternshipManagementSystem.Models
         public List<Contract_> Contracts { get; set; }
         public List<Company> Companys { get; set; }
         public List<Company> AllCompanies { get; set; }
+        public List<InternshipTask> InternshipTasks { get; set; }
 
         public ForTeacherViewModel() { }
 

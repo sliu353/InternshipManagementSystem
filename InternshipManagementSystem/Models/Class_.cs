@@ -24,11 +24,12 @@ namespace InternshipManagementSystem.Models
         public string CompanyName { get; set; }
         public string TeacherEmail { get; set; }
         public Nullable<int> NumberOfStudents { get; set; }
-        public string InternshipTasks { get; set; }
+        public Nullable<int> InternshipTaskId { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual Teacher Teacher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
+        public virtual InternshipTask InternshipTask { get; set; }
     }
 }

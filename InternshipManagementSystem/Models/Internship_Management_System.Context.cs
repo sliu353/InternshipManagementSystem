@@ -29,6 +29,7 @@ namespace InternshipManagementSystem.Models
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Contract_> Contract_ { get; set; }
         public virtual DbSet<HomePageContent> HomePageContents { get; set; }
+        public virtual DbSet<InternshipTask> InternshipTasks { get; set; }
         public virtual DbSet<InternType> InternTypes { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }

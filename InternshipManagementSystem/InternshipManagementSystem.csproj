@@ -222,6 +222,7 @@
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EditOrAddContractViewModel.cs" />
+    <Compile Include="Models\EditOrAddInternshipTaskViewModel.cs" />
     <Compile Include="Models\ForCompanyViewModel.cs" />
     <Compile Include="Models\ForTeacherViewModel.cs" />
     <Compile Include="Models\GradeViewModel.cs" />
@@ -229,6 +230,9 @@
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\InternshipTask.cs">
+      <DependentUpon>Internship_Management_System.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Internship_Management_System.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -374,6 +378,9 @@
     <Content Include="Views\Company\_CompanyMarkedStudentInfo.cshtml" />
     <Content Include="Views\Home\_selectedCompany.cshtml" />
     <Content Include="Views\Home\_selectedCompanyForMobile.cshtml" />
+    <Content Include="Views\Teacher\_InternshipTasks.cshtml" />
+    <Content Include="Views\Teacher\_EditOrAddInternshipTask.cshtml" />
+    <Content Include="Views\Teacher\_DisplayInternshipTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

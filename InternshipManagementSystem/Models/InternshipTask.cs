@@ -12,28 +12,20 @@ namespace InternshipManagementSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Teacher
+    public partial class InternshipTask
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Teacher()
+        public InternshipTask()
         {
             this.Class_ = new HashSet<Class_>();
-            this.Contract_ = new HashSet<Contract_>();
-            this.InternshipTasks = new HashSet<InternshipTask>();
-            this.Students = new HashSet<Student>();
         }
     
         public string TeacherEmail { get; set; }
-        public string TeacherContactNumber { get; set; }
-        public string TeacherName { get; set; }
+        public string InternshipTask1 { get; set; }
+        public int InternshipTaskId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Class_> Class_ { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contract_> Contract_ { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InternshipTask> InternshipTasks { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student> Students { get; set; }
+        public virtual Teacher Teacher { get; set; }
     }
 }

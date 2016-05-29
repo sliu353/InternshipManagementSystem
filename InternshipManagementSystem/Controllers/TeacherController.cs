@@ -35,6 +35,7 @@ namespace InternshipManagementSystem.Controllers
                 forTeacherModel.Contracts = thisTeacher.Contract_.ToList();
             }
             forTeacherModel.AllCompanies = db.Companies.ToList();
+            forTeacherModel.InternshipTasks = db.InternshipTasks.ToList();
 
             return forTeacherModel;
         }
@@ -213,5 +214,44 @@ namespace InternshipManagementSystem.Controllers
             }
             return View("ForTeacher", prepareViewModel());
         }
+
+        [HttpPost]
+        public async Task<ActionResult> EditOrAddInternshipTask(List<string> Classes, InternshipTask internshipTask)
+        {
+            var thisTeacher = getThisTeacher();
+            var aCopyOfDatabase = new Internship_Management_SystemEntities();
+
+            try
+            {
+                internshipTask.TeacherEmail = thisTeacher.TeacherEmail;
+                db.InternshipTasks.Add(internshipTask);
+                db.Class_.Where(c => Classes.Contains(c.ClassName)).ToList().ForEach(c => c.InternshipTask = internshipTask);
+                await db.SaveChangesAsync();
+            }catch(Exception e)
+            {
+                db = aCopyOfDatabase;
+            }
+
+            return PartialView("_InternshipTasks", prepareViewModel());
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteInternshipTask(int internshipTaskId)
+        {
+            var thisTeacher = getThisTeacher();
+            var aCopyOfDatabase = new Internship_Management_SystemEntities();
+            try
+            {
+                db.Class_.Where(c => c.InternshipTaskId == internshipTaskId).ToList().ForEach(c => c.InternshipTaskId = null);
+                var internshipTasksToBeRemoved = db.InternshipTasks.Where(i => i.InternshipTaskId == internshipTaskId).FirstOrDefault();
+                db.InternshipTasks.Remove(internshipTasksToBeRemoved);
+                await db.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                db = aCopyOfDatabase;
+            }
+            return View("ForTeacher", prepareViewModel());
+        } 
     }
 }

@@ -1,0 +1,82 @@
+﻿@model InternshipManagementSystem.Models.EditOrAddInternshipTaskViewModel
+
+@{
+    //string onSuccess = "InternshipTaskSubmitEndLoading(&quot;" + (ViewData["editInternshipTaskNo"].ToString() != "createInternshipTask" ? ViewData["editInternshipTasktNo"].ToString() : "addNewInternshipTask") + "&quot;)";
+    string onStart = "InternshipTaskSubmitStartLoading(\"" + (ViewData["editInternshipTaskNo"].ToString() != "createInternshipTask" ? ViewData["editInternshipTaskNo"].ToString() : "addNewInternshipTask") + "\")";
+    var anchorId = ViewData["editInternshipTaskNo"] + "DisplayTabContent";
+}
+
+<div class="panel-heading">
+    @if (ViewData["editInternshipTaskNo"].ToString() != "createInternshipTask")
+    {
+        <span>编辑
+            @{
+                var lastClass = Model.internshipTask.Class_.Last();
+                foreach (var c in Model.internshipTask.Class_)
+                {
+                    if (c != lastClass)
+                    {
+                        <strong>@c.ClassName,</strong>
+                }
+                    else
+                    {
+                        <strong>@c.ClassName</strong>
+                    }
+                }
+
+            }的实习任务
+        </span>
+        <a href="#@anchorId" data-toggle="tab" class="cancelLabelAnchor">
+            <span class="label label-default cancelLabel">
+                取消
+            </span>
+        </a>
+                }
+                else
+                {
+                    <span>添加新的实习任务</span>
+                }
+</div>
+<div class="panel-body" id="@ViewData["editInternshipTaskNo"]">
+    @using (Ajax.BeginForm("EditOrAddInternshipTask", "Teacher", null, new AjaxOptions { UpdateTargetId = "internshipTasks", HttpMethod = "POST", OnBegin = "StudentMarkStartLoading(" + ViewData["editInternshipTaskNo"] + ")" }, new { @class = "form-horizontal ", role = "form" }))
+    {
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td class="col-xs-3"><strong>选择相关班级</strong></td>
+                    <td class="col-xs-9">
+                        @if (ViewData["editInternshipTaskNo"].ToString() == "createInternshipTask")
+                        {
+                            foreach (var class_ in Model.classes)
+                            {
+                                <label class="checkbox-inline"><input type="checkbox" Value="@class_.ClassName" name="Classes" />@class_.ClassName</label>
+                            }
+                        }
+                        else
+                        {
+                            foreach (var class_ in Model.classes)
+                            {
+                                <span>@class_.ClassName</span>
+                                <input type="hidden" Value="@class_.ClassName" name="Classes" />
+                            }
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3"><strong>实习任务</strong></td>
+                    <td class="col-xs-9"><strong>@Html.TextAreaFor(m => m.internshipTask.InternshipTask1, new { @class = "form-control", rows = "10" })</strong></td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td class="col-xs-9">
+                        <input type="submit" class="btn btn-default submitButton" style="margin-top: 10px" value="Submit" />&nbsp;
+                        <img class="fakeLoader" src="~/Picture/loading.gif" style="margin-top: -19px" />
+                        <span class="alert alert-danger failingAlert">上传失败，请在检查你的信息是否合适</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+</div>

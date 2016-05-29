@@ -1,0 +1,28 @@
+﻿@model InternshipManagementSystem.Models.ForTeacherViewModel
+
+@{
+    int internshipTaskNo = 0;
+    foreach (var i in Model.InternshipTasks)
+    {
+
+            internshipTaskNo++;
+            string idForDiv = "updateInternshipTask" + internshipTaskNo;
+            <div class="tab-content">
+                @Html.Partial("_DisplayInternshipTask", new InternshipManagementSystem.Models.EditOrAddInternshipTaskViewModel(Model.Classes.Where(c => c.InternshipTaskId == i.InternshipTaskId).ToList(), i), new ViewDataDictionary { {"internshipTaskNo", idForDiv } })
+                @{ 
+                    var tabContentId = idForDiv + "EditTabContent";
+                }
+                <div class="panel panel-primary tab-pane fade" id="@tabContentId">
+                    @Html.Partial("_EditOrAddInternshipTask", new InternshipManagementSystem.Models.EditOrAddInternshipTaskViewModel(Model.Classes.Where(c => c.InternshipTaskId == i.InternshipTaskId).ToList(), i), new ViewDataDictionary { { "editInternshipTaskNo", idForDiv} })
+                </div>
+            </div>
+        
+
+    }
+                    <div class="row form-group">
+                        想要添加新的实习任务？ 点<button id="addNewInternshipTaskButton" type="button" class="btn btn-primary" data-toggle="collapse" href="#addNewInternshipTask"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                    <div id="addNewInternshipTask" class="collapse panel panel-primary">
+                        @Html.Partial("_EditOrAddInternshipTask", new InternshipManagementSystem.Models.EditOrAddInternshipTaskViewModel(Model.Classes.Where(c => c.InternshipTaskId == null).ToList(), new InternshipManagementSystem.Models.InternshipTask()), new ViewDataDictionary { { "editInternshipTaskNo", "createInternshipTask" } })
+                    </div>
+}
