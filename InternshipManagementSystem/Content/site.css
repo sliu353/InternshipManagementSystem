@@ -132,3 +132,13 @@ textarea {
     border: 1px solid #dddddd;
 }
 
+/*@media screen and (max-width: 767px) {
+  .alt-table-responsive {
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #dddddd;
+    -webkit-overflow-scrolling: touch;
+  }
+}*/

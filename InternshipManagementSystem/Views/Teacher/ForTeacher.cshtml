@@ -17,15 +17,33 @@
     <h3>上传合同信息</h3>
     <hr />
     <div class="container" id="contract">
+@if (Model.Classes.Count != 0)
+{
         @Html.Partial("_Contracts", Model)
+}
+else
+{
+    <div class="alert alert-info">
+        <strong>您还未上传学生与班级信息。</strong>
+    </div>
+}
     </div>
 
-    @Html.Partial("_TeacherAssessStudents", Model)
+@Html.Partial("_TeacherAssessStudents", Model)
 
     <h3>实习任务</h3>
     <hr />
     <div class="container" id="internshipTasks">
-        @Html.Partial("_InternshipTasks", Model)
+        @if (Model.Classes.Count != 0)
+        {
+            Html.RenderPartial("_InternshipTasks", Model);
+        }
+        else
+        {
+            <div class="alert alert-info">
+                <strong>请先上传学生与班级信息</strong>
+            </div>
+        }
     </div>
 </div>
 @section Scripts {
@@ -57,7 +75,8 @@
     }
 
     var ContractSubmitStartLoading = function (divId) {
-        if (divId.substr(divId.length - 5) == "Modal") {
+        divId = divId + "";
+        if (divId.slice(-5) == "Modal") {
             $(".overlay").css("position", "fixed");
             $(".modalOverlay").show();
         } else {

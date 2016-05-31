@@ -19,6 +19,14 @@ namespace InternshipManagementSystem.Controllers
             return View();
         }
 
+        public ActionResult InternshipTaskIntroduction()
+        {
+            List<Teacher> teachers = db.Teachers.ToList();
+            List<InternshipTask> internshipTasks = db.InternshipTasks.ToList();
+            List<Class_> classes = db.Class_.ToList();
+            return View(new InternshipTaskIntroductionViewModel(internshipTasks, classes, teachers));
+        }
+
         public ActionResult CompanyIntroduction()
         {
             CompanyIntroductionViewModel thisModel = new CompanyIntroductionViewModel();

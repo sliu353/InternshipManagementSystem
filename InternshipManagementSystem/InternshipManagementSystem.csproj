@@ -199,6 +199,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
@@ -208,6 +209,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\Class_.cs">
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
     </Compile>
@@ -233,6 +235,7 @@
     <Compile Include="Models\InternshipTask.cs">
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\InternshipTaskIntroductionViewModel.cs" />
     <Compile Include="Models\Internship_Management_System.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -381,9 +384,11 @@
     <Content Include="Views\Teacher\_InternshipTasks.cshtml" />
     <Content Include="Views\Teacher\_EditOrAddInternshipTask.cshtml" />
     <Content Include="Views\Teacher\_DisplayInternshipTask.cshtml" />
+    <Content Include="Views\Home\InternshipTaskIntroduction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

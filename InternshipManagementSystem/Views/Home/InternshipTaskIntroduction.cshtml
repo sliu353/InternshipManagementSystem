@@ -1,0 +1,62 @@
+﻿@model InternshipManagementSystem.Models.InternshipTaskIntroductionViewModel
+
+@{
+    ViewBag.Title = "实习任务";
+    
+}
+<br />
+<br />
+<h2>实习任务</h2>
+<hr />
+@if (Model != null)
+{
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="col-xs-2">班级</th>
+                    <th class="col-xs-8">实习任务</th>
+                    <th class="col-xs-2">老师</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var teacher in Model.Teachers)
+                {
+                    int teacherTableCellHeight = 0;
+                    teacher.InternshipTasks.ToList().ForEach(i => teacherTableCellHeight = teacherTableCellHeight + i.Class_.Count);
+                    int teacherRowCounter = 1;
+                    foreach(var internshipTask in teacher.InternshipTasks)
+                    {
+                        int internshipTaskRowCounter = 1;
+                        foreach(var class_ in internshipTask.Class_)
+                        {
+                            <tr>
+                                <td class="col-xs-2">@class_.ClassName</td>
+                                @if (internshipTaskRowCounter == 1)
+                                {
+                                    <td class="col-xs-8" rowspan="@internshipTask.Class_.Count">@internshipTask.InternshipTask1</td>
+                                    internshipTaskRowCounter++;
+                                }
+                                @if (teacherRowCounter == 1)
+                                {
+                                    <td class="col-xs-2" rowspan="@teacherTableCellHeight">@teacher.TeacherName</td>
+                                    teacherRowCounter++;
+                                }
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table> 
+
+}
+else
+{
+    <div class="container">
+        <div class="alert alert-info">
+            <strong>现在还没有实习任务被上传。</strong>
+        </div>
+    </div>
+}
+
+

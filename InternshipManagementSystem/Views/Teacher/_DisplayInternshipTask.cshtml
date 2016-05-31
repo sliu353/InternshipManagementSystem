@@ -4,7 +4,7 @@
     var tabContentId = ViewData["internshipTaskNo"] + "DisplayTabContent";
     var anchorId = ViewData["internshipTaskNo"] + "EditTabContent";
     var modalId = ViewData["internshipTaskNo"] + "Modal";
-    string onStart = "InternshipTaskSubmitStartLoading(\"" + modalId + "\")";
+    string onStart = "ContractSubmitStartLoading(\"" + modalId + "\")";
 }
 <div class="panel panel-primary tab-pane fade in active" id="@tabContentId">
     <div class="panel-heading">
@@ -40,7 +40,7 @@
             <table class="table">
                 <tbody>
                     <tr>
-                        <td class="col-xs-3">实习班级</td>
+                        <td class="col-xs-3"><strong>实习班级</strong></td>
                         <td class="col-xs-9">@{
                             foreach (var c in Model.internshipTask.Class_)
                             {

@@ -38,8 +38,9 @@
                 }
 </div>
 <div class="panel-body" id="@ViewData["editInternshipTaskNo"]">
-    @using (Ajax.BeginForm("EditOrAddInternshipTask", "Teacher", null, new AjaxOptions { UpdateTargetId = "internshipTasks", HttpMethod = "POST", OnBegin = "StudentMarkStartLoading(" + ViewData["editInternshipTaskNo"] + ")" }, new { @class = "form-horizontal ", role = "form" }))
+    @using (Ajax.BeginForm("EditOrAddInternshipTask", "Teacher", null, new AjaxOptions { UpdateTargetId = "internshipTasks", HttpMethod = "POST", OnBegin = "ContractSubmitStartLoading(\"" + ViewData["editInternshipTaskNo"] + "\")" }, new { @class = "form-horizontal ", role = "form" }))
     {
+        
         <table class="table">
             <tbody>
                 <tr>
@@ -50,6 +51,8 @@
                             foreach (var class_ in Model.classes)
                             {
                                 <label class="checkbox-inline"><input type="checkbox" Value="@class_.ClassName" name="Classes" />@class_.ClassName</label>
+                                <input type="hidden" Value="true" name="isNewInternshipTask" />
+                                <input type="hidden" Value="0" name="internshipTaskId" />
                             }
                         }
                         else
@@ -58,6 +61,8 @@
                             {
                                 <span>@class_.ClassName</span>
                                 <input type="hidden" Value="@class_.ClassName" name="Classes" />
+                                <input type="hidden" Value="false" name="isNewInternshipTask" />
+                                <input type="hidden" Value="@Model.internshipTask.InternshipTaskId" name="internshipTaskId" />
                             }
                         }
                     </td>

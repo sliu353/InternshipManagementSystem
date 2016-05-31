@@ -66,6 +66,7 @@ namespace InternshipManagementSystem.Controllers
                     db.Students.RemoveRange(thisTeacher.Students);
                     db.Class_.RemoveRange(thisTeacher.Class_);
                     db.Contract_.RemoveRange(thisTeacher.Contract_);
+                    db.InternshipTasks.RemoveRange(thisTeacher.InternshipTasks);
                     HttpPostedFileBase file = Request.Files["UploadedFile"];
 
                     if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
@@ -216,18 +217,26 @@ namespace InternshipManagementSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditOrAddInternshipTask(List<string> Classes, InternshipTask internshipTask)
+        public async Task<ActionResult> EditOrAddInternshipTask(List<string> Classes, InternshipTask internshipTask, bool isNewInternshipTask, int internshipTaskId)
         {
             var thisTeacher = getThisTeacher();
             var aCopyOfDatabase = new Internship_Management_SystemEntities();
 
             try
             {
-                internshipTask.TeacherEmail = thisTeacher.TeacherEmail;
-                db.InternshipTasks.Add(internshipTask);
-                db.Class_.Where(c => Classes.Contains(c.ClassName)).ToList().ForEach(c => c.InternshipTask = internshipTask);
+                if (isNewInternshipTask)
+                {
+                    internshipTask.TeacherEmail = thisTeacher.TeacherEmail;
+                    db.InternshipTasks.Add(internshipTask);
+                    db.Class_.Where(c => Classes.Contains(c.ClassName)).ToList().ForEach(c => c.InternshipTask = internshipTask);
+                }
+                else
+                {
+                    db.InternshipTasks.Where(c => c.InternshipTaskId == internshipTaskId).FirstOrDefault().InternshipTask1 = internshipTask.InternshipTask1;      
+                }
                 await db.SaveChangesAsync();
-            }catch(Exception e)
+            }
+            catch(Exception e)
             {
                 db = aCopyOfDatabase;
             }

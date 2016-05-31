@@ -29,17 +29,17 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("公司一览", "CompanyIntroduction", "Home")</li>
-                    <li>@Html.ActionLink("Ct", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("实习任务", "InternshipTaskIntroduction", "Home")</li>
                     <li>@Html.ActionLink("查看成绩", "Grade", "Home")</li>
                     @{
                         if (User.IsInRole("teacher"))
                         {
-                            <li>@Html.ActionLink("Teacher", "ForTeacher", "Teacher")</li>
+                            <li>@Html.ActionLink("老师", "ForTeacher", "Teacher")</li>
                         }
                         if (User.IsInRole("company"))
                         {
 
-                            <li>@Html.ActionLink("Company", "ForCompany", "Company")</li>
+                            <li>@Html.ActionLink("公司", "ForCompany", "Company")</li>
                         }
                     }
                 </ul>
