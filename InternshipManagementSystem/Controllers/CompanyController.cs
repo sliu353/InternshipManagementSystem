@@ -21,6 +21,7 @@ namespace InternshipManagementSystem.Controllers
         }
 
         [HttpPost]
+        [AuthLog(Roles = "company")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditCompanyIntro(Company model)
         {
@@ -31,6 +32,7 @@ namespace InternshipManagementSystem.Controllers
         }
 
         [HttpPost]
+        [AuthLog(Roles = "company")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditInternIntro(Company model)
         {
@@ -41,6 +43,7 @@ namespace InternshipManagementSystem.Controllers
         }
 
         [HttpPost]
+        [AuthLog(Roles = "company")]
         public async Task<ActionResult> MarkStudent(List<string> companyMark)
         {
             var aCopyOfDB = new Internship_Management_SystemEntities();

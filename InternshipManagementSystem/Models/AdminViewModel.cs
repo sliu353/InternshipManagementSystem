@@ -11,11 +11,16 @@ namespace InternshipManagementSystem.Models
         public List<Company> Companies { get; set; }
         public List<Teacher> Teachers { get; set; }
 
-        public AdminViewModel(){
-            var db = new Internship_Management_SystemEntities();
-            HomePageContents = db.HomePageContents.ToList();
-            Companies = db.Companies.ToList();
-            Teachers = db.Teachers.ToList();
+        public AdminViewModel(List<HomePageContent> homePageContents, List<Company> companies, List<Teacher> teachers)
+        {
+            HomePageContents = homePageContents;
+            Companies = companies;
+            Teachers = teachers;
+        }
+
+        public AdminViewModel()
+        {
+
         }
     }
 }

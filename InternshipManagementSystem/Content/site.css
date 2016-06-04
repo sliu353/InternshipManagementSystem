@@ -142,3 +142,62 @@ textarea {
     -webkit-overflow-scrolling: touch;
   }
 }*/
+
+.close > .glyphicon-remove {
+    color: #3a87ad 
+}
+
+.companyDisplayList{
+    list-style-type: none;
+    margin:0;
+    padding: 0;
+    overflow: hidden;
+        background-color: #eeeeee;
+}
+
+.companyOrderNo, .companyName{
+    text-align: center;
+    float: left;
+}
+
+
+.companyName span{
+    margin-left: 10px;
+    display: inline-block;
+    text-align: center;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    width: 100%;
+}
+
+.companyOrderNo{
+    display: inline-block;
+    text-align: center;
+    padding: 14px 16px;
+    background-color: #3276b1;
+    color: white;
+}
+
+.deleteButton{
+    float: right;
+}
+
+.deleteButton a{
+    display: inline-block;
+    text-align: center;
+    padding: 18px 16px 19px 16px;
+    margin-top: -1px;
+    background-color: #d9534f;
+}
+
+.deleteButton a:hover{
+    color: white;
+    opacity: 0.6;
+     text-decoration: none;
+}
+
+.companyDisplayListItem{
+    padding: 0;
+    border-color: white;
+    margin-bottom: 5px;
+}

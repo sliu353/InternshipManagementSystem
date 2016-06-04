@@ -1,0 +1,72 @@
+﻿@model InternshipManagementSystem.Models.ManageCompaniesViewModel
+
+@using (Html.BeginForm("SortCompanies", "Admin", null, FormMethod.Post, new { @class = "form-horizontal ", role = "form", onsubmit = "companyOrderStartLoading()" }))
+{
+    <ul id="sortable" class="list-group">
+        @{
+
+            var counter = 0;
+            foreach (var company in Model.Companies.OrderBy(c => c.CompanyOrder))
+            {
+                var modalId = company.CompanyName.Replace(" ", String.Empty) + "Modal";
+                counter++;
+                <li class="list-group-item companyDisplayListItem">
+                    <input type="hidden" Value="@company.CompanyName" name="companiesInNewOrder" />
+                    <ul class="companyDisplayList">
+                        <li class="companyOrderNo"><span>@counter</span></li>
+                        <li class="companyName"><span>@company.CompanyName</span>
+                        <li class="deleteButton"><a class="glyphicon glyphicon-remove" href="" data-toggle="modal" data-target="#@modalId"></a></li>
+                    </ul>
+                </li>
+
+            }
+
+        }
+
+    </ul>
+    <div>
+    确定完成顺序的调整吗？
+    <button type="button" class="btn btn-success" onclick="SubmitSortCompanies()">确定</button>&nbsp;
+    <button type="button" class="btn btn-primary" onclick="CancelSortCompanies()">取消</button>&nbsp;
+    <input id="submitSortCompanies" type="submit" style="display: none;" class="btn btn-default submitButton" value="Submit" />
+    <img class="fakeLoader" src="~/Picture/loading.gif" />
+</div>
+            }
+@using (Html.BeginForm("CancelSortingCompanies", "Admin", null, FormMethod.Post, new { @class = "form-horizontal ", role = "form", onsubmit = "companyOrderStartLoading()" }))
+            {
+    <input id="cancelSortCompanies" type="submit" style="display: none;" class="btn btn-default submitButton" value="Submit" />
+}
+
+@foreach (var company in Model.Companies.OrderBy(c => c.CompanyOrder))
+            {
+                var modalId = company.CompanyName.Replace(" ", String.Empty) + "Modal";
+                string onStart = "ContractSubmitStartLoading(\"" + modalId + "\")";
+                using (Html.BeginForm("DeleteCompany", "Admin", null, FormMethod.Post, new { @class = "form-horizontal ", role = "form", onsubmit = onStart }))
+                {
+        <input type="hidden" Value="@company.CompanyName" name="companyToBeDeletedName" />
+        <div class="modal fade" id="@modalId" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modalOverlay"></div>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">
+                            删除<strong>@company.CompanyName</strong>账户？
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            确定要删除<strong>@company.CompanyName</strong>的账户吗？
+                        </p>
+                        <div class="row">
+                            <div class="col-sm-offset-8 col-sm-4 text-center">
+                                <input type="submit" class="btn btn-danger" value="确定" />&nbsp;&nbsp;
+                                <butto type="button" class="btn btn-default" data-dismiss="modal">取消</butto>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

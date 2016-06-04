@@ -21,12 +21,12 @@
           </Key>
           <Property Name="CompanyName" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="CompanyEmail" Type="nvarchar" MaxLength="254" Nullable="false" />
-          <Property Name="CompanyOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ContactNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="PersonInCharge" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="CompanyLocation" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="InternIntroduction" Type="nvarchar" MaxLength="4000" />
           <Property Name="CompanyIntroduction" Type="nvarchar" MaxLength="4000" />
+          <Property Name="CompanyOrder" Type="int" />
         </EntityType>
         <EntityType Name="Contract_">
           <Key>
@@ -42,10 +42,11 @@
         </EntityType>
         <EntityType Name="HomePageContent">
           <Key>
-            <PropertyRef Name="Title" />
+            <PropertyRef Name="HomePageContentId" />
           </Key>
           <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="Content" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="HomePageContentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="4000" />
         </EntityType>
         <EntityType Name="InternshipTask">
           <Key>
@@ -330,12 +331,12 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
           </Key>
           <Property Name="CompanyName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CompanyEmail" Type="String" MaxLength="254" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CompanyOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ContactNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PersonInCharge" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CompanyLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="InternIntroduction" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="CompanyIntroduction" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyOrder" Type="Int32" />
           <NavigationProperty Name="Class_" Relationship="Self.FK__Class___CompanyN__1B9317B3" FromRole="Company" ToRole="Class_" />
           <NavigationProperty Name="Contract_" Relationship="Self.FK__Contract___Compa__1F63A897" FromRole="Company" ToRole="Contract_" />
           <NavigationProperty Name="Students" Relationship="Self.FK__Student__Company__2334397B" FromRole="Company" ToRole="Student" />
@@ -357,10 +358,11 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
         </EntityType>
         <EntityType Name="HomePageContent">
           <Key>
-            <PropertyRef Name="Title" />
+            <PropertyRef Name="HomePageContentId" />
           </Key>
           <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Content" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HomePageContentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="InternshipTask">
           <Key>
@@ -608,12 +610,12 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
               <MappingFragment StoreEntitySet="Company">
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
-                <ScalarProperty Name="CompanyOrder" ColumnName="CompanyOrder" />
                 <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
                 <ScalarProperty Name="PersonInCharge" ColumnName="PersonInCharge" />
                 <ScalarProperty Name="CompanyLocation" ColumnName="CompanyLocation" />
                 <ScalarProperty Name="InternIntroduction" ColumnName="InternIntroduction" />
                 <ScalarProperty Name="CompanyIntroduction" ColumnName="CompanyIntroduction" />
+                <ScalarProperty Name="CompanyOrder" ColumnName="CompanyOrder" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -633,6 +635,7 @@ warning 6002: The table/view 'Internship_Management_System.sys.database_firewall
             <EntityTypeMapping TypeName="Internship_Management_SystemModel.HomePageContent">
               <MappingFragment StoreEntitySet="HomePageContent">
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="HomePageContentId" ColumnName="HomePageContentId" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
               </MappingFragment>
             </EntityTypeMapping>

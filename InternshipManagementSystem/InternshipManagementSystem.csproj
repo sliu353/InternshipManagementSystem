@@ -231,6 +231,7 @@
     <Compile Include="Models\HomePageContent.cs">
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HomePageContentViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InternshipTask.cs">
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
@@ -254,6 +255,7 @@
     <Compile Include="Models\InternType.cs">
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ManageCompaniesViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Student.cs">
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
@@ -261,6 +263,7 @@
     <Compile Include="Models\Teacher.cs">
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
     </Compile>
+    <Compile Include="MyUserManager\MyUserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -365,7 +368,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\_TeacherRegister.cshtml" />
     <Content Include="Views\Account\_CompanyRegister.cshtml" />
-    <Content Include="Views\Home\Grade.cshtml" />
     <Content Include="Views\Shared\AuthorizeFailed.cshtml" />
     <Content Include="Views\Company\ForCompany.cshtml" />
     <Content Include="Views\Company\_CompanyIntro.cshtml" />
@@ -385,10 +387,15 @@
     <Content Include="Views\Teacher\_EditOrAddInternshipTask.cshtml" />
     <Content Include="Views\Teacher\_DisplayInternshipTask.cshtml" />
     <Content Include="Views\Home\InternshipTaskIntroduction.cshtml" />
+    <Content Include="Views\Admin\ForAdmin.cshtml" />
+    <Content Include="Views\Admin\_HomePageContents.cshtml" />
+    <Content Include="Views\Admin\_DisplayHomePageContents.cshtml" />
+    <Content Include="Views\Admin\_EditOrAddHomePageContent.cshtml" />
+    <Content Include="Views\Admin\_ManageCompanies.cshtml" />
+    <Content Include="Views\Home\Grade.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -15,6 +15,7 @@ namespace InternshipManagementSystem.Models
     public partial class HomePageContent
     {
         public string Title { get; set; }
+        public int HomePageContentId { get; set; }
         public string Content { get; set; }
     }
 }

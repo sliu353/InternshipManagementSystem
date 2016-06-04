@@ -1,0 +1,78 @@
+﻿@model InternshipManagementSystem.Models.AdminViewModel
+
+@{
+    ViewBag.Title = "ForAdmin";
+}
+<br>
+<br>
+<h2>管理员</h2>
+<div class="container">
+    <h3>编辑公告栏内容</h3>
+    <hr />
+    <div class="container" id="homePageContent">
+        @Html.Partial("_HomePageContents", new InternshipManagementSystem.Models.HomePageContentViewModel(Model.HomePageContents.ToList()))
+    </div>
+</div>
+<div class="container">
+    <h3>管理公司</h3>
+    <hr />
+    <div class="container">
+        <div class="alert alert-info">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close"><span class="glyphicon glyphicon-remove"></span></a>
+            <strong>通过点击并移动来调整公司顺序,点击“&times;”删除公司账户。</strong>
+        </div>
+            <div id="manageCompanies">
+                @Html.Partial("_ManageCompanies", new InternshipManagementSystem.Models.ManageCompaniesViewModel(Model.Companies.ToList()))
+            </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    var ContractSubmitEndLoading = function (divId) {
+        endLoading(divId);
+        SetDataPicker()
+    }
+
+    var ContractSubmitStartLoading = function (divId) {
+        divId = divId + "";
+        if (divId.slice(-5) == "Modal") {
+            $(".overlay").css("position", "fixed");
+            $(".modalOverlay").show();
+        } else {
+            startLoading(divId);
+        }
+    }
+
+    var sortCompanies = function () {
+        $("#sortable").sortable();
+        $("#sortable").disableSelection();
+    }
+
+    $(sortCompanies());
+
+    function SubmitSortCompanies() {
+        $('#submitSortCompanies').trigger("click");
+        $("#sortable").sortable({
+            disabled: true
+        });
+    }
+
+    function CancelSortCompanies() {
+        $('#cancelSortCompanies').trigger("click");
+    }
+    var companyOrderStartLoading = function () {
+        startLoading("manageCompanies");
+    }
+
+    var ContractSubmitStartLoading = function (divId) {
+        divId = divId + "";
+        if (divId.slice(-5) == "Modal") {
+            $(".overlay").css("position", "fixed");
+            $(".modalOverlay").show();
+        } else {
+            startLoading(divId);
+        }
+    }
+</script>

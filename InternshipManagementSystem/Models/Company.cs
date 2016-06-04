@@ -25,12 +25,12 @@ namespace InternshipManagementSystem.Models
     
         public string CompanyName { get; set; }
         public string CompanyEmail { get; set; }
-        public int CompanyOrder { get; set; }
         public string ContactNumber { get; set; }
         public string PersonInCharge { get; set; }
         public string CompanyLocation { get; set; }
         public string InternIntroduction { get; set; }
         public string CompanyIntroduction { get; set; }
+        public Nullable<int> CompanyOrder { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Class_> Class_ { get; set; }

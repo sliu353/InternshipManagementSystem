@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="37f814f354664232a28b4c50c5a24bfe" Name="Diagram1">
+      <Diagram DiagramId="dff1153d68f345238909e9a0a401fa7b" Name="Diagram1">
         <EntityTypeShape EntityType="Internship_Management_SystemModel.Class_" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Internship_Management_SystemModel.Company" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Internship_Management_SystemModel.Contract_" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />

@@ -14,23 +14,23 @@ using System.Data.Entity.Validation;
 using BotDetect.Web.Mvc;
 
 namespace InternshipManagementSystem.Controllers
-{ 
+{
 
     [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        Internship_Management_SystemEntities db = new Internship_Management_SystemEntities();
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+           // MyUserManager.MyUserManager.SetMyUserManager(userManager);
         }
 
         public ApplicationSignInManager SignInManager
@@ -39,9 +39,9 @@ namespace InternshipManagementSystem.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -125,7 +125,7 @@ namespace InternshipManagementSystem.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -159,20 +159,20 @@ namespace InternshipManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                Internship_Management_SystemEntities db = new Internship_Management_SystemEntities();
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await UserManager.AddToRoleAsync(user.Id, "teacher");
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UshnerManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                
+
                     Teacher newTeacher = new Teacher();
                     newTeacher.TeacherName = model.Name;
                     newTeacher.TeacherEmail = model.Email;
@@ -201,6 +201,7 @@ namespace InternshipManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                Internship_Management_SystemEntities db = new Internship_Management_SystemEntities();
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -221,16 +222,26 @@ namespace InternshipManagementSystem.Controllers
                     newCompany.PersonInCharge = newRegisteredCompany.PersonInCharge;
                     newCompany.ContactNumber = newRegisteredCompany.ContactNumber;
                     newCompany.CompanyLocation = newRegisteredCompany.CompanyLocation;
+                    if (db.Companies.Count() != 0)
+                    {
+                        var newCompanyOrder = db.Companies.Count() + 1;
+                        newCompany.CompanyOrder = newCompanyOrder;
+                    }
+                    else
+                    {
+                        newCompany.CompanyOrder = 1;
+                    }
                     db.Companies.Add(newCompany);
                     await db.SaveChangesAsync();
-                    return Json(new {
+                    return Json(new
+                    {
                         redirectUrl = Url.Action("Index", "Home"),
                         isRedirect = true
                     });
                 }
                 AddErrors(result);
             }
-            return PartialView("_CompanyRegister" ,model);
+            return PartialView("_CompanyRegister", model);
         }
         //
         // GET: /Account/ConfirmEmail
@@ -443,6 +454,11 @@ namespace InternshipManagementSystem.Controllers
 
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
+        }
+
+        public void DeleteCompany(Company companyToBeDeleted)
+        {
+            
         }
 
         //

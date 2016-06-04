@@ -16,7 +16,7 @@ namespace InternshipManagementSystem.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View(new HomePageContentViewModel(db.HomePageContents.ToList()));
         }
 
         public ActionResult InternshipTaskIntroduction()

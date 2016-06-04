@@ -53,6 +53,7 @@ namespace InternshipManagementSystem.Controllers
         }
 
         [HttpPost]
+        [AuthLog(Roles = "teacher")]
         public async Task<ActionResult> UploadStudentInfo(FormCollection formCollection)
         {
             var thisTeacher = getThisTeacher();
@@ -132,6 +133,7 @@ namespace InternshipManagementSystem.Controllers
         }
 
         [HttpPost]
+        [AuthLog(Roles = "teacher")]
         public async Task<ActionResult> MarkStudent(List<string> teacherMark)
         {
             var thisTeacher = getThisTeacher();
@@ -153,6 +155,7 @@ namespace InternshipManagementSystem.Controllers
         }
 
         [HttpPost]
+        [AuthLog(Roles = "teacher")]
         public async Task<ActionResult> EditOrAddContract(Contract_ contract, List<string> Classes, string company)
         {
             var thisTeacher = getThisTeacher();
@@ -195,6 +198,7 @@ namespace InternshipManagementSystem.Controllers
         }
 
         [HttpPost]
+        [AuthLog(Roles = "teacher")]
         public async Task<ActionResult> DeleteContract(List<string> Classes, string company)
         {
             var thisTeacher = getThisTeacher();
@@ -217,6 +221,7 @@ namespace InternshipManagementSystem.Controllers
         }
 
         [HttpPost]
+        [AuthLog(Roles = "teacher")]
         public async Task<ActionResult> EditOrAddInternshipTask(List<string> Classes, InternshipTask internshipTask, bool isNewInternshipTask, int internshipTaskId)
         {
             var thisTeacher = getThisTeacher();
@@ -245,6 +250,7 @@ namespace InternshipManagementSystem.Controllers
         }
 
         [HttpPost]
+        [AuthLog(Roles = "teacher")]
         public async Task<ActionResult> DeleteInternshipTask(int internshipTaskId)
         {
             var thisTeacher = getThisTeacher();

@@ -8,6 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4.js"></script>
     <link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/isLoading.js"></script>
     <link href="~/Content/site.css?version=2" rel="stylesheet" />
@@ -27,7 +28,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("首页", "Index", "Home")</li>
                     <li>@Html.ActionLink("公司一览", "CompanyIntroduction", "Home")</li>
                     <li>@Html.ActionLink("实习任务", "InternshipTaskIntroduction", "Home")</li>
                     <li>@Html.ActionLink("查看成绩", "Grade", "Home")</li>
@@ -40,6 +41,10 @@
                         {
 
                             <li>@Html.ActionLink("公司", "ForCompany", "Company")</li>
+                        }
+                        if (User.IsInRole("admin"))
+                        {
+                            <li>@Html.ActionLink("管理员", "ForAdmin", "Admin")</li>
                         }
                     }
                 </ul>
@@ -60,6 +65,7 @@
     @RenderSection("scripts", required: false)
 
     <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
         </div>
 </body>

@@ -1,0 +1,26 @@
+﻿@model InternshipManagementSystem.Models.HomePageContentViewModel
+
+@if(Model.HomePageContents.Count != 0)
+{
+    int homePageContentNo = 0;
+    foreach( var c in Model.HomePageContents)
+    {
+        homePageContentNo++;
+        string idForDiv = "updateHomePageContent" + homePageContentNo;
+        <div class="tab-content">
+            @Html.Partial("_DisplayHomePageContents", c, new ViewDataDictionary { { "homePageContentNo", idForDiv } })
+            @{
+                var tabContentId = idForDiv + "EditTabContent";
+            }
+            <div class="panel panel-primary tab-pane fade" id="@tabContentId">
+                @Html.Partial("_EditOrAddHomePageContent", c, new ViewDataDictionary { { "editHomePageContentNo", idForDiv } })
+            </div>
+        </div>
+    }
+}
+<div class="row form-group">
+    添加新的首页栏内容？ 点<button id="addNewHomePageContentButton" type="button" class="btn btn-primary" data-toggle="collapse" href="#addNewHomePageContent"><span class="glyphicon glyphicon-plus"></span></button>
+</div>
+<div id="addNewHomePageContent" class="collapse panel panel-primary">
+    @Html.Partial("_EditOrAddHomePageContent", new InternshipManagementSystem.Models.HomePageContent(), new ViewDataDictionary { { "editHomePageContentNo", "createInternshipTask" } })
+</div>

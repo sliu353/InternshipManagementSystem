@@ -1,0 +1,65 @@
+﻿@model InternshipManagementSystem.Models.HomePageContent
+
+@{
+    var tabContentId = ViewData["homePageContentNo"] + "DisplayTabContent";
+    var anchorId = ViewData["homePageContentNo"] + "EditTabContent";
+    var modalId = ViewData["homePageContentNo"] + "Modal";
+    string onStart = "ContractSubmitStartLoading(\"" + modalId + "\")";
+}
+<div class="panel panel-primary tab-pane fade in active" id="@tabContentId">
+    <div class="panel-heading">
+        <span><strong>@Model.Title</strong></span>
+        <a href="#@anchorId" data-toggle="tab">
+            <span class="glyphicon glyphicon-edit" data-toggle="tooltip" title="编辑" data-placement="bottom"></span>
+        </a>
+        &nbsp;
+        <a href="" data-toggle="modal" data-target="#@modalId">
+            <span class="glyphicon glyphicon-remove" data-toggle="tooltip" title="删除" data-placement="bottom"></span>
+        </a>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("DeleteHomePageContent", "Admin", null, FormMethod.Post, new { @class = "form-horizontal ", role = "form", onsubmit = onStart }))
+        {
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td class="col-xs-3"><strong>标题</strong></td>
+                        <td class="col-xs-9">
+                            @Model.Title
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3"><strong>内容</strong></td>
+                    <td class="col-xs-9">@Model.Content</td>
+                </tr>
+            </tbody>
+        </table>
+            <input type="hidden" Value="@Model.HomePageContentId" name="homePageContentId" />
+
+            <div class="modal fade" id="@modalId" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modalOverlay"></div>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">
+                                删除<strong>@Model.Title</strong>
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                确定要删除<strong>@Model.Title</strong>
+                            </p>
+                            <div class="row">
+                                <div class="col-sm-offset-8 col-sm-4 text-center">
+                                    <input type="submit" class="btn btn-danger" value="确定" />&nbsp;&nbsp;
+                                    <butto type="button" class="btn btn-default" data-dismiss="modal">取消</butto>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                    }
+    </div>
+</div>
