@@ -9,6 +9,8 @@
             foreach (var company in Model.Companies.OrderBy(c => c.CompanyOrder))
             {
                 var modalId = company.CompanyName.Replace(" ", String.Empty) + "Modal";
+                modalId = modalId.Replace(".", String.Empty);
+                modalId = modalId.Replace("@", String.Empty);
                 counter++;
                 <li class="list-group-item companyDisplayListItem">
                     <input type="hidden" Value="@company.CompanyName" name="companiesInNewOrder" />
@@ -38,11 +40,13 @@
 }
 
 @foreach (var company in Model.Companies.OrderBy(c => c.CompanyOrder))
-            {
-                var modalId = company.CompanyName.Replace(" ", String.Empty) + "Modal";
-                string onStart = "ContractSubmitStartLoading(\"" + modalId + "\")";
-                using (Html.BeginForm("DeleteCompany", "Admin", null, FormMethod.Post, new { @class = "form-horizontal ", role = "form", onsubmit = onStart }))
-                {
+{
+    var modalId = company.CompanyName.Replace(" ", String.Empty) + "Modal";
+    modalId = modalId.Replace(".", String.Empty);
+    modalId = modalId.Replace("@", String.Empty);
+    string onStart = "ContractSubmitStartLoading(\"" + modalId + "\")";
+    using (Html.BeginForm("DeleteCompany", "Admin", null, FormMethod.Post, new { @class = "form-horizontal ", role = "form", onsubmit = onStart }))
+    {
         <input type="hidden" Value="@company.CompanyName" name="companyToBeDeletedName" />
         <div class="modal fade" id="@modalId" role="dialog">
             <div class="modal-dialog modal-lg">

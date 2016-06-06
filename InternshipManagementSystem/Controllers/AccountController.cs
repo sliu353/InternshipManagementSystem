@@ -198,6 +198,7 @@ namespace InternshipManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         [CaptchaValidation("CompanyCaptchaCode", "CompanyCaptcha", "Incorrect teacher CAPTCHA code!")]
         public async Task<ActionResult> RegisterCompany(RegisterCompanyViewModel model)
+
         {
             if (ModelState.IsValid)
             {
