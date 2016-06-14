@@ -89,5 +89,20 @@ namespace InternshipManagementSystem.Controllers
             await db.SaveChangesAsync();
             return View("ForAdmin", new AdminViewModel(db.HomePageContents.ToList(), db.Companies.ToList(), db.Teachers.ToList()));
         }
+
+        public async Task<ActionResult> DeleteTeacher(string teacherToBeDeletedName)
+        {
+            var teacherToBeDeleted = db.Teachers.Where(t => t.TeacherEmail == teacherToBeDeletedName).FirstOrDefault();
+            db.Students.RemoveRange(db.Students.Where(s => s.TeacherEmail == teacherToBeDeletedName));
+            db.Class_.RemoveRange(db.Class_.Where(c => c.TeacherEmail == teacherToBeDeletedName));
+            db.InternshipTasks.RemoveRange(db.InternshipTasks.Where(i => i.TeacherEmail == teacherToBeDeletedName));
+            db.Contract_.RemoveRange(db.Contract_.Where(c => c.TeacherEmail == teacherToBeDeletedName));
+            var teacherToBeDeletedInAuthenticationDb = userManager.Users.Where(u => u.Email == teacherToBeDeletedName).FirstOrDefault();
+            await userManager.DeleteAsync(teacherToBeDeletedInAuthenticationDb);
+            db.Teachers.Remove(teacherToBeDeleted);
+            await db.SaveChangesAsync();
+            return View("ForAdmin", new AdminViewModel(db.HomePageContents.ToList(), db.Companies.ToList(), db.Teachers.ToList()));
+
+        }
     }
 }

@@ -50,13 +50,18 @@ else
     @Scripts.Render("~/bundles/jqueryval")
 }
 <script>
-    function MarkNowHandler() {
+    function MarkNowHandler(isMarkingStudent) {
         $("#submitButtonForMarkingStudent").hide();
+        $("#submitButtonForEditStudentsInfo").hide();
+        if (isMarkingStudent == false) {
+            $("#isMarkingStudent").val(false);
+        }
         $(".hiddenButton").show();
     }
 
     function CancelHandler() {
         $("#submitButtonForMarkingStudent").show();
+        $("#submitButtonForEditStudentsInfo").show()
         $(".hiddenButton").hide();
     }
 

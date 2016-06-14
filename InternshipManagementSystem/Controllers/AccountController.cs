@@ -149,12 +149,12 @@ namespace InternshipManagementSystem.Controllers
 
 
 
-        //
-        // POST: /Account/Register
+
+        // POST: /Account/RegisterTeacher
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        [CaptchaValidation("TeacherCaptchaCode", "TeacherCaptcha", "Incorrect teacher CAPTCHA code!")]
+        [CaptchaValidation("TeacherCaptchaCode", "TeacherCaptcha", "验证码不正确")]
         public async Task<ActionResult> RegisterTeacher(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -196,9 +196,8 @@ namespace InternshipManagementSystem.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        [CaptchaValidation("CompanyCaptchaCode", "CompanyCaptcha", "Incorrect teacher CAPTCHA code!")]
+        [CaptchaValidation("CompanyCaptchaCode", "CompanyCaptcha", "验证码不正确")]
         public async Task<ActionResult> RegisterCompany(RegisterCompanyViewModel model)
-
         {
             if (ModelState.IsValid)
             {

@@ -11,13 +11,16 @@ namespace InternshipManagementSystem.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
     public partial class Student
     {
         public string PhoneNumber { get; set; }
         public string StudentName { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string ClassName { get; set; }
         public string CompanyName { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string TeacherEmail { get; set; }
         public Nullable<int> CompanyMark { get; set; }
         public Nullable<int> TeacherMark { get; set; }

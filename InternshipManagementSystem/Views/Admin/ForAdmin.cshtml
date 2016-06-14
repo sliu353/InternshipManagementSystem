@@ -26,6 +26,19 @@
             </div>
     </div>
 </div>
+<div class="container">
+    <h3>管理老师账户</h3>
+    <hr />
+    <div class="container">
+        <div class="alert alert-info">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close"><span class="glyphicon glyphicon-remove"></span></a>
+            <strong>点击“&times;”删除老师账户</strong>
+        </div>
+        <div id="manageCompanies">
+            @Html.Partial("_ManageTeachers", new InternshipManagementSystem.Models.ManageTeachersViewModel(Model.Teachers.ToList()))
+        </div>
+    </div>
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

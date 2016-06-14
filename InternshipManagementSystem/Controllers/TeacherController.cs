@@ -132,26 +132,98 @@ namespace InternshipManagementSystem.Controllers
             return View("ForTeacher", prepareViewModel());
         }
 
+        // This method is used to record students' marks that are given by the teacher,
+        // and update companies' and students' information.
         [HttpPost]
         [AuthLog(Roles = "teacher")]
-        public async Task<ActionResult> MarkStudent(List<string> teacherMark)
+        public ActionResult MarkStudent(List<string> teacherMark, List<string> classesNames, List<string> studentsNames, List<string> phoneNumbers, bool isAssessment)
         {
+            var aCopyOfDB = new Internship_Management_SystemEntities();
             var thisTeacher = getThisTeacher();
-            var teacherMarkIterator = 0;
-            foreach (var c in thisTeacher.Class_)
+            if (isAssessment)
             {
-                foreach (var s in c.Students)
+                var teacherMarkIterator = 0;
+                foreach (var c in thisTeacher.Class_)
                 {
-                    int result;
-                    if (Int32.TryParse(teacherMark[teacherMarkIterator], out result))
-                        s.TeacherMark = result;
-                    else
-                        s.TeacherMark = null;
-                    teacherMarkIterator++;
+                    foreach (var s in c.Students)
+                    {
+                        int result;
+                        if (Int32.TryParse(teacherMark[teacherMarkIterator], out result))
+                            s.TeacherMark = result;
+                        else
+                            s.TeacherMark = null;
+                        teacherMarkIterator++;
+                    }
                 }
+                db.SaveChanges();
             }
-            await db.SaveChangesAsync();
-            return PartialView("_MarkedStudentInfo", prepareViewModel());
+            else
+            {
+                try {
+                    var editInforIterator = 0;
+                    var classesIterator = 0;
+                    var infoChangedStudents = new Dictionary<Student, string>();
+                    var infoChangedClasses = new Dictionary<Class_, string>();
+                    foreach (var c in thisTeacher.Class_)
+                    {
+                        if (c.ClassName != classesNames[classesIterator])
+                        {
+                            infoChangedClasses.Add(c, classesNames[classesIterator]);
+                        }
+                        foreach (var s in c.Students)
+                        {
+                            s.StudentName = studentsNames[editInforIterator];
+                            if (s.PhoneNumber != phoneNumbers[editInforIterator])
+                            {
+                                infoChangedStudents.Add(s, phoneNumbers[editInforIterator]);
+                            }
+                            editInforIterator++;
+                        }
+                        classesIterator++;
+                    }
+
+                    foreach (var item in infoChangedStudents)
+                    {
+                        var replacedStudent = new Student
+                        {
+                            PhoneNumber = item.Value,
+                            StudentName = item.Key.StudentName,
+                            ClassName = item.Key.ClassName,
+                            CompanyName = item.Key.CompanyName,
+                            TeacherEmail = thisTeacher.TeacherEmail,
+                            CompanyMark = item.Key.CompanyMark,
+                            TeacherMark = item.Key.TeacherMark
+                        };
+                        db.Students.Remove(item.Key);
+                        db.Students.Add(replacedStudent);
+                    }
+                    foreach (var item in infoChangedClasses)
+                    {
+                        var replacedClass = new Class_
+                        {
+                            ClassName = item.Value,
+                            CompanyName = item.Key.CompanyName,
+                            TeacherEmail = thisTeacher.TeacherEmail,
+                            NumberOfStudents = item.Key.NumberOfStudents,
+                            InternshipTaskId = item.Key.InternshipTaskId,
+                        };
+                        var involvedStudents = db.Students.Where(s => s.ClassName == item.Key.ClassName);
+                        db.Class_.Remove(item.Key);
+                        db.Class_.Add(replacedClass);
+                        foreach (var s in involvedStudents)
+                        {
+                            s.Class_ = replacedClass;
+                        }
+                    }
+                    db.SaveChanges();
+                    ViewData["editStudentinfoSuccessful"] = true;
+                } catch(Exception e)
+                {
+                    db = aCopyOfDB;
+                    ViewData["editStudentinfoSuccessful"] = false;
+                }          
+            }
+            return View("forTeacher", prepareViewModel());
         }
 
         [HttpPost]

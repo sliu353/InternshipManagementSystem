@@ -17,11 +17,17 @@
     {
         if ((bool)ViewData["isSuccessful"] == true)
         {
-            <span class="alert alert-success successAlert" style="display: inline">Your submission was successful.</span>
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><span class="glyphicon glyphicon-remove"></span></a>
+                <strong>上传成功</strong>
+            </div>
         }
         else
         {
-            <span class="alert alert-danger failingAlert" style="display: inline">Your submission failed. Please check your excel format again</span>
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close"><span class="glyphicon glyphicon-remove"></span></a>
+                <strong>上传失败！ 请检查您的文件格式是否有错</strong>
+            </div>
         }
     }
 }

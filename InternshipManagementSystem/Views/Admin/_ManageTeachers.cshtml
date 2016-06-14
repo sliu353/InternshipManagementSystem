@@ -1,0 +1,61 @@
+﻿@model InternshipManagementSystem.Models.ManageTeachersViewModel
+
+
+    <ul class="list-group">
+        @{
+            var counter = 0;
+            foreach (var teacher in Model.Teachers)
+            {
+                var modalId = teacher.TeacherEmail.Replace(" ", String.Empty) + "Modal";
+                modalId = modalId.Replace(".", String.Empty);
+                modalId = modalId.Replace("@", String.Empty);
+                counter++;
+                <li class="list-group-item companyDisplayListItem">
+                    <ul class="companyDisplayList">
+                        <li class="companyOrderNo"><span>@counter</span></li>
+                        <li class="companyName"><span>@teacher.TeacherName (@teacher.TeacherEmail)</span>
+                        <li class="deleteButton"><a class="glyphicon glyphicon-remove" href="" data-toggle="modal" data-target="#@modalId"></a></li>
+                    </ul>
+                </li>
+
+            }
+
+        }
+
+    </ul>
+
+@foreach (var teacher in Model.Teachers)
+{
+    var modalId = teacher.TeacherEmail.Replace(" ", String.Empty) + "Modal";
+    modalId = modalId.Replace(".", String.Empty);
+    modalId = modalId.Replace("@", String.Empty);
+    string onStart = "ContractSubmitStartLoading(\"" + modalId + "\")";
+    using (Html.BeginForm("DeleteTeacher", "Admin", null, FormMethod.Post, new { @class = "form-horizontal ", role = "form", onsubmit = onStart }))
+    {
+        <input type="hidden" Value="@teacher.TeacherEmail" name="teacherToBeDeletedName" />
+        <div class="modal fade" id="@modalId" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modalOverlay"></div>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">
+                            删除<strong>@teacher.TeacherName</strong>账户？
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            确定要删除<strong>@teacher.TeacherName</strong>的账户吗？
+                        </p>
+                        <div class="row">
+                            <div class="col-sm-offset-8 col-sm-4 text-center">
+                                <input type="submit" class="btn btn-danger" value="确定" />&nbsp;&nbsp;
+                                <butto type="button" class="btn btn-default" data-dismiss="modal">取消</butto>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

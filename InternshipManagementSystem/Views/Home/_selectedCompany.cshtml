@@ -3,20 +3,24 @@
 @{
     if (Model != null)
     {
-        <h3>@Model.CompanyName</h3>
-                    <hr />
-                    <h3>
-                        公司介绍
-                    </h3>
-                    <pre>@Model.CompanyIntroduction</pre>
-                    <h3>实习内容</h3>
-                    <pre>@Model.InternIntroduction</pre>
-                    <h3>实习地址</h3>
-                    <p>@Model.CompanyLocation</p>
-                    <h3>负责人</h3>
-                    <p>@Model.PersonInCharge</p>
-                    <h3>联系方式</h3>
-                    <p>@Model.ContactNumber</p>
+        <h3>@Html.Raw(Model.CompanyName)</h3>
+                                    <hr />
+                                    <h3>
+                                        公司介绍
+                                    </h3>
+                                    <div class="displayDiv">
+                                        @Html.Raw("<p>" + Model.CompanyIntroduction + "</p>")
+                                    </div>
+                                    <h3>实习内容</h3>
+                                    <div class="displayDiv">
+                                        @Html.Raw("<p>" + Model.InternIntroduction + "</p>")
+                                    </div>
+                                            <h3>公司地址</h3>
+                                            @Html.Raw("<p>" + Model.CompanyLocation + "</p>")
+                                            <h3>负责人</h3>
+                                            @Html.Raw("<p>" + Model.PersonInCharge + "</p>")
+                                            <h3>联系方式</h3>
+                                            @Html.Raw("<p>" + Model.ContactNumber + "</p>")
     }
     else
     {

@@ -196,8 +196,67 @@ textarea {
      text-decoration: none;
 }
 
+.deleteButton a:active{
+    text-decoration: none;
+}
+
 .companyDisplayListItem{
     padding: 0;
     border-color: white;
     margin-bottom: 5px;
+}
+
+.scroll-box {
+  overflow-y: scroll;
+  border: 1px solid #dddddd;
+}
+
+.scroll-box::-webkit-scrollbar {
+  width: .4em; 
+}
+.scroll-box::-webkit-scrollbar,
+.scroll-box::-webkit-scrollbar-thumb {
+  overflow:visible;
+  border-radius: 4px;
+}
+.scroll-box::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.2); 
+}
+.cover-bar {
+  position: absolute;
+  height: 100%;  
+  top: 0;
+  right: 0;
+  width: .4em;
+  -webkit-transition: all .5s;
+  opacity: 1;
+}
+/* MAGIC HAPPENS HERE */
+.scroll-bar-wrap:hover .cover-bar {
+   opacity: 0;
+  -webkit-transition: all .5s;
+}
+
+.targeted-Company-tab{
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+.list-group-item.targeted-Company-tab{
+    color: white;
+}
+
+.list-group-item.targeted-Company-tab:hover{
+    background-color: #4cae4c;
+    border-color: #4cae4c;
+    color: white;
+}
+
+.list-group-item.active.targeted-Company-tab:hover{
+    background-color: #428bca;
+    border-color: #428bca;
+}
+
+.keyWord{
+    background-color: #f0ad4e;
 }

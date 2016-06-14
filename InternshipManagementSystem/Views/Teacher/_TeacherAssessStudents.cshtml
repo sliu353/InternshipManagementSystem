@@ -1,11 +1,21 @@
 ﻿@model InternshipManagementSystem.Models.ForTeacherViewModel
 
-<h3>Assessment for student</h3>
+<h3>为学生打分和更新学生信息</h3>
 <hr />
+@if (ViewData["editStudentinfoSuccessful"] != null)
+{
+    if ((bool)ViewData["editStudentinfoSuccessful"] == false)
+    {
+        <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close"><span class="glyphicon glyphicon-remove"></span></a>
+            <strong>更新失败！请检查您的学生信息修改是否有错误</strong>
+        </div>
+    }
+}
 <div class="container">
     @if (Model.Students.Count() != 0)
     {
-        using (Ajax.BeginForm("MarkStudent", "Teacher", null, new AjaxOptions { UpdateTargetId = "viewStudentInfo", HttpMethod = "POST", OnSuccess = "StudentMarkEndLoading", OnBegin="StudentMarkStartLoading"}, new { @class = "form-horizontal ", role = "form" }))
+        using (Html.BeginForm("MarkStudent", "Teacher", FormMethod.Post, new { onsubmit = "StudentMarkStartLoading()", @class = "form-horizontal ", role = "form" }))
         {
             <div class="tab-content">
                 <div id="viewStudentInfo" class="tab-pane fade in active table-responsive">
@@ -15,25 +25,25 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Class</th>
-                                <th>Student Name</th>
-                                <th>Phone Number</th>
-                                <th>Grade (Given by teacher)</th>
+                                <th>班级</th>
+                                <th>学生姓名</th>
+                                <th>电话号码</th>
+                                <th>老师打分</th>
                             </tr>
                         </thead>
                         <tbody>
 
                             @foreach (var c in Model.Classes)
-                            {
-                                int rowCounter = 1;
-                                foreach (var s in c.Students)
-                                {
+            {
+                int rowCounter = 1;
+                foreach (var s in c.Students)
+                {
                                     <tr>
                                         @if (rowCounter == 1)
                                         {
                                             <td rowspan="@c.NumberOfStudents">@c.ClassName</td>
                                             rowCounter++;
-                                        }
+                    }
                                         <td>@s.StudentName</td>
                                         <td>@s.PhoneNumber</td>
                                         @if (s.TeacherMark != null)
@@ -51,11 +61,69 @@
                         </tbody>
                     </table>
                 </div>
+                <div id="editStudentInfo" class="tab-pane fade table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>班级</th>
+                                <th>学生姓名</th>
+                                <th>电话号码</th>
+                                <th>老师打分</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var c in Model.Classes)
+    {
+        int rowCounter = 1;
+        foreach (var s in c.Students)
+        {
+                                    @*<tr>
+                                        @if (rowCounter == 1)
+                                        {
+                                            <td rowspan="@c.NumberOfStudents">@c.ClassName</td>
+                                            rowCounter++;
+                                        }
+                                        <td>@s.StudentName</td>
+                                        <td>@s.PhoneNumber</td>
+                                        @if (s.TeacherMark == null)
+                                        {
+                                            <td></td>
+                                        }
+                                        else
+                                        {
+                                            <td>@s.TeacherMark</td>
+                                        }
+                                    </tr>*@
+                                    <tr>
+                                        @if (rowCounter == 1)
+                                        {
+                                            <td rowspan="@c.NumberOfStudents"><input class="form-control" value="@c.ClassName" name="classesNames" type="text"></td>
+                                            rowCounter++;
+                                        }
+                                        <td><input class="form-control" value="@s.StudentName" name="studentsNames" type="text"></td>
+                                        <td><input class="form-control" value="@s.PhoneNumber" name="phoneNumbers" type="text"></td>
+                                        @if (s.TeacherMark == null)
+                                        {
+                                            <td></td>
+                                        }
+                                        else
+                                        {
+                                            <td>@s.TeacherMark</td>
+                                        }
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div id="markingStudentButtons" class="col-md-offset-2 col-md-10 form-group">
-                <span>Mark the students?</span>
-                <button id="submitButtonForMarkingStudent" type="button" class="btn btn-primary" data-toggle="tab" href="#markStudent" onclick="MarkNowHandler()">Mark now</button>
-                <input type="submit" class="hiddenButton btn btn-success submitButton" value="submit"  />&nbsp;&nbsp;
+                <input id="isMarkingStudent" type="hidden" name="isAssessment" value="true" />
+                <button id="submitButtonForMarkingStudent" type="button" class="btn btn-primary" data-toggle="tab" href="#markStudent" onclick="MarkNowHandler(true)">打分</button>
+                <button id="submitButtonForEditStudentsInfo" type="button" class="btn btn-primary" data-toggle="tab" href="#editStudentInfo" onclick="MarkNowHandler(false)">编辑学生信息</button>
+                <input type="submit" class="hiddenButton btn btn-success submitButton" value="上传"  />&nbsp;&nbsp;
                 <img class="fakeLoader" src="~/Picture/loading.gif" />&nbsp;&nbsp;
                 <button type="button" id="cancelButton" class="hiddenButton btn btn-danger submitButton" data-toggle="tab" href="#viewStudentInfo" onclick="CancelHandler()">取消</button>
             </div>
@@ -66,3 +134,4 @@
         <span class="alert alert-info">您还未上传相关学生信息</span>
     }
 </div>
+

@@ -11,7 +11,7 @@ namespace InternshipManagementSystem.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
     public partial class Class_
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +21,10 @@ namespace InternshipManagementSystem.Models
         }
     
         public string ClassName { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string CompanyName { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string TeacherEmail { get; set; }
         public Nullable<int> NumberOfStudents { get; set; }
         public Nullable<int> InternshipTaskId { get; set; }

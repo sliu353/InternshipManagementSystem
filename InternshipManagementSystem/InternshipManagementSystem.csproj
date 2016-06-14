@@ -256,6 +256,7 @@
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageCompaniesViewModel.cs" />
+    <Compile Include="Models\ManageTeachersViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Student.cs">
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
@@ -263,7 +264,6 @@
     <Compile Include="Models\Teacher.cs">
       <DependentUpon>Internship_Management_System.tt</DependentUpon>
     </Compile>
-    <Compile Include="MyUserManager\MyUserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -393,6 +393,7 @@
     <Content Include="Views\Admin\_EditOrAddHomePageContent.cshtml" />
     <Content Include="Views\Admin\_ManageCompanies.cshtml" />
     <Content Include="Views\Home\Grade.cshtml" />
+    <Content Include="Views\Admin\_ManageTeachers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
