@@ -22,3 +22,5 @@ The grades of the students
 Home page
 <br><br>
 ![alt tag](https://github.com/sliu353/InternshipManagementSystem/blob/master/Screenshots/Capture.PNG)
+
+<br><br>
