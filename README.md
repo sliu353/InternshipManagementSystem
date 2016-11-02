@@ -1,5 +1,4 @@
 # InternshipManagementSystem
-Start
 
 This is a simple system that helps teachers and companies manage the internships for college students.
 
