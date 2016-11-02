@@ -1,6 +1,6 @@
 # InternshipManagementSystem
 
-[Sites Using React](http://internshipmanagementsystem.azurewebsites.net)
+[Visit this website](http://internshipmanagementsystem.azurewebsites.net)
 
 This is a simple system that helps teachers and companies manage the internships for college students.
 
