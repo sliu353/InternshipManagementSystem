@@ -11,7 +11,7 @@
     @if (Model.companies.FirstOrDefault() != null || Model.targetedCompanies.FirstOrDefault() != null)
     {
         // for desktop
-        <nav class="col-sm-3 col-xs-12 companiesList hidden-xs">
+        <nav class="col-sm-3 companiesList hidden-xs">
             <div class="list-group nav nav-stacked">
                 @using (Html.BeginForm("Search", "Home", null, FormMethod.Post, new { @class = "form-horizontal", role = "form", style = "overflow: hidden; " }))
                 {
@@ -38,7 +38,7 @@
                             {
                                 if (c.CompanyIntroduction != null && c.InternIntroduction != null)
                                 {
-                                    var replacedCompanyName = c.CompanyName.Replace("<span class=\"keyWord\">", "").Replace("</span>", "").Replace(' ', '-');
+                                    var replacedCompanyName = c.CompanyOrder.ToString();
                                     anchorId = replacedCompanyName + "Anchor";
                                     tabContentId = replacedCompanyName + "Tab";
                                     submitInputId = replacedCompanyName;
@@ -52,7 +52,7 @@
                                         {
                                             <a id="@anchorId" href="#" onclick="selectCompany('@replacedCompanyName')" class="hidden-xs list-group-item targeted-Company-tab">@Html.Raw(c.CompanyName)</a>
                                         }
-                                        <input hidden type="text" name="company" value="@replacedCompanyName" />
+                                        <input hidden type="text" name="company_order_string" value="@replacedCompanyName" />
                                         <input hidden type="submit" id="@submitInputId" />
                                         <input hidden type="text" name="keyWords" value="@Model.keyWords" />
                                     }
@@ -64,7 +64,7 @@
                         {
                             if (c.CompanyIntroduction != null && c.InternIntroduction != null)
                             {
-                                var replacedCompanyName = c.CompanyName.Replace("<span class=\"keyWord\">", "").Replace("</span>", "").Replace(' ', '-');
+                                var replacedCompanyName = c.CompanyOrder.ToString();
                                 anchorId = replacedCompanyName + "Anchor";
                                 tabContentId = replacedCompanyName + "Tab";
                                 submitInputId = replacedCompanyName;
@@ -78,7 +78,7 @@
                                     {
                                         <a id="@anchorId" href="#" onclick="selectCompany('@replacedCompanyName')" class="hidden-xs list-group-item">@Html.Raw(c.CompanyName)</a>
                                     }
-                                    <input hidden type="text" name="company" value="@replacedCompanyName" />
+                                    <input hidden type="text" name="company_order_string" value="@replacedCompanyName" />
                                     <input hidden type="submit" id="@submitInputId" />
                                 }
                                 counter1++;
@@ -91,64 +91,7 @@
             </div>
         </nav>
 
-                        // for mobile
-                        <nav class="col-sm-3 col-xs-12 companiesList hidden-lg hidden-md hidden-sm">
-                            <div class="list-group nav nav-stacked">
-                                @using (Ajax.BeginForm("Search", "Home", null, new AjaxOptions { UpdateTargetId = "CompanyDetail", OnComplete = "calculation" }, new { @class = "form-horizontal", role = "form", style = "overflow: hidden; " }))
-                {
-                                    <div style="width:40px; float: right;">
-                                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
-                                    </div>
-                                    <div style="overflow: hidden">
-                                        <input type="text" class="form-control" id="usr">
-                                    </div>
-                                }
-                                @{
-                                    if (targetedCompanies.Count() != 0)
-                                    {
-                                        foreach (var c in targetedCompanies)
-                                        {
-                                            if (c.CompanyIntroduction != null && c.InternIntroduction != null)
-                                            {
-                                                var replacedCompanyName = c.CompanyName.Replace("<span class=\"keyWord\">", "").Replace("</span>", "").Replace(' ', '-');
-                                                var mobileAnchorId = replacedCompanyName + "MobileAnchor";
-                                                tabContentId = replacedCompanyName + "Tab";
-                                                var submitInputIdMobile = replacedCompanyName + "Mobile";
-                                                using (Ajax.BeginForm("DisplayUserSelectedCompanyDetailForMobile", "Home", null, new AjaxOptions { UpdateTargetId = tabContentId, OnComplete = "calculation" }, new { @class = "form-horizontal", role = "form" }))
-                                                {
-                                                    <a data-toggle="collapse" href="#@tabContentId" id="@mobileAnchorId" onclick="selectCompany('@replacedCompanyName')" class="hidden-lg hidden-md hidden-sm list-group-item targeted-Company-tab">@Html.Raw(c.CompanyName)</a>
-                                                    <div id="@tabContentId" class="collapse col-xs-12 hidden-lg hidden-md hidden-sm">
-                                                    </div>
-                                                    <input hidden type="text" name="company" value="@replacedCompanyName" />
-                                                    <input hidden type="submit" id="@submitInputIdMobile" />
-                                                    <input hidden type="text" name="keyWords" value="@Model.keyWords" />
-                                                }
-                                            }
-
-                                        }
-                                    }
-                                    foreach (var c in orderedCompanies)
-                                    {
-                                        if (c.CompanyIntroduction != null && c.InternIntroduction != null)
-                                        {
-                                            var replacedCompanyName = c.CompanyName.Replace("<span class=\"keyWord\">", "").Replace("</span>", "").Replace(' ', '-');
-                                            var mobileAnchorId = replacedCompanyName + "MobileAnchor";
-                                            tabContentId = replacedCompanyName + "Tab";
-                                            var submitInputIdMobile = replacedCompanyName + "Mobile";
-                                            using (Ajax.BeginForm("DisplayUserSelectedCompanyDetailForMobile", "Home", null, new AjaxOptions { UpdateTargetId = tabContentId, OnComplete = "calculation" }, new { @class = "form-horizontal", role = "form" }))
-                                            {
-                                                <a data-toggle="collapse" href="#@tabContentId" id="@mobileAnchorId" onclick="selectCompany('@replacedCompanyName')" class="hidden-lg hidden-md hidden-sm list-group-item">@Html.Raw(c.CompanyName)</a>
-                                                <div id="@tabContentId" class="collapse col-xs-12 hidden-lg hidden-md hidden-sm">
-                                                </div>
-                                                <input hidden type="text" name="company" value="@replacedCompanyName" />
-                                                <input hidden type="submit" id="@submitInputIdMobile" />
-                                            }
-                                        }
-
-                                    }
-                                }
-                            </div>
-                        </nav>
+           
 
                         <div class="col-sm-9 hidden-xs" id="CompanyDetail">
                             <div class="modalOverlay"></div>
@@ -192,6 +135,78 @@
                                     </div>
                                 }
 </div>
+
+@if (Model.companies.FirstOrDefault() != null || Model.targetedCompanies.FirstOrDefault() != null)
+{
+    var orderedCompanies = Model.companies.OrderBy(c => c.CompanyOrder);
+    var targetedCompanies = Model.targetedCompanies.OrderBy(c => c.CompanyOrder);
+<nav class="" col-xs-12 companiesList hidden-lg hidden-md hidden-sm">
+    <div class="list-group nav nav-stacked">
+        @using (Ajax.BeginForm("Search", "Home", null, new AjaxOptions { UpdateTargetId = "CompanyDetail", OnComplete = "calculation" }, new { @class = "form-horizontal", role = "form", style = "overflow: hidden; " }))
+        {
+            <div style="width:40px; float: right;">
+                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+            </div>
+                                    <div style="overflow: hidden">
+                                        <input type="text" class="form-control" id="usr">
+                                    </div>
+        }
+        @{
+            if (targetedCompanies.Count() != 0)
+            {
+                foreach (var c in targetedCompanies)
+                {
+                    if (c.CompanyIntroduction != null && c.InternIntroduction != null)
+                    {
+
+                        var replacedCompanyName = c.CompanyOrder.ToString();
+                        var mobileAnchorId = replacedCompanyName + "MobileAnchor";
+                        var tabContentId = replacedCompanyName + "Tab";
+                        var submitInputIdMobile = replacedCompanyName + "Mobile";
+                        using (Ajax.BeginForm("DisplayUserSelectedCompanyDetailForMobile", "Home", null, new AjaxOptions { UpdateTargetId = tabContentId, OnComplete = "calculation" }, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            <a id="@mobileAnchorId" onclick="selectCompany('@replacedCompanyName')" class="hidden-lg hidden-md hidden-sm list-group-item">@Html.Raw(c.CompanyName)</a>
+                                                    <a hidden data-toggle="collapse" target="#@tabContentId" href="#@tabContentId" id="hidden-@mobileAnchorId">@Html.Raw(c.CompanyName)</a>
+                                                    <div id="@tabContentId" class="collapse col-xs-12 hidden-lg hidden-md hidden-sm"></div>
+                                                    <input hidden type="text" name="company_order_string" value="@replacedCompanyName" />
+                                                    <input hidden type="submit" id="@submitInputIdMobile" />
+                                                    <input hidden type="text" name="keyWords" value="@Model.keyWords" />
+                        }
+                    }
+
+                }
+            }
+            foreach (var c in orderedCompanies)
+            {
+                if (c.CompanyIntroduction != null && c.InternIntroduction != null)
+                {
+                    var replacedCompanyName = c.CompanyOrder.ToString();
+                    var mobileAnchorId = replacedCompanyName + "MobileAnchor";
+                    var tabContentId = replacedCompanyName + "Tab";
+                    var submitInputIdMobile = replacedCompanyName + "Mobile";
+                    using (Ajax.BeginForm("DisplayUserSelectedCompanyDetailForMobile", "Home", null, new AjaxOptions { UpdateTargetId = tabContentId, OnComplete = "calculation" }, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        <a id="@mobileAnchorId" onclick="selectCompany('@replacedCompanyName')" class="hidden-lg hidden-md hidden-sm list-group-item">@Html.Raw(c.CompanyName)</a>
+                                                <a hidden data-toggle="collapse" target="#@tabContentId" href="#@tabContentId" id="hidden-@mobileAnchorId">@Html.Raw(c.CompanyName)</a>
+                                                <div id="@tabContentId" class="collapse col-xs-12 hidden-lg hidden-md hidden-sm"></div>
+                                                <input hidden type="text" name="company_order_string" value="@replacedCompanyName" />
+                                                <input hidden type="submit" id="@submitInputIdMobile" />
+                    }
+                }
+
+            }
+        }
+    </div>
+            
+</nav>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    <strong>暂时没有公司信息和实习介绍</strong>
+                </div>
+            }
+
 <script>
     $(document).ready(function () {
         if ($(window).width() >= 768) {
@@ -220,16 +235,24 @@
     var selectCompanyLatestClickedAnchor;
 
     function selectCompany(companyName) {
+
         if ($(window).width() <= 768) {
             if (selectCompanyLatestClickedAnchor != companyName)
                 selectCompanyCounter = 0;
             selectCompanyCounter += 1;
-            $("#" + $('.list-group-item.active').attr("id").slice(0, -6) + "Tab").collapse('hide');
-            $("#" + $('.list-group-item.active').attr("id").slice(0, -6) + "Tab").empty();
-            if (selectCompanyCounter % 2 == 1)
+            if (selectCompanyLatestClickedAnchor != undefined && companyName != $('.list-group-item.active').attr("id").slice(0, -6) && $("#" + $('.list-group-item.active').attr("id").slice(0, -6) + "Tab").hasClass("in")) {
+                $("#hidden-" + $('.list-group-item.active').attr("id").slice(0, -6) + "MobileAnchor").click();
+                $("#" + $('.list-group-item.active').attr("id").slice(0, -6) + "Tab").empty();
+            }
+            $("#hidden-" + companyName + "MobileAnchor").click();
+            if (selectCompanyCounter % 2 == 1 && !$('#' + companyName + "Tab").html().length > 0) {
                 $('#' + companyName + "Mobile").click();
+                //$('#' + companyName + "Tab").removeClass("")
+            }
+            else{
+                //$('#' + companyName + "Tab").empty();
+            }
             selectCompanyLatestClickedAnchor = companyName;
-            $('#' + companyName + 'Tab').empty();
         }
         else {
             $(".modalOverlay").show();
