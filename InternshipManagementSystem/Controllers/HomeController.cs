@@ -54,13 +54,17 @@ namespace InternshipManagementSystem.Controllers
             return thisCompany;
         }
 
-        public ActionResult DisplayUserSelectedCompanyDetail(string company, string keyWords)
+        public ActionResult DisplayUserSelectedCompanyDetail(string company_order_string, string keyWords)
         {
+            var company_order = int.Parse(company_order_string);
+            string company = db.Companies.Where(c => c.CompanyOrder == company_order).FirstOrDefault().CompanyName;
             return PartialView("_selectedCompany", prepareUserSelectedCompanyDetail(company, keyWords));
         }
 
-        public ActionResult DisplayUserSelectedCompanyDetailForMobile(string company, string keyWords)
+        public ActionResult DisplayUserSelectedCompanyDetailForMobile(string company_order_string, string keyWords)
         {
+            var company_order = int.Parse(company_order_string);
+            string company = db.Companies.Where(c => c.CompanyOrder == company_order).FirstOrDefault().CompanyName;
             return PartialView("_selectedCompanyForMobile", prepareUserSelectedCompanyDetail(company, keyWords));
         }
 
