@@ -1,10 +1,10 @@
 ﻿@model InternshipManagementSystem.Models.GradeViewModel
 @{
-    ViewBag.Title = "查看成绩";
+    ViewBag.Title = "Grades";
 }
 <br />
 <br />
-<h2>查看成绩</h2>
+<h2>Grades</h2>
 <hr />
 @if (Model.Classes.FirstOrDefault() != null)
 {
@@ -12,12 +12,12 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>班级</th>
-                <th>学生姓名</th>
-                <th>电话号码</th>
-                <th>老师打分</th>
-                <th>单位打分</th>
-                <th>最终实习成绩</th>
+                <th>Class</th>
+                <th>Student Name</th>
+                <th>Phone Number</th>
+                <th>Marks (from teacher)</th>
+                <th>Marks (from company)</th>
+                <th>Final Grade</th>
             </tr>
         </thead>
         <tbody>
@@ -69,7 +69,7 @@
 else {
     <div class="container">
         <div class="alert alert-info">
-            <strong>现在还没有学生成绩被上传。</strong>
+            <strong>No students grade uploaded</strong>
         </div >
         </div >
         }

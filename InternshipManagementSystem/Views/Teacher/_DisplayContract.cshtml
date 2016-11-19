@@ -8,38 +8,39 @@
 }
 <div class="panel panel-primary tab-pane fade in active" id="@tabContentId">
     <div class="panel-heading">
-        与<strong>@Model.contract.CompanyName</strong>的合同 &nbsp;
+        THe contract with <strong>@Model.contract.CompanyName</strong>&nbsp;
         <a href="#@anchorId" data-toggle="tab">
-            <span class="glyphicon glyphicon-edit" data-toggle="tooltip" title="编辑合同" data-placement="bottom"></span>
+            <span class="glyphicon glyphicon-edit" data-toggle="tooltip" title="Edit this contract" data-placement="bottom"></span>
         </a>
         &nbsp;
         <a href="" data-toggle="modal" data-target="#@modalId">
-            <span class="glyphicon glyphicon-remove" data-toggle="tooltip" title="删除合同" data-placement="bottom"></span>
+            <span class="glyphicon glyphicon-remove" data-toggle="tooltip" title="Delete this contract" data-placement="bottom"></span>
         </a>
     </div>
     <div class="panel-body">
 @using (Html.BeginForm("DeleteContract", "Teacher", null, FormMethod.Post, new { @class = "form-horizontal ", role = "form", onsubmit = onStart }))
 {
+    @Html.AntiForgeryToken()
         <table class="table">
             <tbody>
                 <tr>
-                    <td class="col-xs-3"><strong>实习单位名称</strong></td>
+                    <td class="col-xs-3"><strong>Company</strong></td>
                     <td class="col-xs-9">@Model.contract.CompanyName</td>
                 </tr>
                 <tr>
-                    <td class="col-xs-3"><strong>实习地址</strong></td>
+                    <td class="col-xs-3"><strong>Internship Location</strong></td>
                     <td class="col-xs-9">@Model.contract.InternLocation</td>
                 </tr>
                 <tr>
-                    <td class="col-xs-3"><strong>开始时间</strong></td>
+                    <td class="col-xs-3"><strong>Starting Date</strong></td>
                     <td class="col-xs-9">@Model.contract.StartTime</td>
                 </tr>
                 <tr>
-                    <td class="col-xs-3"><strong>结束时间</strong></td>
+                    <td class="col-xs-3"><strong>Ending Date</strong></td>
                     <td class="col-xs-9">@Model.contract.EndTime</td>
                 </tr>
                 <tr>
-                    <td class="col-xs-3"><strong>实习班级</strong></td>
+                    <td class="col-xs-3"><strong>Class</strong></td>
                     <td class="col-xs-9">
                         @foreach (var class_ in (from classes in Model.classes.Where(c => c.Company == Model.contract.Company) select classes.ClassName))
                         {
@@ -48,7 +49,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="col-xs-3"><strong>合同内容</strong></td>
+                    <td class="col-xs-3"><strong>Contract Details</strong></td>
                     <td class="col-xs-9 displayDiv"><p>@Model.contract.ContractContent</p></td>
                 </tr>
             </tbody>
@@ -66,14 +67,14 @@
                     <div class="modalOverlay"></div>
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">删除与<strong>@Model.contract.CompanyName</strong>的合同</h4>
+                        <h4 class="modal-title">Delete the contract with <strong>@Model.contract.CompanyName</strong></h4>
                     </div>
                     <div class="modal-body">
-                        <p>确定要删除与<strong>@Model.contract.CompanyName</strong>的合同吗</p>
+                        <p>Do you really want to delete the contract with <strong>@Model.contract.CompanyName</strong></p>
                         <div class="row">
                             <div class="col-sm-offset-8 col-sm-4 text-center">
-                                <input type="submit" class="btn btn-danger" value="确定" />&nbsp;&nbsp;
-                                <butto type="button" class="btn btn-default" data-dismiss="modal">取消</butto>
+                                <input type="submit" class="btn btn-danger" value="Yes" />&nbsp;&nbsp;
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                             </div>
                         </div>
                     </div>

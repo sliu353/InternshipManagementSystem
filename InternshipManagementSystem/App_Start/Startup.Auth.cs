@@ -55,14 +55,14 @@ namespace InternshipManagementSystem
             //   consumerSecret: "");
 
             //app.UseFacebookAuthentication(
-            //   appId: "",
+            //   appId: "660940217419829",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "872582582765-ratq67iqqj4rcojt6n0fo1j16nka1ass.apps.googleusercontent.com",
+                ClientSecret = "4mftsAnh1FHymAfez89Te7m6"
+            });
         }
     }
 }

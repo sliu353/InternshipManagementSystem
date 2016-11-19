@@ -20,7 +20,7 @@
                 if (Model.Classes.Any(c => c.InternshipTaskId == null))
                 {
                     <div class="row form-group">
-                        想要添加新的实习任务？ 点<button id="addNewInternshipTaskButton" type="button" class="btn btn-primary" data-toggle="collapse" href="#addNewInternshipTask"><span class="glyphicon glyphicon-plus"></span></button>
+                        Add new internship task? Click <button id="addNewInternshipTaskButton" type="button" class="btn btn-primary" data-toggle="collapse" href="#addNewInternshipTask"><span class="glyphicon glyphicon-plus"></span></button>
                     </div>
                     <div id="addNewInternshipTask" class="collapse panel panel-primary">
                         @Html.Partial("_EditOrAddInternshipTask", new InternshipManagementSystem.Models.EditOrAddInternshipTaskViewModel(Model.Classes.Where(c => c.InternshipTaskId == null).ToList(), new InternshipManagementSystem.Models.InternshipTask()), new ViewDataDictionary { { "editInternshipTaskNo", "createInternshipTask" } })

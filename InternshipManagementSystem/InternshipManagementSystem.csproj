@@ -309,6 +309,8 @@
     <Content Include="Models\Internship_Management_System.edmx.diagram">
       <DependentUpon>Internship_Management_System.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\internshipmanagementsystem - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\internshipmanagementsystem - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\isLoading.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -423,15 +425,14 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53924</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:53924/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>https://internshipmanagementsystem.azurewebsites.net</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

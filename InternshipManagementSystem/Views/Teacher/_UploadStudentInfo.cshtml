@@ -1,5 +1,6 @@
 ﻿@using (Html.BeginForm("UploadStudentInfo", "Teacher", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal ", role = "form", onsubmit = "startLoading" }))
 {
+    @Html.AntiForgeryToken()
     <div class="form-group">
         <label class="col-sm-4 col-md-3 control-label">Select the Excel File</label>
         <div class="col-sm-6">
@@ -19,14 +20,14 @@
         {
             <div class="alert alert-success">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close"><span class="glyphicon glyphicon-remove"></span></a>
-                <strong>上传成功</strong>
+                <strong>Upload succeeded.</strong>
             </div>
         }
         else
         {
             <div class="alert alert-danger">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close"><span class="glyphicon glyphicon-remove"></span></a>
-                <strong>上传失败！ 请检查您的文件格式是否有错</strong>
+                <strong>Upload failed.</strong>
             </div>
         }
     }

@@ -9,7 +9,7 @@
 <div class="panel-heading">
     @if (ViewData["editInternshipTaskNo"].ToString() != "createInternshipTask")
     {
-        <span>编辑
+        <span>Edit the internship task for 
             @{
                 var lastClass = Model.internshipTask.Class_.Last();
                 foreach (var c in Model.internshipTask.Class_)
@@ -17,34 +17,34 @@
                     if (c != lastClass)
                     {
                         <strong>@c.ClassName,</strong>
-                }
+                    }
                     else
                     {
                         <strong>@c.ClassName</strong>
+                        }
                     }
-                }
 
-            }的实习任务
+                }
         </span>
         <a href="#@anchorId" data-toggle="tab" class="cancelLabelAnchor">
             <span class="label label-default cancelLabel">
-                取消
+                Cancel
             </span>
         </a>
                 }
                 else
                 {
-                    <span>添加新的实习任务</span>
+                    <span>Add new internship task</span>
                 }
 </div>
 <div class="panel-body" id="@ViewData["editInternshipTaskNo"]">
     @using (Ajax.BeginForm("EditOrAddInternshipTask", "Teacher", null, new AjaxOptions { UpdateTargetId = "internshipTasks", HttpMethod = "POST", OnBegin = "ContractSubmitStartLoading(\"" + ViewData["editInternshipTaskNo"] + "\")" }, new { @class = "form-horizontal ", role = "form" }))
     {
-        
+        @Html.AntiForgeryToken()
         <table class="table">
             <tbody>
                 <tr>
-                    <td class="col-xs-3"><strong>选择相关班级</strong></td>
+                    <td class="col-xs-3"><strong>Choose Class</strong></td>
                     <td class="col-xs-9">
                         @if (ViewData["editInternshipTaskNo"].ToString() == "createInternshipTask")
                         {
@@ -68,7 +68,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="col-xs-3"><strong>实习任务</strong></td>
+                    <td class="col-xs-3"><strong>Internship Task Detail</strong></td>
                     <td class="col-xs-9"><strong>@Html.TextAreaFor(m => m.internshipTask.InternshipTask1, new { @class = "form-control", rows = "10" })</strong></td>
                 </tr>
             </tbody>
@@ -78,7 +78,7 @@
                     <td class="col-xs-9">
                         <input type="submit" class="btn btn-default submitButton" style="margin-top: 10px" value="Submit" />&nbsp;
                         <img class="fakeLoader" src="~/Picture/loading.gif" style="margin-top: -19px" />
-                        <span class="alert alert-danger failingAlert">上传失败，请在检查你的信息是否合适</span>
+                        <span class="alert alert-danger failingAlert">Upload failed</span>
                     </td>
                 </tr>
             </tbody>

@@ -15,7 +15,7 @@ using BotDetect.Web.Mvc;
 
 namespace InternshipManagementSystem.Controllers
 {
-
+    [RequireHttps]
     [Authorize]
     public class AccountController : Controller
     {
@@ -414,8 +414,17 @@ namespace InternshipManagementSystem.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
-            }
+                    if (loginInfo.Login.LoginProvider == "Google")
+                    {
+                        ActionResult resultView = await ExternalLoginConfirmation(new ExternalLoginConfirmationViewModel { Email = loginInfo.Email }, "index");
+                        return resultView;
+                    }
+                    else
+                    {
+                        return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+
+                    }
+                    }
         }
 
         //

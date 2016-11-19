@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace InternshipManagementSystem.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         Internship_Management_SystemEntities db = new Internship_Management_SystemEntities();
@@ -75,6 +76,7 @@ namespace InternshipManagementSystem.Controllers
             return View();
         }
 
+        [AuthLog()]
         public ActionResult Grade()
         {
             GradeViewModel thisModel = new GradeViewModel();

@@ -7,19 +7,19 @@
 <br>
 <h2>administor</h2>
 <div class="container">
-    <h3>编辑公告栏内容</h3>
+    <h3>Edit anouncements</h3>
     <hr />
     <div class="container" id="homePageContent">
         @Html.Partial("_HomePageContents", new InternshipManagementSystem.Models.HomePageContentViewModel(Model.HomePageContents.ToList()))
     </div>
 </div>
 <div class="container">
-    <h3>管理公司</h3>
+    <h3>Manage companies</h3>
     <hr />
     <div class="container">
         <div class="alert alert-info">
             <a href="#" class="close" data-dismiss="alert" aria-label="close"><span class="glyphicon glyphicon-remove"></span></a>
-            <strong>通过点击并移动来调整公司顺序,点击“&times;”删除公司账户。</strong>
+            <strong>Drag and drop to reorder the companies. Click "&times;" to delete company accounts</strong>
         </div>
             <div id="manageCompanies">
                 @Html.Partial("_ManageCompanies", new InternshipManagementSystem.Models.ManageCompaniesViewModel(Model.Companies.ToList()))
@@ -27,12 +27,12 @@
     </div>
 </div>
 <div class="container">
-    <h3>管理老师账户</h3>
+    <h3>Manage teachers</h3>
     <hr />
     <div class="container">
         <div class="alert alert-info">
             <a href="#" class="close" data-dismiss="alert" aria-label="close"><span class="glyphicon glyphicon-remove"></span></a>
-            <strong>点击“&times;”删除老师账户</strong>
+            <strong>Click "&times;" to delete teacher accounts</strong>
         </div>
         <div id="manageCompanies">
             @Html.Partial("_ManageTeachers", new InternshipManagementSystem.Models.ManageTeachersViewModel(Model.Teachers.ToList()))

@@ -11,6 +11,7 @@ using InternshipManagementSystem.Models;
 namespace InternshipManagementSystem.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

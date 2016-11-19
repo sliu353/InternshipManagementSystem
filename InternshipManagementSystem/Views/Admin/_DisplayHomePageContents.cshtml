@@ -20,16 +20,17 @@
     <div class="panel-body">
         @using (Html.BeginForm("DeleteHomePageContent", "Admin", null, FormMethod.Post, new { @class = "form-horizontal ", role = "form", onsubmit = onStart }))
         {
+            @Html.AntiForgeryToken()
             <table class="table">
                 <tbody>
                     <tr>
-                        <td class="col-xs-3"><strong>标题</strong></td>
+                        <td class="col-xs-3"><strong>Title</strong></td>
                         <td class="col-xs-9">
                             @Model.Title
                     </td>
                 </tr>
                 <tr>
-                    <td class="col-xs-3"><strong>内容</strong></td>
+                    <td class="col-xs-3"><strong>Content</strong></td>
                     <td class="col-xs-9 displayDiv"><p>@Model.Content</p></td>
                 </tr>
             </tbody>
@@ -43,17 +44,17 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">
-                                删除<strong>@Model.Title</strong>
+                                Delete <strong>@Model.Title</strong>
                             </h4>
                         </div>
                         <div class="modal-body">
                             <p>
-                                确定要删除<strong>@Model.Title</strong>
+                                Do you really want to delete <strong>@Model.Title</strong>?
                             </p>
                             <div class="row">
                                 <div class="col-sm-offset-8 col-sm-4 text-center">
-                                    <input type="submit" class="btn btn-danger" value="确定" />&nbsp;&nbsp;
-                                    <butto type="button" class="btn btn-default" data-dismiss="modal">取消</butto>
+                                    <input type="submit" class="btn btn-danger" value="Yes" />&nbsp;&nbsp;
+                                    <butto type="button" class="btn btn-default" data-dismiss="modal">Cancel</butto>
                                 </div>
                             </div>
                         </div>

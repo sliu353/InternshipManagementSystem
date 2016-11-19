@@ -4,9 +4,9 @@
 }
 <br />
 <br />
-<h2>老师</h2>
+<h2>Teacher</h2>
 <div class="container">
-    <h3>上传学生信息</h3>
+    <h3>Upload Student Info</h3>
     <hr />
     <div class="container">
         <div id="uploadStudentInfo" class="col-lg-12">
@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <h3>上传合同信息</h3>
+    <h3>Upload Contract</h3>
     <hr />
     <div class="container" id="contract">
 @if (Model.Classes.Count != 0)
@@ -24,14 +24,14 @@
 else
 {
     <div class="alert alert-info">
-        <strong>您还未上传学生与班级信息。</strong>
+        <strong>You haven't uploaded information about students and classes</strong>
     </div>
 }
     </div>
 
 @Html.Partial("_TeacherAssessStudents", Model)
 
-    <h3>实习任务</h3>
+    <h3>Internship Task</h3>
     <hr />
     <div class="container" id="internshipTasks">
         @if (Model.Classes.Count != 0)
@@ -41,7 +41,7 @@ else
         else
         {
             <div class="alert alert-info">
-                <strong>请先上传学生与班级信息</strong>
+                <strong>Please upload student and class information first</strong>
             </div>
         }
     </div>

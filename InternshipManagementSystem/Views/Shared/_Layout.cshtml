@@ -16,35 +16,53 @@
 </head>
 <body>
     <div class="overlay">
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+        @{ 
+            string color;
+            color = "navbar-header-normal";
+            if (User.IsInRole("teacher"))
+            {
+                color = "navbar-header-teacher";
+            }
+            if (User.IsInRole("company"))
+            {
+                color = "navbar-header-company";
+            }
+            if (User.IsInRole("admin"))
+            {
+                color = "navbar-header-admin";
+            }
+        }
+    <div class="navbar navbar-inverse navbar-fixed-top @color">
+        <div class="container @color">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("首页", "Index", "Home")</li>
-                    <li>@Html.ActionLink("公司一览", "CompanyIntroduction", "Home")</li>
-                    <li>@Html.ActionLink("实习任务", "InternshipTaskIntroduction", "Home")</li>
-                    <li>@Html.ActionLink("查看成绩", "Grade", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Companies", "CompanyIntroduction", "Home")</li>
+                    <li>@Html.ActionLink("Internship Tasks", "InternshipTaskIntroduction", "Home")</li>
                     @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Grades", "Grade", "Home")</li>
+                        }
                         if (User.IsInRole("teacher"))
                         {
-                            <li>@Html.ActionLink("老师", "ForTeacher", "Teacher")</li>
+                            <li>@Html.ActionLink("Teacher", "ForTeacher", "Teacher")</li>
                         }
                         if (User.IsInRole("company"))
                         {
 
-                            <li>@Html.ActionLink("公司", "ForCompany", "Company")</li>
+                            <li>@Html.ActionLink("Company", "ForCompany", "Company")</li>
                         }
                         if (User.IsInRole("admin"))
                         {
-                            <li>@Html.ActionLink("管理员", "ForAdmin", "Admin")</li>
+                            <li>@Html.ActionLink("Admin", "ForAdmin", "Admin")</li>
                         }
                     }
                 </ul>

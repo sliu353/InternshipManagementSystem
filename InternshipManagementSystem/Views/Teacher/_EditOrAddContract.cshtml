@@ -9,26 +9,27 @@
 <div class="panel-heading">
     @if (ViewData["editContractNo"].ToString() != "createContract")
     {
-        <span>编辑与<strong>@Model.contract.CompanyName</strong>的合同 &nbsp;</span>
+        <span>Edit the contract with <strong>@Model.contract.CompanyName</strong>&nbsp;</span>
         <a href="#@anchorId" data-toggle="tab" class="cancelLabelAnchor">
             <span class="label label-default cancelLabel">
-                取消
+                Cancel
             </span>
         </a>
     }
     else
     {
-        <span>添加新合同</span>
+        <span>Add new contract</span>
     }
     &nbsp;
 </div>
 <div class="panel-body" id="@ViewData["editContractNo"]">
     @using (Html.BeginForm("EditOrAddContract", "Teacher", null, FormMethod.Post, new { @class = "form-horizontal ", role = "form", onsubmit = onStart }))
     {
+        @Html.AntiForgeryToken()
         <table class="table">
             <tbody>
                 <tr>
-                    <td class="col-xs-3"><strong>选择实习单位</strong></td>
+                    <td class="col-xs-3"><strong>Choose company</strong></td>
                     <td class="col-xs-9">
                         @if (ViewData["editContractNo"].ToString() == "createContract")
                         {
@@ -57,11 +58,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="col-xs-3"><strong>实习地址</strong></td>
+                    <td class="col-xs-3"><strong>Internship Location</strong></td>
                     <td class="col-xs-9">@Html.TextBoxFor(m => m.contract.InternLocation, new { @class = "form-control" })</td>
                 </tr>
                 <tr>
-                    <td class="col-xs-3"><strong>开始时间</strong></td>
+                    <td class="col-xs-3"><strong>Starting Date</strong></td>
                     <td class="col-xs-9">
                         @if (!DateTime.Equals(Model.contract.StartTime, new DateTime()))
                 {
@@ -74,7 +75,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="col-xs-3"><strong>结束时间</strong></td>
+                    <td class="col-xs-3"><strong>Ending Date</strong></td>
                     <td class="col-xs-9">
                         @if (!DateTime.Equals(Model.contract.EndTime, new DateTime()))
                 {
@@ -87,7 +88,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="col-xs-3"><strong>实习班级</strong></td>
+                    <td class="col-xs-3"><strong>Class</strong></td>
                     <td class="col-xs-9">
                         @if (ViewData["editContractNo"].ToString() == "createContract")
                         {
@@ -113,7 +114,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="col-xs-3"><strong>合同内容</strong></td>
+                    <td class="col-xs-3"><strong>Contract Content</strong></td>
                     <td class="col-xs-9">
                         @Html.TextAreaFor(m => m.contract.ContractContent, new { @class = "form-control", rows = "10" })
                     </td>
@@ -125,7 +126,7 @@
                     <td class="col-xs-9">
                         <input type="submit" class="btn btn-default submitButton" style="margin-top: 10px" value="Submit" />&nbsp;
                         <img class="fakeLoader" src="~/Picture/loading.gif" style="margin-top: -19px" />
-                        <span class="alert alert-danger failingAlert">上传失败，请在检查你的信息是否合适</span>
+                        <span class="alert alert-danger failingAlert">Upload failed</span>
                     </td>
                 </tr>
             </tbody>

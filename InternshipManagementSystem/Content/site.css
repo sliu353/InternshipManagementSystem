@@ -246,15 +246,26 @@ textarea {
     color: white;
 }
 
-.list-group-item.targeted-Company-tab:hover{
+.navbar-header-normal .list-group-item.targeted-Company-tab:hover{
     background-color: #4cae4c;
     border-color: #4cae4c;
     color: white;
 }
 
-.list-group-item.active.targeted-Company-tab:hover{
+.navbar-header-teacher .list-group-item.targeted-Company-tab:hover{
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+    color: white;
+}
+
+.navbar-header-normal .list-group-item.active.targeted-Company-tab:hover{
     background-color: #428bca;
     border-color: #428bca;
+}
+
+.navbar-header-teacher .list-group-item.active.targeted-Company-tab:hover{
+    background-color: #5cb85c;
+    border-color: #5cb85c;
 }
 
 .keyWord{
@@ -263,4 +274,95 @@ textarea {
 
 .collapse{
     display: none !important;
+}
+
+.navbar{
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2)
+}
+
+.navbar-header-normal{
+    background-color: #428bca;
+}
+
+.navbar-header-teacher{
+    background-color: #5cb85c;
+}
+
+.navbar-header-company{
+    background-color: #f0ad4e;
+}
+
+.navbar-header-admin{
+    background-color: #d9534f;
+}
+
+.navbar-nav a, .navbar-brand{
+    color: white !important;
+}
+
+.navbar-header-normal{
+    border: #428bca;
+}
+
+.navbar-header-normal .navbar-toggle{
+    border-color: #428bca !important;
+}
+
+.navbar-header-normal .navbar-collapse, .navbar-header-normal .navbar-form{
+    border-color: #428bca;
+}
+
+.navbar-header-normal .navbar-toggle:hover, .navbar-header-normal .navbar-toggle:focus{
+    background-color: #428bca;
+}
+
+.navbar-header-teacher{
+    border: #5cb85c;
+}
+
+.navbar-header-teacher .navbar-toggle{
+    border-color: #5cb85c !important;
+}
+
+.navbar-header-teacher .navbar-collapse, .navbar-header-teacher .navbar-form{
+    border-color: #5cb85c !important;
+}
+
+.navbar-header-teacher .navbar-toggle:hover, .navbar-header-teacher .navbar-toggle:focus{
+    border-color: #5cb85c !important;
+    background-color: #5cb85c !important;
+}
+
+.navbar-header-company{
+    border: #f0ad4e;
+}
+
+.navbar-header-company .navbar-toggle{
+    border-color: #f0ad4e !important;
+}
+
+.navbar-header-company .navbar-collapse, .navbar-header-company .navbar-form{
+    border-color: #f0ad4e !important;
+}
+
+.navbar-header-company .navbar-toggle:hover, .navbar-header-company .navbar-toggle:focus{
+    border-color: #f0ad4e !important;
+    background-color: #f0ad4e !important;
+}
+
+.navbar-header-admin{
+    border: #d9534f;
+}
+
+.navbar-header-admin .navbar-toggle{
+    border-color: #d9534f !important;
+}
+
+.navbar-header-admin .navbar-collapse, .navbar-header-admin .navbar-form{
+    border-color: #d9534f !important;
+}
+
+.navbar-header-admin .navbar-toggle:hover, .navbar-header-admin .navbar-toggle:focus{
+    border-color: #d9534f !important;
+    background-color: #d9534f !important;
 }

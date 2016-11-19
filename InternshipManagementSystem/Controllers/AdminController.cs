@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace InternshipManagementSystem.Controllers
 {
+    [RequireHttps]
     public class AdminController : Controller
     {
         Internship_Management_SystemEntities db = new Internship_Management_SystemEntities();

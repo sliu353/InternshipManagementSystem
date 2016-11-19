@@ -1,6 +1,6 @@
 ﻿@model InternshipManagementSystem.Models.ForTeacherViewModel
 
-<h3>为学生打分和更新学生信息</h3>
+<h3>Assess students or edit students' information</h3>
 <hr />
 @if (ViewData["editStudentinfoSuccessful"] != null)
 {
@@ -8,7 +8,7 @@
     {
         <div class="alert alert-danger">
             <a href="#" class="close" data-dismiss="alert" aria-label="close"><span class="glyphicon glyphicon-remove"></span></a>
-            <strong>更新失败！请检查您的学生信息修改是否有错误</strong>
+            <strong>Update failed</strong>
         </div>
     }
 }
@@ -17,6 +17,7 @@
     {
         using (Html.BeginForm("MarkStudent", "Teacher", FormMethod.Post, new { onsubmit = "StudentMarkStartLoading()", @class = "form-horizontal ", role = "form" }))
         {
+            @Html.AntiForgeryToken()
             <div class="tab-content">
                 <div id="viewStudentInfo" class="tab-pane fade in active table-responsive">
                     @Html.Partial("_MarkedStudentInfo", Model)
@@ -25,10 +26,10 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>班级</th>
-                                <th>学生姓名</th>
-                                <th>电话号码</th>
-                                <th>老师打分</th>
+                                <th>Class</th>
+                                <th>Student Name</th>
+                                <th>Phone Number</th>
+                                <th>Marks (From Teacher)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -65,10 +66,10 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>班级</th>
-                                <th>学生姓名</th>
-                                <th>电话号码</th>
-                                <th>老师打分</th>
+                                <th>Class</th>
+                                <th>Student Name</th>
+                                <th>Phone Number</th>
+                                <th>Marks (From Teacher)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -121,17 +122,17 @@
             </div>
             <div id="markingStudentButtons" class="col-md-offset-2 col-md-10 form-group">
                 <input id="isMarkingStudent" type="hidden" name="isAssessment" value="true" />
-                <button id="submitButtonForMarkingStudent" type="button" class="btn btn-primary" data-toggle="tab" href="#markStudent" onclick="MarkNowHandler(true)">打分</button>
-                <button id="submitButtonForEditStudentsInfo" type="button" class="btn btn-primary" data-toggle="tab" href="#editStudentInfo" onclick="MarkNowHandler(false)">编辑学生信息</button>
-                <input type="submit" class="hiddenButton btn btn-success submitButton" value="上传"  />&nbsp;&nbsp;
+                <button id="submitButtonForMarkingStudent" type="button" class="btn btn-primary" data-toggle="tab" href="#markStudent" onclick="MarkNowHandler(true)">Assess</button>
+                <button id="submitButtonForEditStudentsInfo" type="button" class="btn btn-primary" data-toggle="tab" href="#editStudentInfo" onclick="MarkNowHandler(false)">Edit student info</button>
+                <input type="submit" class="hiddenButton btn btn-success submitButton" value="Update"  />&nbsp;&nbsp;
                 <img class="fakeLoader" src="~/Picture/loading.gif" />&nbsp;&nbsp;
-                <button type="button" id="cancelButton" class="hiddenButton btn btn-danger submitButton" data-toggle="tab" href="#viewStudentInfo" onclick="CancelHandler()">取消</button>
+                <button type="button" id="cancelButton" class="hiddenButton btn btn-danger submitButton" data-toggle="tab" href="#viewStudentInfo" onclick="CancelHandler()">Cancel</button>
             </div>
         }
     }
     else
     {
-        <span class="alert alert-info">您还未上传相关学生信息</span>
+        <span class="alert alert-info">You haven't uploaded student info</span>
     }
 </div>
 

@@ -4,26 +4,26 @@
     if (Model != null)
     {
         <h3>
-            公司介绍
+            Company Introductin
         </h3>
                                     <div class="displayDiv">
                                         @Html.Raw("<p>" + Model.CompanyIntroduction + "</p>")
                                     </div>
-                                    <h3>实习内容</h3>
+                                    <h3>Internship Plan</h3>
                                     <div class="displayDiv">
                                         @Html.Raw("<p>" + Model.InternIntroduction + "</p>")
                                     </div>
-                                    <h3>公司地址</h3>
+                                    <h3>Company Location</h3>
                                             @Html.Raw("<p>" + Model.CompanyLocation + "</p>")
-                                            <h3>负责人</h3>
+                                            <h3>Person In Charge</h3>
                                             @Html.Raw("<p>" + Model.PersonInCharge + "</p>")
-                                            <h3>联系方式</h3>
+                                            <h3>Contact Number</h3>
                                             @Html.Raw("<p>" + Model.ContactNumber + "</p>")
     }
     else
     {
         <div class="alert alert-info">
-            <strong>暂时没有公司信息和实习介绍</strong>
+            <strong>No company introduction and internship plan available</strong>
         </div>
     }
 

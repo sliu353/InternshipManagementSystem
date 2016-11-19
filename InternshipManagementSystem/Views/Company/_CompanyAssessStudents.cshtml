@@ -5,6 +5,7 @@
     {
         using (Ajax.BeginForm("MarkStudent", "Company", null, new AjaxOptions { UpdateTargetId = "viewStudentInfo", HttpMethod = "POST", OnSuccess = "StudentMarkEndLoading", OnBegin = "StudentMarkStartLoading" }, new { @class = "form-horizontal ", role = "form" }))
         {
+            @Html.AntiForgeryToken()
             <div class="tab-content">
                 <div id="viewStudentInfo" class="tab-pane fade in active table-responsive">
                     @Html.Partial("_CompanyMarkedStudentInfo", Model)
@@ -13,10 +14,10 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>班级</th>
-                                <th>学生姓名</th>
-                                <th>电话号码</th>
-                                <th>老师评分</th>
+                                <th>Class</th>
+                                <th>Student name</th>
+                                <th>Phone number</th>
+                                <th>Marks (from the company)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,16 +52,16 @@
                 </div>
             </div>
             <div id="markingStudentButtons" class="col-md-offset-2 col-md-10 form-group">
-                <span>为学生打分？</span>
-                <button id="submitButtonForMarkingStudent" type="button" class="btn btn-primary" data-toggle="tab" href="#markStudent" onclick="MarkNowHandler()">打分</button>
-                <input type="submit" class="hiddenButton btn btn-success submitButton" value="上传" />&nbsp;&nbsp;
+                <span>Assess the students</span>
+                <button id="submitButtonForMarkingStudent" type="button" class="btn btn-primary" data-toggle="tab" href="#markStudent" onclick="MarkNowHandler()">Assess</button>
+                <input type="submit" class="hiddenButton btn btn-success submitButton" value="Upload" />&nbsp;&nbsp;
                 <img class="fakeLoader" src="~/Picture/loading.gif" />&nbsp;&nbsp;
-                <button type="button" id="cancelButton" class="hiddenButton btn btn-danger submitButton" data-toggle="tab" href="#viewStudentInfo" onclick="CancelHandler()">取消</button>
+                <button type="button" id="cancelButton" class="hiddenButton btn btn-danger submitButton" data-toggle="tab" href="#viewStudentInfo" onclick="CancelHandler()">Cancel</button>
             </div>
         }
     }
     else
     {
-        <span class="alert alert-info">您还未有相关学生信息.</span>
+        <span class="alert alert-info">There is no students' info available.</span>
     }
 </div>

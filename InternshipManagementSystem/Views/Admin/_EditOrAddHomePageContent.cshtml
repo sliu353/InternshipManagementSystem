@@ -9,32 +9,32 @@
 <div class="panel-heading">
     @if (ViewData["editHomePageContentNo"].ToString() != "createInternshipTask")
     {
-        <span>编辑<span>@Model.Title</span></span>
+        <span>Edit <span>@Model.Title</span></span>
         <a href="#@anchorId" data-toggle="tab" class="cancelLabelAnchor">
             <span class="label label-default cancelLabel">
-                取消
+                Cancel
             </span>
         </a>
                 }
                 else
                 {
-                    <span>添加新的首页公告</span>
+                    <span>Add new announcement</span>
                 }
 </div>
 <div class="panel-body" id="@ViewData["editHomePageContentNo"]">
     @using (Ajax.BeginForm("EditOrAddHomePageContent", "Admin", null, new AjaxOptions { UpdateTargetId = "homePageContent", HttpMethod = "POST", OnBegin = "ContractSubmitStartLoading(\"" + ViewData["edithomePageContentNo"] + "\")" }, new { @class = "form-horizontal ", role = "form" }))
     {
-        
+        @Html.AntiForgeryToken()
         <table class="table">
             <tbody>
                 <tr>
-                    <td class="col-xs-3"><strong>标题</strong></td>
+                    <td class="col-xs-3"><strong>Title</strong></td>
                     <td class="col-xs-9">
                             @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
                     </td>
                 </tr>
                 <tr>
-                    <td class="col-xs-3"><strong>内容</strong></td>
+                    <td class="col-xs-3"><strong>Content</strong></td>
                     <td class="col-xs-9">@Html.TextAreaFor(m => m.Content, new { @class = "form-control", rows = "10" })</td>
                 </tr>
                 @Html.HiddenFor(m => m.HomePageContentId)
@@ -45,7 +45,7 @@
                     <td class="col-xs-9">
                         <input type="submit" class="btn btn-default submitButton" style="margin-top: 10px" value="上传" />&nbsp;
                         <img class="fakeLoader" src="~/Picture/loading.gif" style="margin-top: -19px" />
-                        <span class="alert alert-danger failingAlert">上传失败，请在检查你的信息是否合适</span>
+                        <span class="alert alert-danger failingAlert">Uploading failed.</span>
                     </td>
                 </tr>
             </tbody>

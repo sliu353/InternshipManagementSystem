@@ -9,6 +9,7 @@
 <div class="panel panel-primary tab-pane fade in active" id="@tabContentId">
     <div class="panel-heading">
         <span>
+            The internship task for 
             @{
                 var lastClass = Model.internshipTask.Class_.Last();
                 foreach (var c in Model.internshipTask.Class_)
@@ -23,23 +24,24 @@
                     }
                 }
 
-            }的实习任务
+            }
         </span>
         <a href="#@anchorId" data-toggle="tab">
-            <span class="glyphicon glyphicon-edit" data-toggle="tooltip" title="编辑实习任务" data-placement="bottom"></span>
+            <span class="glyphicon glyphicon-edit" data-toggle="tooltip" title="Edit" data-placement="bottom"></span>
         </a>
         &nbsp;
         <a href="" data-toggle="modal" data-target="#@modalId">
-            <span class="glyphicon glyphicon-remove" data-toggle="tooltip" title="删除实习任务" data-placement="bottom"></span>
+            <span class="glyphicon glyphicon-remove" data-toggle="tooltip" title="Delete" data-placement="bottom"></span>
         </a>
     </div>
     <div class="panel-body">
         @using (Html.BeginForm("DeleteInternshipTask", "Teacher", null, FormMethod.Post, new { @class = "form-horizontal ", role = "form", onsubmit = onStart }))
         {
+            @Html.AntiForgeryToken()
             <table class="table">
                 <tbody>
                     <tr>
-                        <td class="col-xs-3"><strong>实习班级</strong></td>
+                        <td class="col-xs-3"><strong>Class</strong></td>
                         <td class="col-xs-9">@{
                             foreach (var c in Model.internshipTask.Class_)
                             {
@@ -56,7 +58,7 @@
                         }</td>
                     </tr>
                     <tr>
-                        <td class="col-xs-3"><strong>实习任务</strong></td>
+                        <td class="col-xs-3"><strong>Internship Task</strong></td>
                         <td class="col-xs-9 displayDiv"><p>@Model.internshipTask.InternshipTask1</p></td>
                     </tr>
                 </tbody>
@@ -70,7 +72,7 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">
-                                删除@{
+                                Delete the internship task for @{
                                     foreach (var c in Model.internshipTask.Class_)
                                     {
                                         if (c != lastClass)
@@ -83,12 +85,11 @@
                                         }
                                     }
                                 }
-                                的实习任务？
                             </h4>
                         </div>
                         <div class="modal-body">
                             <p>
-                                确定要删除@{
+                                Do you really want to delete the internship task for @{
                                     foreach (var c in Model.internshipTask.Class_)
                                     {
                                         if (c != lastClass)
@@ -100,12 +101,12 @@
                                             <strong>@c.ClassName</strong>
                                         }
                                     }
-                                }的实习任务吗？
+                                }
                             </p>
                             <div class="row">
                                 <div class="col-sm-offset-8 col-sm-4 text-center">
-                                    <input type="submit" class="btn btn-danger" value="确定" />&nbsp;&nbsp;
-                                    <butto type="button" class="btn btn-default" data-dismiss="modal">取消</butto>
+                                    <input type="submit" class="btn btn-danger" value="Yes" />&nbsp;&nbsp;
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                 </div>
                             </div>
                         </div>

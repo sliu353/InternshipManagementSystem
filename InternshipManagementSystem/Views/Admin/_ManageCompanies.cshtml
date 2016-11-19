@@ -2,6 +2,7 @@
 
 @using (Html.BeginForm("SortCompanies", "Admin", null, FormMethod.Post, new { @class = "form-horizontal ", role = "form", onsubmit = "companyOrderStartLoading()" }))
 {
+    @Html.AntiForgeryToken()
     <ul id="sortable" class="list-group">
         @{
 
@@ -27,15 +28,16 @@
 
     </ul>
     <div>
-    确定完成顺序的调整吗？
-    <button type="button" class="btn btn-success" onclick="SubmitSortCompanies()">确定</button>&nbsp;
-    <button type="button" class="btn btn-primary" onclick="CancelSortCompanies()">取消</button>&nbsp;
+    Do you want to save your changes?
+    <button type="button" class="btn btn-success" onclick="SubmitSortCompanies()">Yes</button>&nbsp;
+    <button type="button" class="btn btn-primary" onclick="CancelSortCompanies()">Cancel</button>&nbsp;
     <input id="submitSortCompanies" type="submit" style="display: none;" class="btn btn-default submitButton" value="Submit" />
     <img class="fakeLoader" src="~/Picture/loading.gif" />
 </div>
             }
 @using (Html.BeginForm("CancelSortingCompanies", "Admin", null, FormMethod.Post, new { @class = "form-horizontal ", role = "form", onsubmit = "companyOrderStartLoading()" }))
             {
+    @Html.AntiForgeryToken()
     <input id="cancelSortCompanies" type="submit" style="display: none;" class="btn btn-default submitButton" value="Submit" />
 }
 
@@ -47,6 +49,7 @@
     string onStart = "ContractSubmitStartLoading(\"" + modalId + "\")";
     using (Html.BeginForm("DeleteCompany", "Admin", null, FormMethod.Post, new { @class = "form-horizontal ", role = "form", onsubmit = onStart }))
     {
+        @Html.AntiForgeryToken()
         <input type="hidden" Value="@company.CompanyName" name="companyToBeDeletedName" />
         <div class="modal fade" id="@modalId" role="dialog">
             <div class="modal-dialog modal-lg">
@@ -55,17 +58,17 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">
-                            删除<strong>@company.CompanyName</strong>账户？
+                            Delete the account of <strong>@company.CompanyName</strong>?
                         </h4>
                     </div>
                     <div class="modal-body">
                         <p>
-                            确定要删除<strong>@company.CompanyName</strong>的账户吗？
+                            Do you really want to delete the account of <strong>@company.CompanyName</strong>?
                         </p>
                         <div class="row">
                             <div class="col-sm-offset-8 col-sm-4 text-center">
-                                <input type="submit" class="btn btn-danger" value="确定" />&nbsp;&nbsp;
-                                <butto type="button" class="btn btn-default" data-dismiss="modal">取消</butto>
+                                <input type="submit" class="btn btn-danger" value="Yes" />&nbsp;&nbsp;
+                                <butto type="button" class="btn btn-default" data-dismiss="modal">Cancel</butto>
                             </div>
                         </div>
                     </div>

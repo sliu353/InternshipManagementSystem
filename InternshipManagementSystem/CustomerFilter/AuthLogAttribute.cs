@@ -45,7 +45,7 @@ namespace InternshipManagementSystem.CustomerFilter
                 vr.ViewName = View;
 
                 ViewDataDictionary dict = new ViewDataDictionary();
-                dict.Add("Message", "您没有权限进入这个页面 (T_T)");
+                dict.Add("Message", "You are not authorised to visit this page (T_T)");
 
                 vr.ViewData = dict;
 

@@ -1,11 +1,11 @@
 ﻿@model InternshipManagementSystem.Models.CompanyIntroductionViewModel
 
 @{
-    ViewBag.Title = "公司一览";
+    ViewBag.Title = "Companies";
 }
 <br />
 <br />
-<h2>公司一览</h2>
+<h2>Companies</h2>
 <hr />
 <div class="row companiesInfoRow">
     @if (Model.companies.FirstOrDefault() != null || Model.targetedCompanies.FirstOrDefault() != null)
@@ -15,6 +15,7 @@
             <div class="list-group nav nav-stacked">
                 @using (Html.BeginForm("Search", "Home", null, FormMethod.Post, new { @class = "form-horizontal", role = "form", style = "overflow: hidden; " }))
                 {
+                    @Html.AntiForgeryToken()
                     <div style="width:40px; float: right;">
                         <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
                     </div>
@@ -44,6 +45,7 @@
                                     submitInputId = replacedCompanyName;
                                     using (Ajax.BeginForm("DisplayUserSelectedCompanyDetail", "Home", null, new AjaxOptions { UpdateTargetId = "CompanyDetail", OnComplete = "calculation" }, new { @class = "form-horizontal", role = "form" }))
                                     {
+                                        @Html.AntiForgeryToken()
                                         if (counter1 == 1 && Model.targetedCompanies.Count == 0)
                                         {
                                             <a id="@anchorId" href="#" onclick="selectCompany('@replacedCompanyName')" class="hidden-xs list-group-item active targeted-Company-tab">@Html.Raw(c.CompanyName)</a>
@@ -70,6 +72,7 @@
                                 submitInputId = replacedCompanyName;
                                 using (Ajax.BeginForm("DisplayUserSelectedCompanyDetail", "Home", null, new AjaxOptions { UpdateTargetId = "CompanyDetail", OnComplete = "calculation" }, new { @class = "form-horizontal", role = "form" }))
                                 {
+                                    @Html.AntiForgeryToken()
                                     if (counter1 == 1 && Model.targetedCompanies.Count == 0)
                                     {
                                         <a id="@anchorId" href="#" onclick="selectCompany('@replacedCompanyName')" class="hidden-xs list-group-item active">@Html.Raw(c.CompanyName)</a>
@@ -102,26 +105,26 @@
                                     <h3>@Html.Raw(thisCompany.CompanyName)</h3>
                                     <hr />
                                     <h3>
-                                        公司介绍
+                                        Company Introduction
                                     </h3>
                                     <div class="displayDiv">
                                         @Html.Raw("<p>" + thisCompany.CompanyIntroduction + "</p>")
                                     </div>
-                                    <h3>实习内容</h3>
+                                    <h3>Internship Plan</h3>
                                             <div class="displayDiv">
                                                 @Html.Raw("<p>" + thisCompany.InternIntroduction + "</p>")
                                             </div>
-                                            <h3>公司地址</h3>
+                                            <h3>Company Location</h3>
                                             @Html.Raw("<p>" + thisCompany.CompanyLocation + "</p>")
-                                            <h3>负责人</h3>
+                                            <h3>Person In Charge</h3>
                                             @Html.Raw("<p>" + thisCompany.PersonInCharge + "</p>")
-                                            <h3>联系方式</h3>
+                                            <h3>Contact Number</h3>
                                             @Html.Raw("<p>" + thisCompany.ContactNumber + "</p>")
                                 }
                                 else
                                 {
                                     <div class="alert alert-info">
-                                        <strong>暂时没有公司信息和实习介绍</strong>
+                                        <strong>No company introduction and internship plan</strong>
                                     </div>
                                 }
 
@@ -131,7 +134,7 @@
                                 else
                                 {
                                     <div class="alert alert-info">
-                                        <strong>暂时没有公司信息和实习介绍</strong>
+                                        <strong>No company introduction and internship plan</strong>
                                     </div>
                                 }
 </div>
@@ -140,10 +143,11 @@
 {
     var orderedCompanies = Model.companies.OrderBy(c => c.CompanyOrder);
     var targetedCompanies = Model.targetedCompanies.OrderBy(c => c.CompanyOrder);
-<nav class="" col-xs-12 companiesList hidden-lg hidden-md hidden-sm">
+<nav class="col-xs-12 companiesList hidden-lg hidden-md hidden-sm">
     <div class="list-group nav nav-stacked">
         @using (Ajax.BeginForm("Search", "Home", null, new AjaxOptions { UpdateTargetId = "CompanyDetail", OnComplete = "calculation" }, new { @class = "form-horizontal", role = "form", style = "overflow: hidden; " }))
         {
+            @Html.AntiForgeryToken()
             <div style="width:40px; float: right;">
                 <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
             </div>
@@ -165,6 +169,7 @@
                         var submitInputIdMobile = replacedCompanyName + "Mobile";
                         using (Ajax.BeginForm("DisplayUserSelectedCompanyDetailForMobile", "Home", null, new AjaxOptions { UpdateTargetId = tabContentId, OnComplete = "calculation" }, new { @class = "form-horizontal", role = "form" }))
                         {
+                            @Html.AntiForgeryToken()
                             <a id="@mobileAnchorId" onclick="selectCompany('@replacedCompanyName')" class="hidden-lg hidden-md hidden-sm list-group-item">@Html.Raw(c.CompanyName)</a>
                                                     <a hidden data-toggle="collapse" target="#@tabContentId" href="#@tabContentId" id="hidden-@mobileAnchorId">@Html.Raw(c.CompanyName)</a>
                                                     <div id="@tabContentId" class="collapse col-xs-12 hidden-lg hidden-md hidden-sm"></div>
@@ -186,6 +191,7 @@
                     var submitInputIdMobile = replacedCompanyName + "Mobile";
                     using (Ajax.BeginForm("DisplayUserSelectedCompanyDetailForMobile", "Home", null, new AjaxOptions { UpdateTargetId = tabContentId, OnComplete = "calculation" }, new { @class = "form-horizontal", role = "form" }))
                     {
+                        @Html.AntiForgeryToken()
                         <a id="@mobileAnchorId" onclick="selectCompany('@replacedCompanyName')" class="hidden-lg hidden-md hidden-sm list-group-item">@Html.Raw(c.CompanyName)</a>
                                                 <a hidden data-toggle="collapse" target="#@tabContentId" href="#@tabContentId" id="hidden-@mobileAnchorId">@Html.Raw(c.CompanyName)</a>
                                                 <div id="@tabContentId" class="collapse col-xs-12 hidden-lg hidden-md hidden-sm"></div>
@@ -203,7 +209,7 @@
             else
             {
                 <div class="alert alert-info">
-                    <strong>暂时没有公司信息和实习介绍</strong>
+                    <strong>No company introduction and internship plan</strong>
                 </div>
             }
 
