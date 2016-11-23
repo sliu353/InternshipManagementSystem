@@ -9,7 +9,7 @@
 <div class="row">
     <ul class="nav nav-tabs col-lg-8 col-md-10">
         <li class="active"><a data-toggle="tab" href="#loginForm" class="registerTab">Log in with local account</a></li>
-        <li><a data-toggle="tab" href="#externalLogin" class="registerTab">Log in with Google+</a></li>
+        <li><a data-toggle="tab" href="#externalLogin" class="registerTab">Log in with Google+ or Facebook</a></li>
     </ul>
     <div class="tab-content col-md-8">
         <section id="loginForm" class="tab-pane fade in active">
@@ -64,7 +64,7 @@
 </section>
         </div>
 </div>
-
+@ViewBag.info
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

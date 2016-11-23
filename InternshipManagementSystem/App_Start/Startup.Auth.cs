@@ -54,9 +54,9 @@ namespace InternshipManagementSystem
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "660940217419829",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1271081882949847",
+               appSecret: "e7f34c2e956d75b6489d406326688e08");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
